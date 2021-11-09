@@ -1,15 +1,16 @@
 .header {
-    grid-area: header;
-    background: #1A1A1A;
-}
+  grid-area: header;
+  background: #1A1A1A;
 
-.header__wrap {
+  &__wrap {
     max-width: 1280px;
     margin: 0 auto;
-}
 
-.header__wrap img {
-    padding: 5px;
-    max-height: 50px;
-    max-width: 50px;
+    & img {
+      padding: 5px;
+      max-height: 50px;
+      max-width: 50px;
+    }
+  }
+
 }

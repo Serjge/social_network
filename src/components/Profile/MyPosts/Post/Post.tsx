@@ -1,5 +1,5 @@
 import React from 'react'
-import c from './Post.module.scss'
+import s from './Post.module.scss'
 
 type PostPropsType = {
     message: string
@@ -7,10 +7,10 @@ type PostPropsType = {
 }
 
 
-const Post = (props: PostPropsType) => {
+export const Post = (props: PostPropsType) => {
     return (
-        <div className={c.post}>
-            <div className={c.item}>
+        <div className={s.post}>
+            <div className={s.item}>
                 <img  alt='' src='https://avatarko.ru/img/kartinka/1/pozitiv_smailik.jpg'/>
                 {props.message}
                 <div>
@@ -20,4 +20,4 @@ const Post = (props: PostPropsType) => {
         </div>
     )
 }
-export default Post
+// export default Post

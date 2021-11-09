@@ -1,8 +1,8 @@
 import React from 'react'
-import c from './MyPosts.module.scss'
-import Post from "./Post/Post";
+import s from './MyPosts.module.scss'
+import {Post} from "./Post/Post";
 
-const MyPosts = () => {
+export const MyPosts = () => {
     return (
         <div>
             My post
@@ -14,4 +14,4 @@ const MyPosts = () => {
         </div>
     )
 }
-export default MyPosts
+// export default MyPosts

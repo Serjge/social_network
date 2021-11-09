@@ -1,16 +1,16 @@
 import React from 'react'
-import c from './Navbar.module.scss'
-import ItemMenu from "./Item/ItemMenu";
+import s from './Navbar.module.scss'
+import {ItemMenu} from "./Item/ItemMenu";
 
 
-const Navbar = () => {
+export const Navbar = () => {
     return (
-        <nav className={c.nav}>
-            <ItemMenu href={'#profile'} nameMenu={'Profile'}/>
-            <ItemMenu href={'#message'} nameMenu={'Message'}/>
-            <ItemMenu href={'#musik'} nameMenu={'Music'}/>
-            <ItemMenu href={'#news'} nameMenu={'News'}/>
-            <ItemMenu href={'#setings'} nameMenu={'Setings'}/>
+        <nav className={s.nav}>
+            <ItemMenu href={'/profile'} nameMenu={'Profile'}/>
+            <ItemMenu href={'/message'} nameMenu={'Message'}/>
+            <ItemMenu href={'/music'} nameMenu={'Music'}/>
+            <ItemMenu href={'/news'} nameMenu={'News'}/>
+            <ItemMenu href={'/settings'} nameMenu={'Settings'}/>
 
         </nav>
     )
@@ -18,4 +18,4 @@ const Navbar = () => {
 }
 
 
-export default Navbar
+// export default Navbar

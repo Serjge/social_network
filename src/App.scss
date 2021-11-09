@@ -3,7 +3,7 @@ body {
   color: #cccccc;
 }
 
-.app-wrapper {
+.app__wrapper {
   max-width: 1280px;
   margin: 0 auto;
 
@@ -13,6 +13,14 @@ body {
   //grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
+
+  &_content {
+
+    grid-area: content;
+    background: #2d2d2d;
+
+
+  }
 }
 
 

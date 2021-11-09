@@ -1,12 +1,14 @@
 .item {
-    border-radius: 5px;
-    color: aqua;
-    padding: 10px;
-}
-.item:hover {
+  border-radius: 5px;
+  color: aqua;
+  padding: 10px;
+
+  &:hover {
     background: #3F8CFF;
-}
-.item a {
+  }
+
+  & a {
     color: antiquewhite;
     text-decoration: none;
+  }
 }

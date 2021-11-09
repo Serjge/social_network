@@ -1,14 +1,14 @@
 import React from 'react'
 // import style from './Header.scss'
-import c from './Footer.module.scss'
+import s from './Footer.module.scss'
 
-const Footer = () => {
+export const Footer = () => {
     return (
-        <footer className={c.footer}>
-            <div className={c.footer__wrap}>
+        <footer className={s.footer}>
+            <div className={s.footer__wrap}>
                 <> by Serjge, © 2021, It-incubator.ru</>
             </div>
         </footer>
     )
 }
-export default Footer
+// export default Footer
