@@ -10,5 +10,9 @@
   & a {
     color: antiquewhite;
     text-decoration: none;
+
+    &.active {
+      color: #3F8CFF;
+    }
   }
 }

@@ -8,4 +8,3 @@ export function Dialogs()  {
             Dialogs</div>
 )
 }
-// export default Dialogs
