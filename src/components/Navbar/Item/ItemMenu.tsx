@@ -1,17 +1,18 @@
 import React from "react";
 import c from "./ItemMenu.module.scss";
-import {NavLink} from "react-router-dom";
+import {NavLink, useMatch} from "react-router-dom";
+import s from './ItemMenu.module.scss'
 
 type ItemMenuPropsType = {
     nameMenu: string
-    href: string
+    to: string
 }
 
 export const ItemMenu = (props: ItemMenuPropsType) => {
+    let match = useMatch(props.to + "/*");  // переменная чтобы работал выделание меню при переходе по диалогам
     return (
         <div className={c.item}>
-            <NavLink className={(navDate) => navDate.isActive ? c.active : ''}
-                     to={props.href}>{props.nameMenu}</NavLink>
+            <NavLink className={match ? s.active : ""} to={props.to}>{props.nameMenu}</NavLink>
         </div>
     )
 }

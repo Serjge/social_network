@@ -1,0 +1,18 @@
+.dialogs {
+  &__wrapper {
+    display: grid;
+    background: #2d2d2d;
+    grid-template-columns: 2fr 10fr;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  &__list {
+    padding: 10px;
+  }
+
+  &__messages {
+    padding: 10px;
+  }
+
+}

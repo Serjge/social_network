@@ -1,18 +1,23 @@
 .item {
   border-radius: 5px;
   color: aqua;
-  padding: 10px;
-
-  &:hover {
-    background: #3F8CFF;
-  }
+  padding-right: 10px;
+  margin: 10px;
 
   & a {
+    display: block;
+    width: 100%;
+border-radius: 10px;
+    vertical-align: middle;
+    padding: 20px;
     color: antiquewhite;
     text-decoration: none;
+&:hover {
+  background: #3F8CFF;
+}
 
     &.active {
-      color: #3F8CFF;
+      background: #3F8CFF;
     }
   }
 }
