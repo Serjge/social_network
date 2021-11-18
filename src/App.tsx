@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
 import {Profile} from './components/Profile/Profile'
 import './App.scss'
-import {Footer} from "./components/Footer/Footer";
 import {Dialogs} from './components/Dialogs/Dialogs'
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Music} from './components/Music/Music';

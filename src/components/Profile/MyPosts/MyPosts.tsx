@@ -11,9 +11,9 @@ type MyPostsPropsType = {
 
 export const MyPosts = (props: MyPostsPropsType) => {
     let [post, setPost] = useState<string>('')
-        let [error, setError] = useState<string>('')
+    let [error, setError] = useState<string>('')
 
-    let postElements = props.post.map(p => (<Post  message={p.message} likeCount={p.likeCount}/>))
+    let postElements = props.post.map(p => (<Post message={p.message} likeCount={p.likeCount}/>))
 
     const addPost = () => {
         if (post.trim() !== '') {

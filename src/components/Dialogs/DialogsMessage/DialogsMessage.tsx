@@ -6,6 +6,7 @@ type DialogsMessageType = {
 }
 
 export function DialogsMessage(props: DialogsMessageType) {
+
     return (
         <div className={s.message}>{props.message}</div>
     )
