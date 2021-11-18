@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
 import {Profile} from './components/Profile/Profile'
@@ -25,15 +25,14 @@ export function App(props: AppPropsType) {
                 <div className="app__wrapper_contend">
                     <Routes>
                         <Route path='/' element={<Navigate to='/profile'/>}/>
-                        <Route path='/profile' element={<Profile profileDate={props.state.profilePage}/>}/>
-                        <Route path='/dialogs/*' element={<Dialogs  dialogsData={props.state.dialogsPage}/>}/>
+                        <Route path='/profile' element={<Profile  profileDate={props.state.profilePage}/>}/>
+                        <Route path='/dialogs/*' element={<Dialogs dialogsData={props.state.dialogsPage}/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                     </Routes>
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 }

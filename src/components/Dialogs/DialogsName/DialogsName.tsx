@@ -1,10 +1,8 @@
 import s from "./DialogsName.module.scss";
 import {NavLink} from "react-router-dom";
 import React from "react";
-import {StateType} from "../../../Redux/State";
 
 type DialogsNameType = {
-
     name: string
     id: string
 }
