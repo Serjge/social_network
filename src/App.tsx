@@ -15,7 +15,7 @@ type AppPropsType = {
 }
 
 export function App(props: AppPropsType) {
-
+    console.log('render app')
     return (
         <div className="App">
             <Header/>

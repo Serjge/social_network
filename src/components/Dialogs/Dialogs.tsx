@@ -14,23 +14,29 @@ export function Dialogs(props: DialogsPropsType) {
     let [messages, setMessages] = useState(props.dialogsData.messages)
     let [post, setPost] = useState('')
     let [error, setError] = useState('')
+    let [activeButton, setActiveButton] = useState(true)
 
     const addMessage = (mes: string) => {
         let message = {id: v1(), message: mes}
-        let newMessage = [message, ...messages]
-        setMessages(newMessage)
+        setMessages([...messages, message])
     }
     const onClickAddMessage = () => {
         if (post.trim() !== '') {
             addMessage(post)
             setPost('')
+            setActiveButton(true)
         } else {
             setError('Пустая строка')
         }
     }
     const OnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setPost(e.currentTarget.value)
-        setError('')
+        if (e.currentTarget.value === '') {
+            setActiveButton(true)
+        } else {
+            setPost(e.currentTarget.value)
+            setActiveButton(false)
+            setError('')
+        }
     }
 
     let dialogsElement = props.dialogsData.dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
@@ -45,9 +51,8 @@ export function Dialogs(props: DialogsPropsType) {
             <div className={s.dialogs__messages}>
                 {dialogsMessage}
                 <textarea value={post} onChange={OnChangeHandler}></textarea>
-                <button onClick={onClickAddMessage}>Add Message</button>
+                <button disabled={activeButton} onClick={onClickAddMessage}>Add Message</button>
                 <div><span>{error}</span></div>
-
             </div>
         </div>
     )

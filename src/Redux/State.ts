@@ -1,9 +1,10 @@
 import { v1 } from "uuid"
 
 export type PostsType = {
-    id: string,
-    message: string,
+    id: string
+    message: string
     likeCount: number
+    isDone: boolean
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -42,9 +43,9 @@ export let state = {
     },
     profilePage: {
         posts: [
-            {id: v1(), message: `Hi, how are you?`, likeCount: 10},
-            {id: v1(), message: `It's my first post`, likeCount: 15},
-            {id: v1(), message: `React, it's cool!`, likeCount: 50}
+            {id: v1(), message: `Hi, how are you?`, likeCount: 10, isDone: false },
+            {id: v1(), message: `It's my first post`, likeCount: 15, isDone: false},
+            {id: v1(), message: `React, it's cool!`, likeCount: 50, isDone: false}
         ]
     },
     sidebar: {}
