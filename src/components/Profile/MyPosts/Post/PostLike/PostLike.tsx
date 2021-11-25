@@ -9,7 +9,6 @@ type PostLikePropsType = {
 }
 
 export const PostLike = (props: PostLikePropsType) => {
-    console.log('render Like')
     const onClickLike = () => {
         if (props.isDone === false) {
             props.likeAdd(props.id, true)

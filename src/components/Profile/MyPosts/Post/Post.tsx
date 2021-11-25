@@ -13,7 +13,6 @@ type PostPropsType = {
 }
 
 export const Post = (props: PostPropsType) => {
-    console.log('render Post')
 
     const onClickRemovePost = () => {  //функция удаления поста
         props.removePost(props.id)

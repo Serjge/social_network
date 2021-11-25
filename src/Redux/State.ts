@@ -1,4 +1,5 @@
-import { v1 } from "uuid"
+import {v1} from "uuid"
+import {renderTree} from "../render";
 
 export type PostsType = {
     id: string
@@ -7,6 +8,7 @@ export type PostsType = {
     isDone: boolean
 }
 export type ProfilePageType = {
+    messageForNewPost: string
     posts: Array<PostsType>
 }
 export type MessagesType = {
@@ -42,8 +44,9 @@ export let state = {
         ]
     },
     profilePage: {
+        messageForNewPost: '',
         posts: [
-            {id: v1(), message: `Hi, how are you?`, likeCount: 10, isDone: false },
+            {id: v1(), message: `Hi, how are you?`, likeCount: 10, isDone: false},
             {id: v1(), message: `It's my first post`, likeCount: 15, isDone: false},
             {id: v1(), message: `React, it's cool!`, likeCount: 50, isDone: false}
         ]
@@ -51,3 +54,36 @@ export let state = {
     sidebar: {}
 
 }
+
+
+export const addPost = (postText: string) => {
+    const newPost: PostsType = {
+        id: v1(),
+        message: postText,
+        likeCount: 0,
+        isDone: false
+    }
+    state.profilePage.posts.unshift(newPost)
+    renderTree(state)
+
+
+    // let message = {id: v1(), message: post, likeCount: 0, isDone: false}
+    // let newMessage = [message, ...postsData]
+    // setPostsData(newMessage)
+}
+
+export const changeNewTextCallback = (newText: string) => {
+    state.profilePage.messageForNewPost = newText
+    renderTree(state)
+}
+
+
+// const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+//     if (e.currentTarget.value === '') {
+//         setDisableButton(true)
+//     } else {
+//         setDisableButton(false)
+//         setPost(e.currentTarget.value)
+//         setError('')
+//     }
+// }

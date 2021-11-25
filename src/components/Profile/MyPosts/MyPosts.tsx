@@ -1,16 +1,15 @@
 import React, {ChangeEvent, useState} from 'react'
 import {Post} from "./Post/Post";
 import {PostsType, ProfilePageType} from "../../../Redux/State";
-import {v1} from "uuid";
 
 type MyPostsPropsType = {
     profileDate: ProfilePageType
+    addPostCallback: (postText: string) => void
+    changeNewTextCallback: (postText: string) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
     console.log('render myPost')
-
-    let [post, setPost] = useState<string>('')
     let [error, setError] = useState<string>('')
     let [postsData, setPostsData] = useState<PostsType[]>(props.profileDate.posts) // разделение приходимых данных в хранилище
     let [disableButton, setDisableButton] = useState(true) // деланье кнопки
@@ -46,16 +45,11 @@ export const MyPosts = (props: MyPostsPropsType) => {
         )
     })
 
-    const addPostData = (post: string) => {
-        let message = {id: v1(), message: post, likeCount: 0, isDone: false}
-        let newMessage = [message, ...postsData]
-        setPostsData(newMessage)
-    }
-
     const addPost = () => {
-        if (post.trim() !== '') {
-            addPostData(post)
-            setPost('')
+
+        if (props.profileDate.messageForNewPost.trim() !== '') {
+            props.addPostCallback(props.profileDate.messageForNewPost)
+            props.changeNewTextCallback( '')
             setDisableButton(true)
             console.log(postsData)
         } else {
@@ -68,7 +62,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             setDisableButton(true)
         } else {
             setDisableButton(false)
-            setPost(e.currentTarget.value)
+            props.changeNewTextCallback(e.currentTarget.value)
             setError('')
         }
     }
@@ -76,7 +70,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     return (
         <div>
             <div>
-                <textarea value={post} onChange={onChangeHandler}></textarea><span>{error}</span>
+                <textarea value={props.profileDate.messageForNewPost} onChange={onChangeHandler} ></textarea><span>{error}</span>
             </div>
             <div>
                 <button disabled={disableButton} onClick={addPost}>Add post</button>
