@@ -1,6 +1,9 @@
 .item {
-  &span {
-    color: aqua;
+  & .like {
+    cursor: pointer;
+  }
+  & .likeActive {
+    color: #3F8CFF;
   }
 
   & img {

@@ -22,6 +22,7 @@ export type DialogType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>,
     messages: Array<MessagesType>
+    messagesNewDialogs: string
 }
 export type StateType = {
     dialogsPage: DialogsPageType,
@@ -41,7 +42,8 @@ export let state = {
             {id: v1(), message: 'Hello friend!'},
             {id: v1(), message: 'Glad to see you!'},
             {id: v1(), message: 'How are you?'}
-        ]
+        ],
+        messagesNewDialogs: ''
     },
     profilePage: {
         messageForNewPost: '',
@@ -54,7 +56,7 @@ export let state = {
     sidebar: {}
 
 }
-
+const virtualState = state
 
 export const addPost = (postText: string) => {
     const newPost: PostsType = {
@@ -65,11 +67,6 @@ export const addPost = (postText: string) => {
     }
     state.profilePage.posts.unshift(newPost)
     renderTree(state)
-
-
-    // let message = {id: v1(), message: post, likeCount: 0, isDone: false}
-    // let newMessage = [message, ...postsData]
-    // setPostsData(newMessage)
 }
 
 export const changeNewTextCallback = (newText: string) => {
@@ -77,13 +74,32 @@ export const changeNewTextCallback = (newText: string) => {
     renderTree(state)
 }
 
+export const likeAdd = (id: string, isDone: boolean) => {
+    const posts = state.profilePage.posts.find(p => p.id === id)
+    if (posts) {
+        posts.isDone = isDone
+        isDone === true ? posts.likeCount += 1 : posts.likeCount -= 1
+        renderTree(state)
+    }
+}
 
-// const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-//     if (e.currentTarget.value === '') {
-//         setDisableButton(true)
-//     } else {
-//         setDisableButton(false)
-//         setPost(e.currentTarget.value)
-//         setError('')
-//     }
-// }
+export const removePost = (id: string) => {
+    let posts = state.profilePage.posts.find(p => p.id === id)
+    if (posts) {
+        const indexPost = virtualState.profilePage.posts.indexOf(posts)
+        state.profilePage.posts.splice(indexPost, 1)
+        renderTree(state)
+    }
+}
+
+export const addMessage = (mes: string) => {
+    let message = {id: v1(), message: mes}
+    state.dialogsPage.messages.push(message)
+    renderTree(state)
+}
+
+export const changeNewDialogCallBack = (newText: string) => {
+    state.dialogsPage.messagesNewDialogs = newText
+    console.log(state.dialogsPage.messagesNewDialogs)
+    renderTree(state)
+}

@@ -7,14 +7,15 @@
   & a {
     display: block;
     width: 100%;
-border-radius: 10px;
+    border-radius: 10px;
     vertical-align: middle;
     padding: 20px;
     color: antiquewhite;
     text-decoration: none;
-&:hover {
-  background: #3F8CFF;
-}
+
+    &:hover {
+      background: #3F8CFF;
+    }
 
     &.active {
       background: #3F8CFF;

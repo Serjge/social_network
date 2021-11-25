@@ -1,6 +1,5 @@
 import React from 'react'
 import style from './Post.module.scss'
-import {PostLike} from "./PostLike/PostLike";
 
 type PostPropsType = {
 
@@ -17,6 +16,11 @@ export const Post = (props: PostPropsType) => {
     const onClickRemovePost = () => {  //функция удаления поста
         props.removePost(props.id)
     }
+    const onClickLike = () => {
+        props.isDone === false ? props.likeAdd(props.id, true) : props.likeAdd(props.id, false)
+
+    }
+    const classNameLike = ` ${style.like} ${props.isDone === true ? style.likeActive : ''}`
 
     return (
         <div className={style.post}>
@@ -25,7 +29,7 @@ export const Post = (props: PostPropsType) => {
                 {props.message}
                 <button onClick={onClickRemovePost}>x</button>
                 <div>
-                    <PostLike id={props.id} likeAdd={props.likeAdd} isDone={props.isDone} like={props.likeCount}/>
+                    <span onClick={onClickLike} className={classNameLike}>♥{props.likeCount}</span>
                 </div>
             </div>
         </div>

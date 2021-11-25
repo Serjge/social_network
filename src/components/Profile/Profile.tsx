@@ -7,6 +7,8 @@ type ProfilePropsType = {
     profileDate: ProfilePageType
     addPostCallback: (postText: string) => void
     changeNewTextCallback: (postText: string) => void
+    likeAdd: (id: string, isDone: boolean) => void
+    removePost: (id: string) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -14,7 +16,11 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts changeNewTextCallback={props.changeNewTextCallback} addPostCallback={props.addPostCallback} profileDate={props.profileDate}/>
+            <MyPosts removePost={props.removePost}
+                     changeNewTextCallback={props.changeNewTextCallback}
+                     likeAdd={props.likeAdd}
+                     addPostCallback={props.addPostCallback}
+                     profileDate={props.profileDate}/>
         </div>
     )
 }

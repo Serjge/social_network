@@ -8,16 +8,15 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {Music} from './components/Music/Music';
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {changeNewTextCallback, StateType} from "./Redux/State"
-import {addPost} from "./Redux/State"
-
+import {addMessage, changeNewDialogCallBack, changeNewTextCallback, removePost, StateType} from "./Redux/State"
+import {addPost, likeAdd} from "./Redux/State"
 
 type AppPropsType = {
     state: StateType
 }
 
 export function App(props: AppPropsType) {
-
+    console.log('render APP')
     return (
         <div className="App">
             <Header/>
@@ -26,9 +25,14 @@ export function App(props: AppPropsType) {
                 <div className="app__wrapper_contend">
                     <Routes>
                         <Route path='/' element={<Navigate to='/profile'/>}/>
-                        <Route path='/profile' element={<Profile changeNewTextCallback={changeNewTextCallback} addPostCallback={addPost}
-                                                 profileDate={props.state.profilePage}/>}/>
-                        <Route path='/dialogs/*' element={<Dialogs dialogsData={props.state.dialogsPage}/>}/>
+                        <Route path='/profile' element={<Profile profileDate={props.state.profilePage}
+                                                                 changeNewTextCallback={changeNewTextCallback}
+                                                                 addPostCallback={addPost}
+                                                                 likeAdd={likeAdd}
+                                                                 removePost={removePost}/>}/>
+                        <Route path='/dialogs/*' element={<Dialogs dialogsData={props.state.dialogsPage}
+                                                                   addMessage={addMessage}
+                                                                   changeNewDialogCallBack={changeNewDialogCallBack}/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
