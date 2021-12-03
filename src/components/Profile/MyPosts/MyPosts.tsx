@@ -23,7 +23,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 likeCount={p.likeCount}
                 removePost={props.removePost}
                 id={p.id}
-                isDone={p.isDone}
+                isLike={p.isLike}
                 likeAdd={props.likeAdd}
             />
         )
@@ -53,7 +53,8 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <div>
             <div>
                 <textarea value={props.profileDate.messageForNewPost}
-                          onChange={onChangeHandler}/><span>{error}</span>
+                          onChange={onChangeHandler}/>
+                <span>{error}</span>
             </div>
             <div>
                 <button disabled={disableButton} onClick={addPost}>Add post</button>

@@ -2,12 +2,11 @@ import React from 'react'
 import style from './Post.module.scss'
 
 type PostPropsType = {
-
     message: string
     likeCount: number
     removePost: (id: string) => void
     id: string
-    isDone: boolean
+    isLike: boolean
     likeAdd: (id: string, isDone: boolean) => void
 }
 
@@ -17,10 +16,10 @@ export const Post = (props: PostPropsType) => {
         props.removePost(props.id)
     }
     const onClickLike = () => {
-        props.isDone === false ? props.likeAdd(props.id, true) : props.likeAdd(props.id, false)
+        props.isLike === false ? props.likeAdd(props.id, true) : props.likeAdd(props.id, false)
 
     }
-    const classNameLike = ` ${style.like} ${props.isDone === true ? style.likeActive : ''}`
+    const classNameLike = ` ${style.like} ${props.isLike === true ? style.likeActive : ''}`
 
     return (
         <div className={style.post}>

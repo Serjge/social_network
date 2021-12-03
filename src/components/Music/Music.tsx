@@ -1,5 +1,4 @@
 import React from "react";
-import s from './Music.module.scss'
 
 
 export function Music() {
@@ -8,4 +7,3 @@ export function Music() {
     )
 }
 
-// export default Dialogs
