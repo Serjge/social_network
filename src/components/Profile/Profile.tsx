@@ -1,14 +1,11 @@
 import React from 'react'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePageType} from "../../Redux/State";
+import {ActionsType, ProfilePageType, store} from "../../Redux/State";
 
 type ProfilePropsType = {
     profileDate: ProfilePageType
-    addPostCallback: (postText: string) => void
-    changeNewTextCallback: (postText: string) => void
-    likeAdd: (id: string, isDone: boolean) => void
-    removePost: (id: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -16,10 +13,7 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts removePost={props.removePost}
-                     changeNewTextCallback={props.changeNewTextCallback}
-                     likeAdd={props.likeAdd}
-                     addPostCallback={props.addPostCallback}
+            <MyPosts dispatch={props.dispatch.bind(store)}
                      profileDate={props.profileDate}/>
         </div>
     )

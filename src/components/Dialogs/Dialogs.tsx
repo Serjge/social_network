@@ -2,41 +2,36 @@ import React, {ChangeEvent, useState} from "react";
 import s from './Dialogs.module.scss'
 import {DialogsName} from "./DialogsName/DialogsName";
 import {DialogsMessage} from "./DialogsMessage/DialogsMessage";
-import {DialogsPageType} from "../../Redux/State";
+import {ActionsType, DialogsPageType} from "../../Redux/State";
 
 type DialogsPropsType = {
     dialogsData: DialogsPageType
-    addMessage: (nes: string) => void
-    changeNewDialogCallBack: (newText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export function Dialogs(props: DialogsPropsType) {
 
-    let [error, setError] = useState('')
-    let [activeButton, setActiveButton] = useState(false)
+    const [error, setError] = useState('')
 
     const onClickAddMessage = () => {
         if (props.dialogsData.messagesNewDialogs.trim() === '') {
             setError('Пустая строка')
         } else {
-            props.addMessage(props.dialogsData.messagesNewDialogs)
-            props.changeNewDialogCallBack('')
-            setActiveButton(true)
+            props.dispatch({type: "ADD-MESSAGE",messageText:props.dialogsData.messagesNewDialogs})
+            props.dispatch({type:"UPDATE-NEW-DIALOG-TEXT",newDialogText:''})
         }
     }
     const OnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget.value === '') {
-            setActiveButton(true)
         } else {
-            // props.changeNewDialogCallBack(e.currentTarget.value)
-            setActiveButton(false)
             setError('')
         }
-        props.changeNewDialogCallBack(e.currentTarget.value)
+        props.dispatch({type:"UPDATE-NEW-DIALOG-TEXT",newDialogText:e.currentTarget.value})
     }
+    const disabledButton = props.dialogsData.messagesNewDialogs === ''
 
-    let dialogsElement = props.dialogsData.dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
-    let dialogsMessage = props.dialogsData.messages.map(m => <DialogsMessage key={m.id} message={m.message}/>)
+    const dialogsElement = props.dialogsData.dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
+    const dialogsMessage = props.dialogsData.messages.map(m => <DialogsMessage key={m.id} message={m.message}/>)
 
     return (
         <div className={s.dialogs__wrapper}>
@@ -46,7 +41,7 @@ export function Dialogs(props: DialogsPropsType) {
             <div className={s.dialogs__messages}>
                 {dialogsMessage}
                 <textarea value={props.dialogsData.messagesNewDialogs} onChange={OnChangeHandler}/>
-                <button disabled={activeButton} onClick={onClickAddMessage}>Add Message</button>
+                <button disabled={disabledButton} onClick={onClickAddMessage}>Add Message</button>
                 <div><span>{error}</span></div>
             </div>
         </div>

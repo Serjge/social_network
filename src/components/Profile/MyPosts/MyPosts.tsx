@@ -1,53 +1,45 @@
 import React, {ChangeEvent, useState} from 'react'
 import {Post} from "./Post/Post";
-import {ProfilePageType} from "../../../Redux/State";
+import {ActionsType, ProfilePageType, store} from "../../../Redux/State";
 
 type MyPostsPropsType = {
     profileDate: ProfilePageType
-    addPostCallback: (postText: string) => void
-    changeNewTextCallback: (postText: string) => void
-    likeAdd: (id: string, isDone: boolean) => void
-    removePost: (id: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
     let [error, setError] = useState<string>('')
-    let [disableButton, setDisableButton] = useState(true) // деланье кнопки
 
     const postElements = props.profileDate.posts.map(p => {
         return (
-            <Post
-                key={p.id}
-                message={p.message}
-                likeCount={p.likeCount}
-                removePost={props.removePost}
-                id={p.id}
-                isLike={p.isLike}
-                likeAdd={props.likeAdd}
+            <Post key={p.id}
+                  message={p.message}
+                  likeCount={p.likeCount}
+                  id={p.id}
+                  isLike={p.isLike}
+                  dispatch={props.dispatch.bind(store)}
             />
         )
     })
 
     const addPost = () => {
         if (props.profileDate.messageForNewPost.trim() !== '') {
-            props.addPostCallback(props.profileDate.messageForNewPost)
-            props.changeNewTextCallback('')
-            setDisableButton(true)
+            props.dispatch({type: "ADD-POST", postText: props.profileDate.messageForNewPost})
+            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newPostText: ''})
         } else {
             setError(' поле должно быть заполнено')
         }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        if (e.currentTarget.value === '') {
-            setDisableButton(true)
-        } else {
-            setDisableButton(false)
+        if (e.currentTarget.value !== '') {
             setError('')
         }
-        props.changeNewTextCallback(e.currentTarget.value)
+        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newPostText: e.currentTarget.value})
     }
+    const disableButton = props.profileDate.messageForNewPost === ''
+
 
     return (
         <div>

@@ -1,25 +1,26 @@
 import React from 'react'
 import style from './Post.module.scss'
+import {ActionsType} from "../../../../Redux/State";
 
 type PostPropsType = {
     message: string
     likeCount: number
-    removePost: (id: string) => void
     id: string
     isLike: boolean
-    likeAdd: (id: string, isDone: boolean) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Post = (props: PostPropsType) => {
 
-    const onClickRemovePost = () => {  //функция удаления поста
-        props.removePost(props.id)
+    const onClickRemovePost = () => {
+        props.dispatch({type: "REMOVE-POST", removeId: props.id})
     }
     const onClickLike = () => {
-        props.isLike === false ? props.likeAdd(props.id, true) : props.likeAdd(props.id, false)
-
+        !props.isLike
+            ? props.dispatch({type: "ADD-LIKE", LikeId: props.id, isLike: true})
+            : props.dispatch({type: "ADD-LIKE", LikeId: props.id, isLike: false})
     }
-    const classNameLike = ` ${style.like} ${props.isLike === true ? style.likeActive : ''}`
+    const classNameLike = ` ${style.like} ${props.isLike ? style.likeActive : ''}`
 
     return (
         <div className={style.post}>
