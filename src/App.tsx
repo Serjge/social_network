@@ -1,21 +1,23 @@
 import React from 'react';
 import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
-import {Profile} from './components/Profile/Profile'
 import './App.scss'
-import {Dialogs} from './components/Dialogs/Dialogs'
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Music} from './components/Music/Music';
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StateType} from "./Redux/State"
+import {StoreType} from "./Redux/State";
+import {Profile} from './components/Profile/Profile';
+import {Dialogs} from './components/Dialogs/Dialogs';
 
 type AppPropsType = {
-    state: StateType
+    store: StoreType
 }
 
-export function App(props: AppPropsType) {
-    console.log('render app')
+export const App = ({store}: AppPropsType) => {
+
+    const state = store.getState()
+    console.log('render APP')
     return (
         <div className="App">
             <Header/>
@@ -24,8 +26,13 @@ export function App(props: AppPropsType) {
                 <div className="app__wrapper_contend">
                     <Routes>
                         <Route path='/' element={<Navigate to='/profile'/>}/>
-                        <Route path='/profile' element={<Profile  profileDate={props.state.profilePage}/>}/>
-                        <Route path='/dialogs/*' element={<Dialogs dialogsData={props.state.dialogsPage}/>}/>
+                        <Route path='/profile' element={<Profile profileDate={state.profilePage}
+                                                                 dispatch={store.dispatch.bind(store)}
+                        />}
+                        />
+                        <Route path='/dialogs/*' element={<Dialogs dialogsData={state.dialogsPage}
+                                                                   dispatch={store.dispatch.bind(store)}
+                        />}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>

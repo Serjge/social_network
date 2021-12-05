@@ -1,10 +1,11 @@
 import React from 'react'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePageType} from "../../Redux/State";
+import {ActionsType, ProfilePageType, store} from "../../Redux/State";
 
 type ProfilePropsType = {
     profileDate: ProfilePageType
+    dispatch: (action: ActionsType) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -12,7 +13,8 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts profileDate={props.profileDate}/>
+            <MyPosts dispatch={props.dispatch.bind(store)}
+                     profileDate={props.profileDate}/>
         </div>
     )
 }
