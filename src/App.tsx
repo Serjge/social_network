@@ -14,7 +14,7 @@ type AppPropsType = {
     store: StoreType
 }
 
-export const App = ({store, ...props}: AppPropsType) => {
+export const App = ({store}: AppPropsType) => {
 
     const state = store.getState()
     console.log('render APP')
