@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import s from './Dialogs.module.scss'
 import {DialogsName} from "./DialogsName/DialogsName";
 import {DialogsMessage} from "./DialogsMessage/DialogsMessage";
-import {ActionsType, DialogsPageType} from "../../Redux/State";
+import {ActionsType, AddMessageAC, ChangeNewDialogCallBackAC, DialogsPageType} from "../../Redux/State";
 
 type DialogsPropsType = {
     dialogsData: DialogsPageType
@@ -17,8 +17,8 @@ export function Dialogs(props: DialogsPropsType) {
         if (props.dialogsData.messagesNewDialogs.trim() === '') {
             setError('Пустая строка')
         } else {
-            props.dispatch({type: "ADD-MESSAGE",messageText:props.dialogsData.messagesNewDialogs})
-            props.dispatch({type:"UPDATE-NEW-DIALOG-TEXT",newDialogText:''})
+            props.dispatch(AddMessageAC (props.dialogsData.messagesNewDialogs))
+            props.dispatch(ChangeNewDialogCallBackAC(''))
         }
     }
     const OnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,7 +26,7 @@ export function Dialogs(props: DialogsPropsType) {
         } else {
             setError('')
         }
-        props.dispatch({type:"UPDATE-NEW-DIALOG-TEXT",newDialogText:e.currentTarget.value})
+        props.dispatch(ChangeNewDialogCallBackAC(e.currentTarget.value))
     }
     const disabledButton = props.dialogsData.messagesNewDialogs === ''
 

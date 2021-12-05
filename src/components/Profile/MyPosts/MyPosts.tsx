@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react'
 import {Post} from "./Post/Post";
-import {ActionsType, ProfilePageType, store} from "../../../Redux/State";
+import {ActionsType, addPostAC, ChangeNewTextAC, ProfilePageType, store} from "../../../Redux/State";
 
 type MyPostsPropsType = {
     profileDate: ProfilePageType
@@ -25,8 +25,8 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addPost = () => {
         if (props.profileDate.messageForNewPost.trim() !== '') {
-            props.dispatch({type: "ADD-POST", postText: props.profileDate.messageForNewPost})
-            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newPostText: ''})
+            props.dispatch(addPostAC(props.profileDate.messageForNewPost))
+            props.dispatch(ChangeNewTextAC( ''))
         } else {
             setError(' поле должно быть заполнено')
         }
@@ -36,7 +36,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
         if (e.currentTarget.value !== '') {
             setError('')
         }
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newPostText: e.currentTarget.value})
+        props.dispatch(ChangeNewTextAC (e.currentTarget.value))
     }
     const disableButton = props.profileDate.messageForNewPost === ''
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Post.module.scss'
-import {ActionsType} from "../../../../Redux/State";
+import {ActionsType, AddLikeAC, RemovePostAC} from "../../../../Redux/State";
 
 type PostPropsType = {
     message: string
@@ -13,12 +13,12 @@ type PostPropsType = {
 export const Post = (props: PostPropsType) => {
 
     const onClickRemovePost = () => {
-        props.dispatch({type: "REMOVE-POST", removeId: props.id})
+        props.dispatch(RemovePostAC(props.id))
     }
     const onClickLike = () => {
         !props.isLike
-            ? props.dispatch({type: "ADD-LIKE", LikeId: props.id, isLike: true})
-            : props.dispatch({type: "ADD-LIKE", LikeId: props.id, isLike: false})
+            ? props.dispatch(AddLikeAC(props.id, true))
+            : props.dispatch(AddLikeAC(props.id, false))
     }
     const classNameLike = ` ${style.like} ${props.isLike ? style.likeActive : ''}`
 

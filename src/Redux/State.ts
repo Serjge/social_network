@@ -35,36 +35,51 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-    postText: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-    messageText: string
-}
+export type ActionsType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof AddMessageAC>
+    | ReturnType<typeof ChangeNewTextAC>
+    | ReturnType<typeof ChangeNewDialogCallBackAC>
+    | ReturnType<typeof RemovePostAC>
+    | ReturnType<typeof AddLikeAC>
 
-type ChangeNewTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newPostText: string
+export const addPostAC = (postText: string) => {
+    return {
+        type: 'ADD-POST',
+        postText: postText
+    } as const
 }
-type ChangeNewDialogCallBackActionType = {
-    type: 'UPDATE-NEW-DIALOG-TEXT'
-    newDialogText: string
+export const AddMessageAC = (messageText: string) => {
+    return {
+        type: 'ADD-MESSAGE',
+        messageText: messageText
+    } as const
 }
-type RemovePostActionType = {
-    type: 'REMOVE-POST'
-    removeId: string
+export const ChangeNewTextAC = (newPostText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newPostText: newPostText
+    } as const
 }
-type AddLikeActionType = {
-    type: 'ADD-LIKE'
-    LikeId: string
-    isLike: boolean
-
+export const ChangeNewDialogCallBackAC = (newDialogText: string) => {
+    return {
+        type: 'UPDATE-NEW-DIALOG-TEXT',
+        newDialogText: newDialogText
+    } as const
 }
-
-export type ActionsType = AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeNewDialogCallBackActionType | RemovePostActionType | AddLikeActionType
-
+export const RemovePostAC = (removeId: string) => {
+    return {
+        type: 'REMOVE-POST',
+        removeId: removeId
+    } as const
+}
+export const AddLikeAC = (LikeId: string, isLike: boolean) => {
+    return {
+        type: 'ADD-LIKE',
+        LikeId: LikeId,
+        isLike: isLike
+    } as const
+}
 
 export let store = {
     _state: {
@@ -116,21 +131,21 @@ export let store = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.messageForNewPost = action.newPostText
             this._callSubscriber()
-        } else if (action.type === "ADD-MESSAGE" ) {
+        } else if (action.type === "ADD-MESSAGE") {
             const message = {id: v1(), message: action.messageText}
             this._state.dialogsPage.messages.push(message)
             this._callSubscriber()
         } else if (action.type === "UPDATE-NEW-DIALOG-TEXT") {
             this._state.dialogsPage.messagesNewDialogs = action.newDialogText
             this._callSubscriber()
-        }else if (action.type === "REMOVE-POST") {
+        } else if (action.type === "REMOVE-POST") {
             const posts = this._state.profilePage.posts.find(p => p.id === action.removeId)
             if (posts) {
                 const indexPost = this._state.profilePage.posts.indexOf(posts)
                 this._state.profilePage.posts.splice(indexPost, 1)
                 this._callSubscriber()
             }
-        }else if (action.type === "ADD-LIKE") {
+        } else if (action.type === "ADD-LIKE") {
             const posts = this._state.profilePage.posts.find(p => p.id === action.LikeId)
             if (posts) {
                 posts.isLike = action.isLike
