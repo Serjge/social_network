@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './Post.module.scss'
-import {ActionsType, AddLikeAC, RemovePostAC} from "../../../../Redux/State";
+import {ActionsType} from "../../../../Redux/State";
+import {AddLikeAC, RemovePostAC } from '../../../../Redux/ProfileReducer';
 
 type PostPropsType = {
     message: string

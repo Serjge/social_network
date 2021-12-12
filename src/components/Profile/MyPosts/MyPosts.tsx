@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from 'react'
 import {Post} from "./Post/Post";
-import {ActionsType, addPostAC, ChangeNewTextAC, ProfilePageType, store} from "../../../Redux/State";
+import {ActionsType,  ProfilePageType, store} from "../../../Redux/State";
+import {addPostAC, ChangeNewTextAC} from '../../../Redux/ProfileReducer';
 
 type MyPostsPropsType = {
     profileDate: ProfilePageType
