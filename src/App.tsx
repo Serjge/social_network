@@ -14,7 +14,7 @@ type AppPropsType = {
     store: StoreType
 }
 
-export const App = ({store}: AppPropsType) => {
+export const App = () => {
 
     return (
         <div className="App">
@@ -24,8 +24,8 @@ export const App = ({store}: AppPropsType) => {
                 <div className="app__wrapper_contend">
                     <Routes>
                         <Route path='/' element={<Navigate to='/profile'/>}/>
-                        <Route path='/profile' element={<Profile store={store}/>}/>
-                        <Route path='/dialogs/*' element={<DialogsContainer store={store}/>}/>
+                        <Route path='/profile' element={<Profile/>}/>
+                        <Route path='/dialogs/*' element={<DialogsContainer />}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
