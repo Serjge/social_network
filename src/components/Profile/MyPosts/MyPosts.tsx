@@ -1,59 +1,35 @@
-import React, {ChangeEvent, useState} from 'react'
-import {Post} from "./Post/Post";
-import {ActionsType,  ProfilePageType, store} from "../../../Redux/State";
-import {addPostAC, ChangeNewTextAC} from '../../../Redux/ProfileReducer';
+import React, {ChangeEvent} from 'react'
+import {PostsType} from "../../../Redux/State";
+import {PostMap} from './Post/PostMap';
 
 type MyPostsPropsType = {
-    profileDate: ProfilePageType
-    dispatch: (action: ActionsType) => void
+    addPost: () => void
+    onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    posts: PostsType[]
+    messageForNewPost: string
+    onClickRemovePost: (idPost: string) => void
+    onClickLike: (idPost: string, isLike: boolean) => void
+    error: string
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    let [error, setError] = useState<string>('')
-
-    const postElements = props.profileDate.posts.map(p => {
-        return (
-            <Post key={p.id}
-                  message={p.message}
-                  likeCount={p.likeCount}
-                  id={p.id}
-                  isLike={p.isLike}
-                  dispatch={props.dispatch.bind(store)}
-            />
-        )
-    })
-
-    const addPost = () => {
-        if (props.profileDate.messageForNewPost.trim() !== '') {
-            props.dispatch(addPostAC(props.profileDate.messageForNewPost))
-            props.dispatch(ChangeNewTextAC( ''))
-        } else {
-            setError(' поле должно быть заполнено')
-        }
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        if (e.currentTarget.value !== '') {
-            setError('')
-        }
-        props.dispatch(ChangeNewTextAC (e.currentTarget.value))
-    }
-    const disableButton = props.profileDate.messageForNewPost === ''
-
+    const disableButton = props.messageForNewPost === ''
 
     return (
         <div>
             <div>
-                <textarea value={props.profileDate.messageForNewPost}
-                          onChange={onChangeHandler}/>
-                <span>{error}</span>
+                <textarea value={props.messageForNewPost}
+                          onChange={props.onChangeHandler}/>
+                <span>{props.error}</span>
             </div>
             <div>
-                <button disabled={disableButton} onClick={addPost}>Add post</button>
+                <button disabled={disableButton} onClick={props.addPost}>Add post</button>
             </div>
             <div>
-                {postElements}
+                <PostMap onClickLike={props.onClickLike}
+                         posts={props.posts}
+                         onClickRemovePost={props.onClickRemovePost}/>
             </div>
         </div>
     )

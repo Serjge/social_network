@@ -8,7 +8,7 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {StoreType} from "./Redux/State";
 import {Profile} from './components/Profile/Profile';
-import {Dialogs} from './components/Dialogs/Dialogs';
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     store: StoreType
@@ -16,8 +16,6 @@ type AppPropsType = {
 
 export const App = ({store}: AppPropsType) => {
 
-    const state = store.getState()
-    console.log('render APP')
     return (
         <div className="App">
             <Header/>
@@ -26,13 +24,8 @@ export const App = ({store}: AppPropsType) => {
                 <div className="app__wrapper_contend">
                     <Routes>
                         <Route path='/' element={<Navigate to='/profile'/>}/>
-                        <Route path='/profile' element={<Profile profileDate={state.profilePage}
-                                                                 dispatch={store.dispatch.bind(store)}
-                        />}
-                        />
-                        <Route path='/dialogs/*' element={<Dialogs dialogsData={state.dialogsPage}
-                                                                   dispatch={store.dispatch.bind(store)}
-                        />}/>
+                        <Route path='/profile' element={<Profile store={store}/>}/>
+                        <Route path='/dialogs/*' element={<DialogsContainer store={store}/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>

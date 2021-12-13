@@ -1,26 +1,18 @@
 import React from 'react'
 import style from './Post.module.scss'
-import {ActionsType} from "../../../../Redux/State";
-import {AddLikeAC, RemovePostAC } from '../../../../Redux/ProfileReducer';
 
 type PostPropsType = {
     message: string
     likeCount: number
     id: string
     isLike: boolean
-    dispatch: (action: ActionsType) => void
+    onClickRemovePost: (idPost:string) => void
+
+    onClickLike: (idPost: string, isLike:boolean) =>void
 }
 
 export const Post = (props: PostPropsType) => {
 
-    const onClickRemovePost = () => {
-        props.dispatch(RemovePostAC(props.id))
-    }
-    const onClickLike = () => {
-        !props.isLike
-            ? props.dispatch(AddLikeAC(props.id, true))
-            : props.dispatch(AddLikeAC(props.id, false))
-    }
     const classNameLike = ` ${style.like} ${props.isLike ? style.likeActive : ''}`
 
     return (
@@ -28,9 +20,11 @@ export const Post = (props: PostPropsType) => {
             <div className={style.item}>
                 <img alt='' src='https://randomuser.me/api/portraits/women/57.jpg'/>
                 {props.message}
-                <button onClick={onClickRemovePost}>x</button>
+                <button onClick={()=>props.onClickRemovePost(props.id)}>x</button>
                 <div>
-                    <span onClick={onClickLike} className={classNameLike}>♥{props.likeCount}</span>
+                    <span onClick={()=>props.onClickLike(props.id, props.isLike)}
+                          className={classNameLike}>♥{props.likeCount}
+                    </span>
                 </div>
             </div>
         </div>
