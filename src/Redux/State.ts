@@ -1,26 +1,27 @@
 import {v1} from "uuid"
 import {AddMessageAC, ChangeNewDialogCallBackAC, DialogsReducer} from "./DialogsReducer"
 import {AddLikeAC, addPostAC, ChangeNewTextAC, ProfileReducer, RemovePostAC} from "./ProfileReducer"
+import {FollowAC, UnFollowAC} from "./UsersReducer";
 
-export type PostsType = {
+ type PostsType = {
     id: string
     message: string
     likeCount: number
     isLike: boolean
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     messageForNewPost: string
     posts: Array<PostsType>
 }
-export type MessagesType = {
+ type MessagesType = {
     id: string,
     message: string
 }
-export type DialogType = {
+ type DialogType = {
     id: string,
     name: string
 }
-export type DialogsPageType = {
+ type DialogsPageType = {
     dialogs: Array<DialogType>,
     messages: Array<MessagesType>
     messagesNewDialogs: string
@@ -44,6 +45,8 @@ ReturnType<typeof addPostAC>
 | ReturnType<typeof ChangeNewDialogCallBackAC>
 | ReturnType<typeof RemovePostAC>
 | ReturnType<typeof AddLikeAC>
+| ReturnType<typeof FollowAC>
+| ReturnType<typeof UnFollowAC>
 
 export let store = {
     _state: {

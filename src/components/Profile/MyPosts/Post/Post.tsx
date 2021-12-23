@@ -8,7 +8,7 @@ type PostPropsType = {
     isLike: boolean
     onClickRemovePost: (idPost:string) => void
 
-    onClickLike: (idPost: string, isLike:boolean) =>void
+    onClickLike: (idPost: string, isLike:boolean,likeCount:number) =>void
 }
 
 export const Post = (props: PostPropsType) => {
@@ -22,7 +22,7 @@ export const Post = (props: PostPropsType) => {
                 {props.message}
                 <button onClick={()=>props.onClickRemovePost(props.id)}>x</button>
                 <div>
-                    <span onClick={()=>props.onClickLike(props.id, props.isLike)}
+                    <span onClick={()=>props.onClickLike(props.id, props.isLike, props.likeCount)}
                           className={classNameLike}>♥{props.likeCount}
                     </span>
                 </div>

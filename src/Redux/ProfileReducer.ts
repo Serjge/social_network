@@ -1,10 +1,63 @@
 import {v1} from "uuid";
-import {ActionsType, PostsType, ProfilePageType} from "./State";
+import {ActionsType} from "./State";
 
-export const addPostAC = (postText: string) => {
+export type  InitialProfileStateType = typeof initialState
+
+const initialState = {
+    messageForNewPost: '' as string,
+    posts: [
+        {id: v1(), message: `Hi, how are you?`, likeCount: 10, isLike: false},
+        {id: v1(), message: `It's my first post`, likeCount: 15, isLike: false},
+        {id: v1(), message: `React, it's cool!`, likeCount: 50, isLike: false}
+    ] as PostsType[]
+}
+export type PostsType = {
+    id: string
+    message: string
+    likeCount: number
+    isLike: boolean
+}
+
+export const ProfileReducer = (state = initialState, action: ActionsType): InitialProfileStateType => {
+    switch (action.type) {
+        case "ADD-POST":
+            const newPost: PostsType = {
+                id: v1(),
+                message: state.messageForNewPost,
+                likeCount: 0,
+                isLike: false
+            }
+            return {
+                ...state,
+                messageForNewPost: '',
+                posts: [ newPost,...state.posts]
+            }
+        case "UPDATE-NEW-POST-TEXT":
+            return {
+                ...state,
+                messageForNewPost: action.newPostText
+            }
+        case "REMOVE-POST":
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id !== action.removeId)
+            }
+        case "ADD-LIKE":
+            return {
+                ...state,
+                posts: state.posts.map(p => p.id === action.LikeId ?
+                    !p.isLike
+                        ? {...p, isLike: action.isLike, likeCount: p.likeCount + 1}
+                        : {...p, isLike: action.isLike, likeCount: p.likeCount - 1}
+                    : p)
+            }
+        default:
+            return state
+    }
+}
+export const addPostAC = () => {
     return {
         type: 'ADD-POST',
-        postText: postText
     } as const
 }
 
@@ -27,43 +80,4 @@ export const AddLikeAC = (LikeId: string, isLike: boolean) => {
         LikeId: LikeId,
         isLike: isLike
     } as const
-}
-
-export type ProfileActionsType =
-    | ReturnType<typeof addPostAC>
-    | ReturnType<typeof ChangeNewTextAC>
-    | ReturnType<typeof RemovePostAC>
-    | ReturnType<typeof AddLikeAC>
-
-export const ProfileReducer = (state: ProfilePageType, action: ActionsType) => {
-    switch (action.type) {
-        case "ADD-POST":
-            const newPost: PostsType = {
-                id: v1(),
-                message: action.postText,
-                likeCount: 0,
-                isLike: false
-            }
-            state.posts.unshift(newPost)
-            return state
-        case "UPDATE-NEW-POST-TEXT":
-            state.messageForNewPost = action.newPostText
-            return state
-        case "REMOVE-POST":
-            const removePost = state.posts.find(p => p.id === action.removeId)
-            if (removePost) {
-                const indexPost = state.posts.indexOf(removePost)
-                state.posts.splice(indexPost, 1)
-            }
-            return state
-        case "ADD-LIKE":
-            const likePost = state.posts.find(p => p.id === action.LikeId)
-            if (likePost) {
-                likePost.isLike = action.isLike
-                action.isLike ? likePost.likeCount += 1 : likePost.likeCount -= 1
-            }
-            return state
-        default:
-            return state
-    }
 }

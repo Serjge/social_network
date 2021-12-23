@@ -6,13 +6,9 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {Music} from './components/Music/Music';
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StoreType} from "./Redux/State";
 import {Profile} from './components/Profile/Profile';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-
-type AppPropsType = {
-    store: StoreType
-}
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 export const App = () => {
 
@@ -29,6 +25,7 @@ export const App = () => {
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/settings' element={<Settings/>}/>
+                        <Route path='/users' element={<UsersContainer />}/>
                     </Routes>
                 </div>
             </div>

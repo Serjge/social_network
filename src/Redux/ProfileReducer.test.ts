@@ -21,8 +21,8 @@ const state: StateType = {
 }
 
 test('add post', () => {
-    const newState = ProfileReducer(state.profilePage, {type: "ADD-POST", postText: 'New Post'})
-    expect(newState.posts[0].message).toBe('New Post')
+    const newState = ProfileReducer(state.profilePage, {type: "ADD-POST"})
+    expect(newState.posts[0].message).toBe('')
     expect(newState.posts.length).toBe(2)
 })
 test('Update text post', () => {

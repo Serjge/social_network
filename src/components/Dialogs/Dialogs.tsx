@@ -1,31 +1,21 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './Dialogs.module.scss'
 import {DialogsName} from "./DialogsName/DialogsName";
 import {DialogsMessage} from "./DialogsMessage/DialogsMessage";
-import {DialogType, MessagesType} from "../../Redux/State";
-
-type DialogsPropsType = {
-    addMessage: () => void
-    OnChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    dialogs: DialogType[]
-    messages: MessagesType[]
-    messagesNewDialogs: string
-    error: string
-}
+import {DialogsPropsType} from "./DialogsContainer";
 
 export function Dialogs({
                             addMessage,
                             OnChangeHandler,
-                            dialogs,
-                            messages,
-                            messagesNewDialogs,
-                            error
+                            dialogsPage
                         }: DialogsPropsType) {
 
-    const disabledButton = messagesNewDialogs === ''
+    const dialogsElement = dialogsPage.dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
+    const dialogsMessage = dialogsPage.messages.map(m => <DialogsMessage key={m.id} message={m.message}/>)
 
-    const dialogsElement = dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
-    const dialogsMessage = messages.map(m => <DialogsMessage key={m.id} message={m.message}/>)
+    const onChangeMessage= (e: React.ChangeEvent<HTMLTextAreaElement>)=> {
+        OnChangeHandler(e.currentTarget.value)
+    }
 
     return (
         <div className={s.dialogs__wrapper}>
@@ -34,9 +24,8 @@ export function Dialogs({
             </div>
             <div className={s.dialogs__messages}>
                 {dialogsMessage}
-                <textarea value={messagesNewDialogs} onChange={OnChangeHandler}/>
-                <button disabled={disabledButton} onClick={addMessage}>Add Message</button>
-                <div><span>{error}</span></div>
+                <textarea value={dialogsPage.messagesNewDialogs} onChange={onChangeMessage}/>
+                <button onClick={addMessage}>Add Message</button>
             </div>
         </div>
     )

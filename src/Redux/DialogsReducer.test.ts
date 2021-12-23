@@ -26,7 +26,7 @@ test('add message in dialogs', () => {
 })
 
 test('update text in dialogs', () => {
-    const newState2 = DialogsReducer(state.dialogsPage, {type: "ADD-MESSAGE", messageText: 'T'})
-    expect(newState2.messages[newState2.messages.length - 1].message).toBe('T')
+    const newState2 = DialogsReducer(state.dialogsPage, {type: "ADD-MESSAGE"})
+    expect(newState2.messages[newState2.messages.length - 1].message).toBe('Test')
     expect(newState2.messages.length).toBe(2)
 })
