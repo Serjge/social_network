@@ -1,8 +1,9 @@
 import {FollowAC, InitialUsersStateType, setUsersAC, UnFollowAC, UserType} from "../../Redux/UsersReducer";
 import {connect} from "react-redux";
-import {Users} from "./Users";
+
 import {AppStateType} from "../../Redux/redux_store";
 import {Dispatch} from "redux";
+import { UsersC } from "./UsersC";
 
 type mapStateToPropsType = {
     usersPage: InitialUsersStateType
@@ -35,4 +36,4 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
