@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {ActionsType} from "./State";
 
 export type  InitialProfileStateType = typeof initialState
 
@@ -18,12 +17,19 @@ export type PostsType = {
     isLike: boolean
 }
 
-export const ProfileReducer = (state = initialState, action: ActionsType): InitialProfileStateType => {
+type ActionsProfileType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof ChangeNewTextAC>
+    | ReturnType<typeof RemovePostAC>
+    | ReturnType<typeof AddLikeAC>
+
+
+export const ProfileReducer = (state = initialState, action: ActionsProfileType): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostsType = {
                 id: v1(),
-                message: state.messageForNewPost,
+                message: state.messageForNewPost.trim(),
                 likeCount: 0,
                 isLike: false
             }

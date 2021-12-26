@@ -15,7 +15,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                           onChange={onChangeHandler}/>
             </div>
             <div>
-                <button onClick={props.addPost}>Add post</button>
+                <button disabled={props.profilePage.messageForNewPost.trim()===''} onClick={props.addPost}>Add post</button>
             </div>
             <div>
                 <PostMap onClickLike={props.onClickLike}

@@ -1,9 +1,6 @@
 import {v1} from "uuid"
-import {AddMessageAC, ChangeNewDialogCallBackAC, DialogsReducer} from "./DialogsReducer"
-import {AddLikeAC, addPostAC, ChangeNewTextAC, ProfileReducer, RemovePostAC} from "./ProfileReducer"
-import {FollowAC, UnFollowAC} from "./UsersReducer";
 
- type PostsType = {
+type PostsType = {
     id: string
     message: string
     likeCount: number
@@ -30,23 +27,23 @@ export type StateType = {
     dialogsPage: DialogsPageType,
     profilePage: ProfilePageType
 }
-export type StoreType = {
-    _state: StateType
-    getState: () => StateType
-    _callSubscriber: (_state: StateType) => void
-    subscribe: (observer: () => void) => void
-    dispatch: (action: ActionsType) => void
-}
-
-export type ActionsType =
-ReturnType<typeof addPostAC>
-| ReturnType<typeof AddMessageAC>
-| ReturnType<typeof ChangeNewTextAC>
-| ReturnType<typeof ChangeNewDialogCallBackAC>
-| ReturnType<typeof RemovePostAC>
-| ReturnType<typeof AddLikeAC>
-| ReturnType<typeof FollowAC>
-| ReturnType<typeof UnFollowAC>
+// export type StoreType = {
+//     _state: StateType
+//     getState: () => StateType
+//     _callSubscriber: (_state: StateType) => void
+//     subscribe: (observer: () => void) => void
+//     dispatch: (action: ActionsType) => void
+// }
+//
+// export type ActionsType =
+// ReturnType<typeof addPostAC>
+// | ReturnType<typeof AddMessageAC>
+// | ReturnType<typeof ChangeNewTextAC>
+// | ReturnType<typeof ChangeNewDialogCallBackAC>
+// | ReturnType<typeof RemovePostAC>
+// | ReturnType<typeof AddLikeAC>
+// | ReturnType<typeof FollowAC>
+// | ReturnType<typeof UnFollowAC>
 
 export let store = {
     _state: {
@@ -85,10 +82,10 @@ export let store = {
     subscribe(observer: () => void) {
         this._callSubscriber = observer
     },
-    dispatch(action: ActionsType) {
-        this._state.profilePage = ProfileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action)
-        this._callSubscriber()
+    // dispatch(action: ActionsType) {
+    //     this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+    //     this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action)
+    //     this._callSubscriber()
         // if (action.type === 'ADD-POST') {
         //     const newPost: PostsType = {
         //         id: v1(),
@@ -123,5 +120,5 @@ export let store = {
         //         this._callSubscriber()
         //     }
         // }
-    }
+    // }
 }

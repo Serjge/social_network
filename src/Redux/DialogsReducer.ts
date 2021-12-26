@@ -1,4 +1,3 @@
-import {ActionsType} from "./State";
 import {v1} from "uuid";
 
 export type MessagesType = {
@@ -32,16 +31,20 @@ const initialState = {
     ] as MessagesType[],
     messagesNewDialogs: '' as string
 }
+type ActionsDialogsType =
+    ReturnType<typeof AddMessageAC>
+    | ReturnType<typeof ChangeNewDialogCallBackAC>
 
-export const DialogsReducer = (state=initialState, action: ActionsType):InitialDialogsStateType => {
+
+export const DialogsReducer = (state = initialState, action: ActionsDialogsType): InitialDialogsStateType => {
     switch (action.type) {
         case "ADD-MESSAGE":
-            const newMessage:MessagesType = {id: v1(), message: state.messagesNewDialogs}
+            const newMessage: MessagesType = {id: v1(), message: state.messagesNewDialogs}
 
             return {
                 ...state,
                 messagesNewDialogs: '',
-                messages: [...state.messages,newMessage]
+                messages: [...state.messages, newMessage]
             }
         case "UPDATE-NEW-DIALOG-TEXT":
             return {
