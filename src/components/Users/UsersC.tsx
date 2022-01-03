@@ -6,17 +6,42 @@ import userPhoto from '../../assets/img/i.webp'
 
 export class UsersC extends React.Component<UsersPropsType, UsersPropsType> {
 
-    constructor(props: UsersPropsType) {
-        super(props);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+    // constructor(props: UsersPropsType) {
+    //     super(props);
+    //
+    // }
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUserCount(response.data.totalCount)
+            console.log(response)
+        })
+    }
+
+    onPageChanged = (pageNumber:number)=> {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersPage.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
             console.log(response)
         })
     }
 
     render() {
+        let pagesCounter = Math.ceil(this.props.usersPage.totalUserCount / this.props.usersPage.pageSize)
+        let pages = []
+        for (let i=1 ; i<=pagesCounter;i++) {
+            pages.push(i)
+        }
+        console.log(pages)
         return (
             <div>
+                <div>
+                    {pages.map(p=>{
+                        return <span key={p}
+                                     onClick={()=>{this.onPageChanged(p)}}
+                                     style={{fontWeight: this.props.usersPage.currentPage===p ? 'bold': 'normal', cursor: 'pointer'}}>{p} </span>
+                    })}
+                </div>
                 {/*<button onClick={this.getUsers}>users</button>*/}
                 {this.props.usersPage.users.map(u => {
                         return (
