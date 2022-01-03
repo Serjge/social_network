@@ -1,66 +1,35 @@
-// export type InitialUsersStateType = {
-//     users: UserType[]
-//     pageSize: number,
-//     totalUserCount: number,
-//     currentPage: number
-// }
-export type InitialUsersStateType =typeof initialState
+export type InitialUsersStateType = typeof initialState
 
 const initialState = {
-    users : [] as UserType[],
-    pageSize:10,
-    totalUserCount:0,
-    currentPage:1
+    users: [] as UserType[],
+    pageSize: 10,
+    totalUserCount: 0,
+    currentPage: 1,
+    isFetching: true
 
-
-    //     {
-    //         id: v1(),
-    //         name: 'Dmitriy',
-    //         age: 35,
-    //         urlAvatar: 'https://randomuser.me/api/portraits/men/15.jpg',
-    //         followed: false,
-    //         status: 'I am boss',
-    //         location: {city: 'Pskov', country: 'Russia'}
-    //     }, {
-    //         id: v1(),
-    //         name: 'Andrey',
-    //         age: 25,
-    //         urlAvatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-    //         followed: true,
-    //         status: 'I am student',
-    //         location: {city: 'Minsk', country: 'Belarus'}
-    //     }, {
-    //         id: v1(),
-    //         name: 'Anna',
-    //         age: 30,
-    //         urlAvatar: 'https://randomuser.me/api/portraits/women/75.jpg',
-    //         followed: false,
-    //         status: 'I am boss',
-    //         location: {city: 'Moscow', country: 'Russia'}
-    //     },
-    // ] as UserType[]
 }
 
 export type UserType = {
     id: string
     name: string
     age: number
-    photos: { small:string, large:string }
+    photos: { small: string, large: string }
     followed: boolean
     status: string
     location: { city: string, country: string }
 }
 
 type ActionsUsersType =
-    ReturnType<typeof FollowAC>
-    | ReturnType<typeof UnFollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUserCountAC>
+    ReturnType<typeof setFollow>
+    | ReturnType<typeof setUnFollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUserCount>
+    | ReturnType<typeof setToggleIsFetching>
 
-export const UsersReducer = (state:InitialUsersStateType  =initialState , action: ActionsUsersType): InitialUsersStateType => {
+export const UsersReducer = (state: InitialUsersStateType = initialState, action: ActionsUsersType): InitialUsersStateType => {
     switch (action.type) {
-        case "FOLLOW":
+        case "SET-FOLLOW":
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -70,7 +39,7 @@ export const UsersReducer = (state:InitialUsersStateType  =initialState , action
                     return u
                 })
             }
-        case "UNFOLLOW":
+        case "SET-UNFOLLOW":
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -83,17 +52,22 @@ export const UsersReducer = (state:InitialUsersStateType  =initialState , action
         case "SET-USERS":
             return {
                 ...state,
-                users: [ ...action.users]
+                users: [...action.users]
             }
-            case 'SET-CURRENT-PAGE':
+        case 'SET-CURRENT-PAGE':
             return {
                 ...state,
                 currentPage: action.currentPage
             }
-              case 'SET-TOTAL-USER-COUNT':
+        case 'SET-TOTAL-USER-COUNT':
             return {
                 ...state,
                 totalUserCount: action.totalUserCount
+            }
+ case 'TOGGLE-IS-FETCHING':
+            return {
+                ...state,
+                isFetching: action.isFetching
             }
 
         default:
@@ -101,34 +75,40 @@ export const UsersReducer = (state:InitialUsersStateType  =initialState , action
     }
 }
 
-export const FollowAC = (id: string) => {
+export const setFollow = (id: string) => {
     return {
-        type: 'FOLLOW',
+        type: 'SET-FOLLOW',
         id: id,
     } as const
 }
-export const UnFollowAC = (id: string) => {
+export const setUnFollow = (id: string) => {
     return {
-        type: 'UNFOLLOW',
+        type: 'SET-UNFOLLOW',
         id: id,
     } as const
 }
 
-export const setUsersAC = (users: UserType[]) => {
+export const setUsers = (users: UserType[]) => {
     return {
         type: 'SET-USERS',
         users: users
     } as const
 }
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         currentPage: currentPage
     } as const
 }
-export const setTotalUserCountAC = (totalUserCount: number) => {
+export const setTotalUserCount = (totalUserCount: number) => {
     return {
         type: 'SET-TOTAL-USER-COUNT',
         totalUserCount: totalUserCount
+    } as const
+}
+export const setToggleIsFetching = (isFetching: boolean) => {
+    return {
+        type: 'TOGGLE-IS-FETCHING',
+        isFetching: isFetching
     } as const
 }

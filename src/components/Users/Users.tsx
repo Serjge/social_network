@@ -1,17 +1,21 @@
 import React from 'react';
 import userPhoto from '../../assets/img/i.webp'
-import {InitialUsersStateType} from "../../Redux/UsersReducer";
+import {UserType} from "../../Redux/UsersReducer";
 
 type UsersPropsType = {
-    usersPage:InitialUsersStateType
+    users:UserType[]
     onPageChanged: (pageNumber:number) => void
     follow: (id: string) => void
     unFollow: (id: string) => void
+    totalUserCount: number
+    pageSize: number
+    currentPage: number
+
 }
 
-export const Users = ({usersPage,onPageChanged,follow, unFollow}: UsersPropsType) => {
+export const Users = ({onPageChanged,follow, unFollow, pageSize,totalUserCount,currentPage, users}: UsersPropsType) => {
 
-    let pagesCounter = Math.ceil(usersPage.totalUserCount / usersPage.pageSize)
+    let pagesCounter = Math.ceil(totalUserCount / pageSize)
     let pages = []
     for (let i = 1; i <= pagesCounter; i++) {
         pages.push(i)
@@ -22,10 +26,10 @@ export const Users = ({usersPage,onPageChanged,follow, unFollow}: UsersPropsType
                 {pages.map(p=>{
                     return <span key={p}
                                  onClick={()=>{onPageChanged(p)}}
-                                 style={{fontWeight: usersPage.currentPage===p ? 'bold': 'normal', cursor: 'pointer'}}>{p} </span>
+                                 style={{fontWeight: currentPage===p ? 'bold': 'normal', cursor: 'pointer'}}>{p} </span>
                 })}
             </div>
-            {usersPage.users.map(u => {
+            {users.map(u => {
                     return (
                         <div key={u.id}
                              style={{
