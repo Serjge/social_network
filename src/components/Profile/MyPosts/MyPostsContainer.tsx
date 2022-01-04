@@ -1,9 +1,9 @@
 import {
-    AddLikeAC,
-    addPostAC,
-    ChangeNewTextAC,
+    AddLike,
+    addPost,
+    ChangeNewText,
     InitialProfileStateType,
-    RemovePostAC
+    RemovePost
 } from '../../../Redux/ProfileReducer';
 import {MyPosts} from "./MyPosts";
 import {AppStateType} from "../../../Redux/redux_store";
@@ -32,19 +32,19 @@ const mapStateToProps = (state: AppStateType):mapStateToPropsType => {
 const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
     return {
         addPost: () => {
-            dispatch(addPostAC())
-            dispatch(ChangeNewTextAC(''))
+            dispatch(addPost())
+            dispatch(ChangeNewText(''))
         },
         onChangeHandler: (text:string) => {
-            dispatch(ChangeNewTextAC(text))
+            dispatch(ChangeNewText(text))
         },
         onClickRemovePost: (idPost: string) => {
-            dispatch(RemovePostAC(idPost))
+            dispatch(RemovePost(idPost))
         },
         onClickLike: (idPost: string, isLike: boolean) => {
             !isLike
-                ? dispatch(AddLikeAC(idPost, true))
-                : dispatch(AddLikeAC(idPost, false))
+                ? dispatch(AddLike(idPost, true))
+                : dispatch(AddLike(idPost, false))
         }
     }
 }

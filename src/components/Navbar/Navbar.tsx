@@ -5,7 +5,7 @@ import {ItemMenu} from "./Item/ItemMenu";
 export const Navbar = () => {
     return (
         <nav className={s.nav}>
-                <ItemMenu to={'/profile'} nameMenu={'Profile'}/>
+                <ItemMenu to={'/profile/'} nameMenu={'Profile'}/>
                 <ItemMenu to={'/dialogs/'} nameMenu={'Message'}/>
                 <ItemMenu to={'/music'} nameMenu={'Music'}/>
                 <ItemMenu to={'/news'} nameMenu={'News'}/>

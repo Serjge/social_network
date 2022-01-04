@@ -9,6 +9,7 @@ import {Settings} from "./components/Settings/Settings";
 import {Profile} from './components/Profile/Profile';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
 export const App = () => {
 
@@ -20,7 +21,7 @@ export const App = () => {
                 <div className="app__wrapper_contend">
                     <Routes>
                         <Route path='/' element={<Navigate to='/profile'/>}/>
-                        <Route path='/profile' element={<Profile/>}/>
+                        <Route path='/profile/*' element={<ProfileContainer/>}/>
                         <Route path='/dialogs/*' element={<DialogsContainer />}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>

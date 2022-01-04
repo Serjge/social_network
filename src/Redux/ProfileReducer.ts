@@ -8,8 +8,32 @@ const initialState = {
         {id: v1(), message: `Hi, how are you?`, likeCount: 10, isLike: false},
         {id: v1(), message: `It's my first post`, likeCount: 15, isLike: false},
         {id: v1(), message: `React, it's cool!`, likeCount: 50, isLike: false}
-    ] as PostsType[]
+    ] as PostsType[],
+    profile: null as ProfileType
 }
+
+export type ProfileType = {
+    "aboutMe": string,
+    "contacts": {
+        "facebook": string,
+        "website": string,
+        "vk": string,
+        "twitter": string,
+        "instagram": string,
+        "youtube": string,
+        "github": string,
+        "mainLink": string
+    },
+    "lookingForAJob": string,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+    "photos": {
+        "small": string,
+        "large": string
+    }
+} | null
+
 export type PostsType = {
     id: string
     message: string
@@ -18,10 +42,11 @@ export type PostsType = {
 }
 
 type ActionsProfileType =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof ChangeNewTextAC>
-    | ReturnType<typeof RemovePostAC>
-    | ReturnType<typeof AddLikeAC>
+    ReturnType<typeof addPost>
+    | ReturnType<typeof ChangeNewText>
+    | ReturnType<typeof RemovePost>
+    | ReturnType<typeof AddLike>
+    | ReturnType<typeof setUserProfile>
 
 
 export const ProfileReducer = (state = initialState, action: ActionsProfileType): InitialProfileStateType => {
@@ -57,33 +82,46 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
                         : {...p, isLike: action.isLike, likeCount: p.likeCount - 1}
                     : p)
             }
+            case 'SET-USER-PROFILE':
+            return {
+                ...state,
+                profile: action.profile
+            }
+
         default:
             return state
     }
 }
-export const addPostAC = () => {
+export const addPost = () => {
     return {
         type: 'ADD-POST',
     } as const
 }
 
-export const ChangeNewTextAC = (newPostText: string) => {
+export const ChangeNewText = (newPostText: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         newPostText: newPostText
     } as const
 }
 
-export const RemovePostAC = (removeId: string) => {
+export const RemovePost = (removeId: string) => {
     return {
         type: 'REMOVE-POST',
         removeId: removeId
     } as const
 }
-export const AddLikeAC = (LikeId: string, isLike: boolean) => {
+export const AddLike = (LikeId: string, isLike: boolean) => {
     return {
         type: 'ADD-LIKE',
         LikeId: LikeId,
         isLike: isLike
+    } as const
+}
+export const setUserProfile = (profile: ProfileType) => {
+    return {
+        type: 'SET-USER-PROFILE',
+        profile: profile
+
     } as const
 }
