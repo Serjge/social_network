@@ -9,7 +9,7 @@ const initialState = {
         {id: v1(), message: `It's my first post`, likeCount: 15, isLike: false},
         {id: v1(), message: `React, it's cool!`, likeCount: 50, isLike: false}
     ] as PostsType[],
-    profile: null as ProfileType
+    profile: null as ProfileType,
 }
 
 export type ProfileType = {
@@ -47,6 +47,7 @@ type ActionsProfileType =
     | ReturnType<typeof RemovePost>
     | ReturnType<typeof AddLike>
     | ReturnType<typeof setUserProfile>
+
 
 
 export const ProfileReducer = (state = initialState, action: ActionsProfileType): InitialProfileStateType => {
@@ -87,6 +88,7 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
                 ...state,
                 profile: action.profile
             }
+
 
         default:
             return state

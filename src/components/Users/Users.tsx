@@ -4,17 +4,24 @@ import {UserType} from "../../Redux/UsersReducer";
 import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
-    users:UserType[]
-    onPageChanged: (pageNumber:number) => void
+    users: UserType[]
+    onPageChanged: (pageNumber: number) => void
     follow: (id: string) => void
     unFollow: (id: string) => void
     totalUserCount: number
     pageSize: number
     currentPage: number
-
 }
 
-export const Users = ({onPageChanged,follow, unFollow, pageSize,totalUserCount,currentPage, users}: UsersPropsType) => {
+export const Users = ({
+                          onPageChanged,
+                          follow,
+                          unFollow,
+                          pageSize,
+                          totalUserCount,
+                          currentPage,
+                          users
+                      }: UsersPropsType) => {
 
     let pagesCounter = Math.ceil(totalUserCount / pageSize)
     let pages = []
@@ -36,10 +43,11 @@ export const Users = ({onPageChanged,follow, unFollow, pageSize,totalUserCount,c
 
                             <div>
                                 <div style={{width: '80px', height: '80px'}}>
-                                    <NavLink to={'/profile/'+ u.id}>
-                                    <img style={{width: '100%', height: '100%', borderRadius: '50%'}}
-                                         src={u.photos.small === null ? userPhoto : u.photos.small}
-                                         alt={u.name}/>
+
+                                    <NavLink to={'/profile/' + u.id}>
+                                        <img style={{width: '100%', height: '100%', borderRadius: '50%'}}
+                                             src={u.photos.small === null ? userPhoto : u.photos.small}
+                                             alt={u.name}/>
                                     </NavLink>
                                 </div>
                                 <div>
@@ -67,10 +75,15 @@ export const Users = ({onPageChanged,follow, unFollow, pageSize,totalUserCount,c
                 }
             )}
             <div>
-                {pages.map(p=>{
+                {pages.map(p => {
                     return <span key={p}
-                                 onClick={()=>{onPageChanged(p)}}
-                                 style={{fontWeight: currentPage===p ? 'bold': 'normal', cursor: 'pointer'}}>{p} </span>
+                                 onClick={() => {
+                                     onPageChanged(p)
+                                 }}
+                                 style={{
+                                     fontWeight: currentPage === p ? 'bold' : 'normal',
+                                     cursor: 'pointer'
+                                 }}>{p} </span>
                 })}
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>

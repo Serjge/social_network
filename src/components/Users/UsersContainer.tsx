@@ -67,6 +67,7 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentPropsTyp
                 currentPage={this.props.currentPage}
                 pageSize={this.props.pageSize}
                 totalUserCount={this.props.totalUserCount}
+
             />
             </>
         );
@@ -89,6 +90,7 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUserCount,
-    setToggleIsFetching
+    setToggleIsFetching,
+
 })(UsersAPIComponent)
 

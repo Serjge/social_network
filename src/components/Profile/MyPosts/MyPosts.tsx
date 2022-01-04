@@ -9,7 +9,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     }
 
     return (
-        <div>
+        <div style={{display:'block', marginTop: '40px'}}>
             <div>
                 <textarea value={props.profilePage.messageForNewPost}
                           onChange={onChangeHandler}/>
