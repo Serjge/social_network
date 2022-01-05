@@ -9,7 +9,7 @@ export type locationType = {
     key: string
     pathname: string
     search: string
-    state: null
+    state: object | null
 }
 
 export type WrappedComponentWithRouterPropsType = {
