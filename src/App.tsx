@@ -19,8 +19,8 @@ export const App = () => {
                 <Navbar/>
                 <div className="app__wrapper_contend">
                     <Routes>
-
-                        <Route path="profile" element={<ProfileContainer />}>
+                        <Route path="/" element={<ProfileContainer />}/>
+                        <Route path="/profile" element={<ProfileContainer />}>
                             <Route path=":userId" element={<ProfileContainer />} />
                         </Route>
                         <Route path='/dialogs/*' element={<DialogsContainer />}/>

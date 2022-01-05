@@ -9,7 +9,6 @@ type ProfileInfoPropsType = {
 
 export const ProfileInfo = ({profile}:ProfileInfoPropsType) => {
 
-
     return (
         <div>
             <div className={s.content}><img alt=''

@@ -4,11 +4,10 @@ import axios from "axios";
 import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
 import {AddLike, addPost, ChangeNewText, ProfileType, RemovePost, setUserProfile} from "../../Redux/ProfileReducer";
-import {useParams} from "react-router-dom";
+import {withRouter, WrappedComponentWithRouterPropsType} from '../common/withRouter/withRouter';
 
 type mapStateToPropsType = {
     profile: ProfileType
-    id?: number
 }
 
 type mapDispatchToPropsType = {
@@ -20,33 +19,13 @@ type mapDispatchToPropsType = {
 }
 export type ProfileAPIContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-type ParamsType = {
-    userId: string
-}
-
-const withRouter = (WrappedComponent:any) => (props:any)   => {
-
-    const params = useParams();
-    // etc... other react-router-dom v6 hooks
-    return (
-        <WrappedComponent
-            {...props}
-            params={params}
-            // etc...
-        />
-    );
-};
-
-export class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType & { params: ParamsType }> {
-
+export class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType & WrappedComponentWithRouterPropsType> {
 
     componentDidMount() {
-
-        let userId = this.props.params.userId;
+        let userId: string = this.props.params.userId
         if (!userId) {
             userId = '21501';
         }
-        debugger
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
@@ -56,7 +35,6 @@ export class ProfileAPIContainer extends React.Component<ProfileAPIContainerProp
 
     render() {
         return (
-            // <Profile {...this.props} profile={this.props.profile}/>
             <Profile profile={this.props.profile}/>
         )
     }
@@ -65,7 +43,6 @@ export class ProfileAPIContainer extends React.Component<ProfileAPIContainerProp
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-
     }
 }
 
