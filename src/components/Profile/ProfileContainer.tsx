@@ -1,15 +1,15 @@
-import React from 'react'
+import React, {ComponentType} from 'react'
 import {Profile} from "./Profile";
 import axios from "axios";
 import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
 import {AddLike, addPost, ChangeNewText, ProfileType, RemovePost, setUserProfile} from "../../Redux/ProfileReducer";
-import {withRouter, WrappedComponentWithRouterPropsType} from '../common/withRouter/withRouter';
+import {InjectedProps, withRouter2} from '../common/withRouter/withRouter';
+import {compose} from "redux";
 
 type mapStateToPropsType = {
     profile: ProfileType
 }
-
 type mapDispatchToPropsType = {
     addPost: () => void
     ChangeNewText: (newPostText: string) => void
@@ -17,12 +17,14 @@ type mapDispatchToPropsType = {
     AddLike: (LikeId: string, isLike: boolean) => void
     setUserProfile: (profile: ProfileType) => void
 }
-export type ProfileAPIContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-export class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType & WrappedComponentWithRouterPropsType> {
+export type ProfileAPIContainerPropsType = mapStateToPropsType & mapDispatchToPropsType & InjectedProps
+
+class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> {
 
     componentDidMount() {
-        let userId: string = this.props.params.userId
+
+        let userId: string = this.props.userId
         if (!userId) {
             userId = '21501';
         }
@@ -42,17 +44,19 @@ export class ProfileAPIContainer extends React.Component<ProfileAPIContainerProp
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile,
+        profile: state.profilePage.profile
+
     }
 }
 
-let WithUrlDataContainerComponent = withRouter(ProfileAPIContainer);
-
-export const ProfileContainer = connect(mapStateToProps, {
-    addPost,
-    ChangeNewText,
-    RemovePost,
-    AddLike,
-    setUserProfile,
-})(WithUrlDataContainerComponent)
+export const ProfileContainer = compose<ComponentType>(
+    connect(mapStateToProps,
+        {
+        addPost,
+        ChangeNewText,
+        RemovePost,
+        AddLike,
+        setUserProfile,
+    }),
+    withRouter2)(ProfileAPIContainer)
 

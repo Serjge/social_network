@@ -1,9 +1,6 @@
 import React from "react";
 import {useLocation, useParams} from "react-router-dom";
 
-export type ParamsType = {
-    userId: string
-}
 export type locationType = {
     hash: string
     key: string
@@ -13,23 +10,42 @@ export type locationType = {
 }
 
 export type WrappedComponentWithRouterPropsType = {
-    params: ParamsType
+    userId: string
     location: locationType
 }
 
-export function withRouter (WrappedComponent: typeof React.Component) {
-    function WrappedComponentWithRouterProps(props: object) {
+export const withRouter = (WrappedComponent: typeof React.Component) => (props: object) => {
 
-        const params = useParams();
-        const location = useLocation()
+    const params = useParams<'userId'>();
+    const location = useLocation()
 
-        return (
-            <WrappedComponent
-                {...props}
-                params={params}
-                location={location}
+    return (
+
+        <WrappedComponent
+            {...props}
+            userId={params.userId}
+            location={location}
         />
     );
-    }
-    return WrappedComponentWithRouterProps
 }
+
+export type InjectedProps = {
+    userId : string
+}
+
+
+export const withRouter2 = <T  extends object> (WrappedComponent: React.ComponentType<T>) => (props: T) => {
+
+    const params = useParams<'userId'>();
+    const location = useLocation()
+    return (
+
+        <WrappedComponent
+            {...props as T}
+            userId={params.userId}
+            location={location}
+
+        />
+    );
+}
+

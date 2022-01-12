@@ -21,6 +21,3 @@ export const ProfileInfo = ({profile}:ProfileInfoPropsType) => {
         </div>
     )
 }
-
-
-//'https://www.domashniy-comfort.ru/images/stories/picture/00000korgi/korg_007.jpg'
