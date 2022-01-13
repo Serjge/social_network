@@ -16,16 +16,15 @@ export const Header = ({
                            auth,
                        }: HeaderPropsType) => {
 
-    console.log(login)
     return (
         <header className={s.header}>
             <div className={s.header__wrap}>
                 <img alt='' src='https://sektascience.com/wp-content/uploads/2018/06/logo_300x300.png'/>
                 <div>
-                    { auth ? login : 'guest'}
-                    { auth
-                        ?  <NavLink to={'/logout'}>logout</NavLink>
-                        :  <NavLink to={'/login'}>Login</NavLink>}
+                    {auth ? login : 'guest'}
+                    {auth
+                        ? <NavLink to={'/logout'}>logout</NavLink>
+                        : <NavLink to={'/login'}>Login</NavLink>}
 
                 </div>
             </div>
@@ -33,4 +32,3 @@ export const Header = ({
         </header>
     )
 }
-// export default Header

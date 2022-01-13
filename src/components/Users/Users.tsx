@@ -7,21 +7,25 @@ import {usersAPI} from "../../api/api";
 type UsersPropsType = {
     users: UserType[]
     onPageChanged: (pageNumber: number) => void
-    follow: (id: string) => void
-    unFollow: (id: string) => void
+    setFollow: (id: string) => void
+    setUnFollow: (id: string) => void
     totalUserCount: number
     pageSize: number
     currentPage: number
+    followingInProgress: number[]
+    toggleFollowingInProgress: (isFollow: boolean, userId: number) => void
 }
 
 export const Users = ({
                           onPageChanged,
-                          follow,
-                          unFollow,
+                          setFollow,
+                          setUnFollow,
                           pageSize,
                           totalUserCount,
                           currentPage,
-                          users
+                          users,
+                          followingInProgress,
+                          toggleFollowingInProgress,
                       }: UsersPropsType) => {
 
     let pagesCounter = Math.ceil(totalUserCount / pageSize)
@@ -53,22 +57,27 @@ export const Users = ({
                                 </div>
                                 <div>
                                     {u.followed
-                                        ? <button onClick={() => {
+                                        ? <button disabled={followingInProgress.some(id => id === +u.id)} onClick={() => {
+                                            toggleFollowingInProgress(true, +u.id)
                                             usersAPI.unFollow(u.id).then(response => {
                                                     if (response.resultCode === 0) {
-                                                        unFollow(u.id)
+                                                        setUnFollow(u.id)
+                                                        toggleFollowingInProgress(false, +u.id)
                                                     }
                                                 }
                                             )
                                         }}>Unfollow</button>
-                                        : <button onClick={() => {
-                                            usersAPI.follow(u.id).then(response => {
-                                                    if (response.resultCode === 0) {
-                                                        follow(u.id)
-                                                    }
-                                                }
-                                            )
-                                        }}>Follow</button>}
+                                        : <button disabled={followingInProgress.some(id => id === +u.id)}
+                                                  onClick={() => {
+                                                      toggleFollowingInProgress(true, +u.id)
+                                                      usersAPI.follow(u.id).then(response => {
+                                                              if (response.resultCode === 0) {
+                                                                  setFollow(u.id)
+                                                                  toggleFollowingInProgress(false, +u.id)
+                                                              }
+                                                          }
+                                                      )
+                                                  }}>Follow</button>}
                                 </div>
                             </div>
                             <div style={{
