@@ -26,7 +26,13 @@ export class HeaderAPIContainer extends React.Component<HeaderAPIContainerType, 
 
     componentDidMount() {
         this.props.setToggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+            withCredentials: true,
+            baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+            headers:     {
+                "API-KEY": "6455f709-1e25-404c-a49d-c20b867901e8"
+            }
+        }).then(response => {
             this.props.setToggleIsFetching(false)
             const a = response.data.data
             if (response.data.resultCode === 0) {
