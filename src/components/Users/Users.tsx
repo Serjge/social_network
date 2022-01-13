@@ -30,9 +30,47 @@ export const Users = ({
 
     let pagesCounter = Math.ceil(totalUserCount / pageSize)
     let pages = []
-    for (let i = 1; i <= pagesCounter; i++) {
-        pages.push(i)
+    console.log(totalUserCount)
+    if (currentPage < 7) {
+        for (let i = 1; i <= currentPage + 5; i++) {
+            pages.push(i)
+        }
+        pages.push(pagesCounter)
+    } else if (currentPage + 5 >= pagesCounter) {
+        pages.push(1)
+        for (let i = currentPage - 5; i <= pagesCounter; i++) {
+            pages.push(i)
+        }
+    } else {
+        pages.push(1)
+        for (let i = currentPage - 5; i <= currentPage + 5; i++) {
+            pages.push(i)
+        }
+        pages.push(pagesCounter)
     }
+
+    const onClickFollow = (id: string) => {
+        toggleFollowingInProgress(true, +id)
+        usersAPI.follow(id).then(response => {
+                if (response.resultCode === 0) {
+                    setFollow(id)
+                    toggleFollowingInProgress(false, +id)
+                }
+            }
+        )
+    }
+
+    const onClickUnFollow = (id: string) => {
+        toggleFollowingInProgress(true, +id)
+        usersAPI.unFollow(id).then(response => {
+                if (response.resultCode === 0) {
+                    setUnFollow(id)
+                    toggleFollowingInProgress(false, +id)
+                }
+            }
+        )
+    }
+
     return (
         <div>
 
@@ -58,26 +96,14 @@ export const Users = ({
                                 <div>
                                     {u.followed
                                         ? <button disabled={followingInProgress.some(id => id === +u.id)} onClick={() => {
-                                            toggleFollowingInProgress(true, +u.id)
-                                            usersAPI.unFollow(u.id).then(response => {
-                                                    if (response.resultCode === 0) {
-                                                        setUnFollow(u.id)
-                                                        toggleFollowingInProgress(false, +u.id)
-                                                    }
-                                                }
-                                            )
-                                        }}>Unfollow</button>
+                                            onClickUnFollow(u.id)
+                                        }}>
+                                            Unfollow
+                                        </button>
                                         : <button disabled={followingInProgress.some(id => id === +u.id)}
-                                                  onClick={() => {
-                                                      toggleFollowingInProgress(true, +u.id)
-                                                      usersAPI.follow(u.id).then(response => {
-                                                              if (response.resultCode === 0) {
-                                                                  setFollow(u.id)
-                                                                  toggleFollowingInProgress(false, +u.id)
-                                                              }
-                                                          }
-                                                      )
-                                                  }}>Follow</button>}
+                                                  onClick={() => onClickFollow(u.id)}>
+                                            Follow
+                                        </button>}
                                 </div>
                             </div>
                             <div style={{
@@ -98,20 +124,22 @@ export const Users = ({
                     )
                 }
             )}
-            <div>
-                {pages.map(p => {
-                    return <span key={p}
-                                 onClick={() => {
-                                     onPageChanged(p)
-                                 }}
-                                 style={{
-                                     fontWeight: currentPage === p ? 'bold' : 'normal',
-                                     cursor: 'pointer'
-                                 }}>{p} </span>
-                })}
-            </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <button>Show more</button>
+
+                {pages.map(p => {
+                    return (
+                        <span key={p}
+                              onClick={() => {
+                                  onPageChanged(p)
+                              }}
+                              style={{
+                                  fontWeight: currentPage === p ? 'bold' : 'normal',
+                                  color: currentPage === p ? 'darkred' : '',
+                                  cursor: 'pointer',
+                                  padding: '5px'
+                              }}>{p} </span>
+                    )
+                })}
             </div>
         </div>
     );

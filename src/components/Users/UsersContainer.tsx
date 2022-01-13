@@ -41,7 +41,8 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentPropsTyp
 
     componentDidMount() {
         this.props.setToggleIsFetching(true)
-        usersAPI.getUsers(1, 10).then(response => {
+        usersAPI.getUsers(1, this.props.pageSize).then(response => {
+            debugger
             this.props.setToggleIsFetching(false)
             this.props.setUsers(response.items)
             this.props.setTotalUserCount(response.totalCount)
@@ -51,7 +52,7 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentPropsTyp
     onPageChanged = (pageNumber: number) => {
         this.props.setToggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        usersAPI.getUsers(pageNumber, 10).then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(response => {
             this.props.setToggleIsFetching(false)
             this.props.setUsers(response.items)
         })
@@ -88,6 +89,5 @@ export const UsersContainer = connect(mapStateToProps, {
     setTotalUserCount,
     setToggleIsFetching,
     toggleFollowingInProgress,
-
 })(UsersAPIComponent)
 

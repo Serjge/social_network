@@ -2,7 +2,7 @@ export type InitialUsersStateType = typeof initialState
 
 const initialState = {
     users: [] as UserType[],
-    pageSize: 10,
+    pageSize: 5,
     totalUserCount: 0,
     currentPage: 1,
     isFetching: true,
