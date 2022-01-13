@@ -1,10 +1,10 @@
 import React from 'react'
 import {Header} from "./Header";
-import axios from "axios";
 import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
-import {setUserAuth, setToggleIsFetching, setToggleIsAuth} from "../../Redux/AuthReducer";
+import {setToggleIsAuth, setToggleIsFetching, setUserAuth} from "../../Redux/AuthReducer";
 import {Preloader} from "../common/preloader/Preloader";
+import {authApi} from "../../api/api";
 
 type mapStateToPropsType = {
     login: string
@@ -17,7 +17,7 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     setToggleIsFetching: (isFetching: boolean) => void
     setUserAuth: (usersId: string, email: string, login: string) => void
-    setToggleIsAuth: (auth:boolean)=> void
+    setToggleIsAuth: (auth: boolean) => void
 }
 
 type HeaderAPIContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -26,17 +26,14 @@ export class HeaderAPIContainer extends React.Component<HeaderAPIContainerType, 
 
     componentDidMount() {
         this.props.setToggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true,
-            baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-            headers:     {
-                "API-KEY": "6455f709-1e25-404c-a49d-c20b867901e8"
-            }
-        }).then(response => {
+        authApi.getAuth().then(response => {
             this.props.setToggleIsFetching(false)
-            const a = response.data.data
-            if (response.data.resultCode === 0) {
-                this.props.setUserAuth(a.usersId, a.email, a.login)
+            if (response.resultCode === 0) {
+                this.props.setUserAuth(
+                    response.data.usersId,
+                    response.data.email,
+                    response.data.login
+                )
                 this.props.setToggleIsAuth(true)
             }
             this.props.setToggleIsFetching(false)
@@ -44,9 +41,9 @@ export class HeaderAPIContainer extends React.Component<HeaderAPIContainerType, 
     }
 
     render() {
-        return  <>{this.props.isFetching? <Preloader/>: null}
-        <Header {...this.props} />
-            </>
+        return <>{this.props.isFetching ? <Preloader/> : null}
+            <Header {...this.props} />
+        </>
     }
 }
 
