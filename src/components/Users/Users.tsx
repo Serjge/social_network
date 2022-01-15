@@ -28,7 +28,7 @@ export const Users = ({
 
     let pagesCounter = Math.ceil(totalUserCount / pageSize)
     let pages = []
-    console.log(totalUserCount)
+
     if (currentPage < 7) {
         for (let i = 1; i <= currentPage + 5; i++) {
             pages.push(i)

@@ -1,9 +1,8 @@
 import React, {ComponentType} from 'react'
 import {Profile} from "./Profile";
-import axios from "axios";
 import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
-import {AddLike, addPost, ChangeNewText, ProfileType, RemovePost, setUserProfile} from "../../Redux/ProfileReducer";
+import {AddLike, addPost, ChangeNewText, getProfile, ProfileType, RemovePost} from "../../Redux/ProfileReducer";
 import {InjectedProps, withRouter3} from '../common/withRouter/withRouter';
 import {compose} from "redux";
 
@@ -15,7 +14,7 @@ type mapDispatchToPropsType = {
     ChangeNewText: (newPostText: string) => void
     RemovePost: (removeId: string) => void
     AddLike: (LikeId: string, isLike: boolean) => void
-    setUserProfile: (profile: ProfileType) => void
+    getProfile: (userId: string) => void
 }
 
 export type ProfileAPIContainerPropsType = mapStateToPropsType & mapDispatchToPropsType & InjectedProps
@@ -28,12 +27,8 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
         if (!userId) {
             userId = '21501';
         }
+        this.props.getProfile(userId)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-
-                this.props.setUserProfile(response.data)
-            })
     }
 
     render() {
@@ -53,11 +48,11 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 export const ProfileContainer = compose<ComponentType>(
     connect(mapStateToProps,
         {
-        addPost,
-        ChangeNewText,
-        RemovePost,
-        AddLike,
-        setUserProfile,
-    }),
+            addPost,
+            ChangeNewText,
+            RemovePost,
+            AddLike,
+            getProfile,
+        }),
     withRouter3)(ProfileAPIContainer)
 

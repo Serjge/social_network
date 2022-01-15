@@ -7,8 +7,8 @@ export const Navbar = () => {
         <nav className={s.nav}>
                 <ItemMenu to={'/profile/'} nameMenu={'Profile'}/>
                 <ItemMenu to={'/dialogs/'} nameMenu={'Message'}/>
-                <ItemMenu to={'/music'} nameMenu={'Music'}/>
-                <ItemMenu to={'/news'} nameMenu={'News'}/>
+                {/*<ItemMenu to={'/music'} nameMenu={'Music'}/>*/}
+                {/*<ItemMenu to={'/news'} nameMenu={'News'}/>*/}
                 <ItemMenu to={'/users'} nameMenu={'Users'}/>
                 <ItemMenu to={'/settings'} nameMenu={'Settings'}/>
         </nav>

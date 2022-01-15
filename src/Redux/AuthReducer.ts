@@ -1,7 +1,10 @@
+import {Dispatch} from "redux";
+import {authApi} from "../api/authApi";
+
 type initialStateType = {
     data: dataType
     isFetching: boolean
-    auth: boolean
+    isAuth: boolean
 }
 type dataType = {
     usersId: string,
@@ -12,7 +15,7 @@ type dataType = {
 const initialState = {
     data: {} as dataType,
     isFetching: true,
-    auth: false
+    isAuth: false
 }
 
 type ActionsUsersType =
@@ -26,7 +29,8 @@ export const AuthReducer = (state: initialStateType = initialState, action: Acti
         case "SET-USERS-DATA":
             return {
                 ...state,
-                data: {...state.data,
+                data: {
+                    ...state.data,
                     email: action.data.email,
                     login: action.data.login,
                     usersId: action.data.usersId
@@ -38,16 +42,32 @@ export const AuthReducer = (state: initialStateType = initialState, action: Acti
                 ...state,
                 isFetching: action.isFetching
             }
-            case 'TOGGLE-IS-AUTH':
+        case 'TOGGLE-IS-AUTH':
             return {
                 ...state,
-                auth: action.auth
+                isAuth: action.isAuth
             }
         default:
             return state
     }
 }
 
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    dispatch(setToggleIsFetching(true))
+    authApi.authMe()
+        .then(response => {
+            dispatch(setToggleIsFetching(false))
+            if (response.resultCode === 0) {
+                dispatch(setUserAuth(
+                    response.data.usersId,
+                    response.data.email,
+                    response.data.login
+                ))
+                dispatch(setToggleIsAuth(true))
+            }
+            dispatch(setToggleIsFetching(false))
+        })
+}
 
 export const setUserAuth = (usersId: string, email: string, login: string) => {
     return {
@@ -61,9 +81,9 @@ export const setToggleIsFetching = (isFetching: boolean) => {
         isFetching: isFetching
     } as const
 }
-export const setToggleIsAuth = (auth: boolean) => {
+export const setToggleIsAuth = (isAuth: boolean) => {
     return {
         type: 'TOGGLE-IS-AUTH',
-        auth: auth
+        isAuth: isAuth
     } as const
 }

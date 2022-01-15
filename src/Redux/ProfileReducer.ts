@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/profileApi";
 
 export type  InitialProfileStateType = typeof initialState
 
@@ -49,7 +51,6 @@ type ActionsProfileType =
     | ReturnType<typeof setUserProfile>
 
 
-
 export const ProfileReducer = (state = initialState, action: ActionsProfileType): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
@@ -62,7 +63,7 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
             return {
                 ...state,
                 messageForNewPost: '',
-                posts: [ newPost,...state.posts]
+                posts: [newPost, ...state.posts]
             }
         case "UPDATE-NEW-POST-TEXT":
             return {
@@ -83,7 +84,7 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
                         : {...p, isLike: action.isLike, likeCount: p.likeCount - 1}
                     : p)
             }
-            case 'SET-USER-PROFILE':
+        case 'SET-USER-PROFILE':
             return {
                 ...state,
                 profile: action.profile
@@ -94,6 +95,13 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
             return state
     }
 }
+
+export const getProfile = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.authMe(userId)
+        .then(response => dispatch(setUserProfile(response)))
+
+}
+
 export const addPost = () => {
     return {
         type: 'ADD-POST',
@@ -127,3 +135,4 @@ export const setUserProfile = (profile: ProfileType) => {
 
     } as const
 }
+

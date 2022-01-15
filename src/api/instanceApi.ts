@@ -7,8 +7,3 @@ export const instance = axios.create({
         "API-KEY": "6455f709-1e25-404c-a49d-c20b867901e8"
     }
 });
-export const authApi = {
-    authMe() {
-      return  instance.get(`auth/me`).then(response => response.data)
-    }
-}
