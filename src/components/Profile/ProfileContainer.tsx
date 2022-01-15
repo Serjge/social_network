@@ -3,8 +3,9 @@ import {Profile} from "./Profile";
 import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
 import {AddLike, addPost, ChangeNewText, getProfile, ProfileType, RemovePost} from "../../Redux/ProfileReducer";
-import {InjectedProps, withRouter3} from '../common/withRouter/withRouter';
+import {InjectedProps, withRouter} from '../../hoc/withRouter/withRouter';
 import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect/withAuthRedirect";
 
 type mapStateToPropsType = {
     profile: ProfileType
@@ -54,5 +55,6 @@ export const ProfileContainer = compose<ComponentType>(
             AddLike,
             getProfile,
         }),
-    withRouter3)(ProfileAPIContainer)
-
+    withRouter,
+    withAuthRedirect
+)(ProfileAPIContainer)

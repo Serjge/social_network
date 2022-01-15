@@ -1,10 +1,11 @@
 import {follow, getUsers, toggleFollowingInProgress, unFollow, UserType} from "../../Redux/UsersReducer";
 import {connect} from "react-redux";
-
 import {AppStateType} from "../../Redux/redux_store";
-import React from "react";
+import React, {ComponentType} from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect/withAuthRedirect";
 
 type mapStateToPropsType = {
     users: UserType[]
@@ -57,10 +58,14 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
-    toggleFollowingInProgress,
-    getUsers,
-    follow,
-    unFollow,
-})(UsersAPIComponent)
+export const UsersContainer = compose<ComponentType>(
+    connect(mapStateToProps, {
+        toggleFollowingInProgress,
+        getUsers,
+        follow,
+        unFollow,
+    }),
+    withAuthRedirect
+)(UsersAPIComponent)
+
 
