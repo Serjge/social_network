@@ -4,7 +4,7 @@ import axios from "axios";
 import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
 import {AddLike, addPost, ChangeNewText, ProfileType, RemovePost, setUserProfile} from "../../Redux/ProfileReducer";
-import {InjectedProps, withRouter2} from '../common/withRouter/withRouter';
+import {InjectedProps, withRouter3} from '../common/withRouter/withRouter';
 import {compose} from "redux";
 
 type mapStateToPropsType = {
@@ -31,6 +31,7 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
+
                 this.props.setUserProfile(response.data)
             })
     }
@@ -58,5 +59,5 @@ export const ProfileContainer = compose<ComponentType>(
         AddLike,
         setUserProfile,
     }),
-    withRouter2)(ProfileAPIContainer)
+    withRouter3)(ProfileAPIContainer)
 

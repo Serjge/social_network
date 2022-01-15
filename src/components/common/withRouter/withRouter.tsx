@@ -30,11 +30,10 @@ export const withRouter = (WrappedComponent: typeof React.Component) => (props: 
 }
 
 export type InjectedProps = {
-    userId : string
+    userId: string
 }
 
-
-export const withRouter2 = <T  extends object> (WrappedComponent: React.ComponentType<T>) => (props: T) => {
+export const withRouter2 = <T extends React.Component>(WrappedComponent: React.ComponentType<T>) => (props: T) => {
 
     const params = useParams<'userId'>();
     const location = useLocation()
@@ -49,3 +48,19 @@ export const withRouter2 = <T  extends object> (WrappedComponent: React.Componen
     );
 }
 
+export function withRouter3<T>(WrappedComponent: React.ComponentType<T>) {
+    return (props: T) => {
+
+        const params = useParams<'userId'>();
+        const location = useLocation()
+        return (
+
+            <WrappedComponent
+                {...props as T}
+                userId={params.userId}
+                location={location}
+
+            />
+        );
+    }
+}

@@ -15,7 +15,6 @@ const initialState = {
     auth: false
 }
 
-
 type ActionsUsersType =
     ReturnType<typeof setUserAuth>
     | ReturnType<typeof setToggleIsFetching>

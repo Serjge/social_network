@@ -4,7 +4,7 @@ import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
 import {setToggleIsAuth, setToggleIsFetching, setUserAuth} from "../../Redux/AuthReducer";
 import {Preloader} from "../common/preloader/Preloader";
-import {authApi} from "../../api/api";
+import {authApi} from "../../api/userApi";
 
 type mapStateToPropsType = {
     login: string

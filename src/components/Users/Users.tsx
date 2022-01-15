@@ -2,30 +2,28 @@ import React from 'react';
 import userPhoto from '../../assets/img/i.webp'
 import {UserType} from "../../Redux/UsersReducer";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     users: UserType[]
     onPageChanged: (pageNumber: number) => void
-    setFollow: (id: string) => void
-    setUnFollow: (id: string) => void
     totalUserCount: number
     pageSize: number
     currentPage: number
     followingInProgress: number[]
     toggleFollowingInProgress: (isFollow: boolean, userId: number) => void
+    follow: (id: string) => void
+    unFollow: (id: string) => void
 }
 
 export const Users = ({
                           onPageChanged,
-                          setFollow,
-                          setUnFollow,
                           pageSize,
                           totalUserCount,
                           currentPage,
                           users,
                           followingInProgress,
-                          toggleFollowingInProgress,
+                          follow,
+                          unFollow,
                       }: UsersPropsType) => {
 
     let pagesCounter = Math.ceil(totalUserCount / pageSize)
@@ -47,28 +45,6 @@ export const Users = ({
             pages.push(i)
         }
         pages.push(pagesCounter)
-    }
-
-    const onClickFollow = (id: string) => {
-        toggleFollowingInProgress(true, +id)
-        usersAPI.follow(id).then(response => {
-                if (response.resultCode === 0) {
-                    setFollow(id)
-                    toggleFollowingInProgress(false, +id)
-                }
-            }
-        )
-    }
-
-    const onClickUnFollow = (id: string) => {
-        toggleFollowingInProgress(true, +id)
-        usersAPI.unFollow(id).then(response => {
-                if (response.resultCode === 0) {
-                    setUnFollow(id)
-                    toggleFollowingInProgress(false, +id)
-                }
-            }
-        )
     }
 
     return (
@@ -95,13 +71,13 @@ export const Users = ({
                                 </div>
                                 <div>
                                     {u.followed
-                                        ? <button disabled={followingInProgress.some(id => id === +u.id)} onClick={() => {
-                                            onClickUnFollow(u.id)
-                                        }}>
+                                        ? <button
+                                            disabled={followingInProgress.some(id => id === +u.id)}
+                                            onClick={() => unFollow(u.id)}>
                                             Unfollow
                                         </button>
                                         : <button disabled={followingInProgress.some(id => id === +u.id)}
-                                                  onClick={() => onClickFollow(u.id)}>
+                                                  onClick={() => follow(u.id)}>
                                             Follow
                                         </button>}
                                 </div>
