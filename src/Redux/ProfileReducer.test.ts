@@ -21,19 +21,23 @@ const state: StateType = {
 }
 
 test('add post', () => {
+    // @ts-ignore
     const newState = ProfileReducer(state.profilePage, {type: "ADD-POST"})
     expect(newState.posts[0].message).toBe('')
     expect(newState.posts.length).toBe(2)
 })
 test('Update text post', () => {
+    // @ts-ignore
     const newState = ProfileReducer(state.profilePage, {type: "UPDATE-NEW-POST-TEXT", newPostText: 'new'})
     expect(newState.messageForNewPost).toBe('new')
 })
 test('Delete post ', () => {
+    // @ts-ignore
     const newState = ProfileReducer(state.profilePage, {type: "REMOVE-POST", removeId: '1'})
     expect(newState.posts.length).toBe(0)
 })
 test('Likes post ', () => {
+    // @ts-ignore
     const newState = ProfileReducer(state.profilePage, {type: "ADD-LIKE", LikeId: '1', isLike: true})
     expect(newState.posts[0].isLike).toBe(true)
     expect(newState.posts[0].likeCount).toBe(11)

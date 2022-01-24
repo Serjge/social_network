@@ -1,7 +1,7 @@
 import {follow, getUsers, toggleFollowingInProgress, unFollow, UserType} from "../../Redux/UsersReducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux_store";
-import React, {ComponentType} from "react";
+import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 import {compose} from "redux";
@@ -58,7 +58,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export const UsersContainer = compose<ComponentType>(
+export const UsersContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {
         toggleFollowingInProgress,
         getUsers,

@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 
 type mapStateToPropsType ={
     profilePage: InitialProfileStateType
+
 }
 
 type mapDispatchToPropsType = {
@@ -25,7 +26,8 @@ export type MyPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType):mapStateToPropsType => {
     return {
-        profilePage: state.profilePage
+        profilePage: state.profilePage,
+
     }
 }
 

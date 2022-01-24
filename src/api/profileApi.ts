@@ -10,7 +10,19 @@ export const instance = axios.create({
 export const profileAPI = {
     authMe(userId: string) {
         return instance.get(`profile/` + userId)
-            .then(response => response.data)
+            .then(response => {
+                console.log(response)
+               return  response.data
+            })
+
+    },
+    getStatus(userId: string) {
+        return instance.get(`profile/status/` + userId)
+            // .then(console.log)
+            .then(response => {
+                console.log(response.data)
+                return response.data
+            })
 
     },
 

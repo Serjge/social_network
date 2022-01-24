@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {getAuthUserData, setToggleIsFetching} from "../../Redux/AuthReducer";
 import {Preloader} from "../common/preloader/Preloader";
 
-
 type mapStateToPropsType = {
     login: string
     email: string
@@ -43,6 +42,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         auth: state.authPage.isAuth
     }
 }
+
 export const HeaderContainer = connect(mapStateToProps, {
     setToggleIsFetching,
     getAuth: getAuthUserData,

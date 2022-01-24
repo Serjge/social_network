@@ -12,9 +12,11 @@ const initialState = {
         {id: v1(), message: `React, it's cool!`, likeCount: 50, isLike: false}
     ] as PostsType[],
     profile: null as ProfileType,
+    status: '' as string
 }
 
 export type ProfileType = {
+
     "aboutMe": string,
     "contacts": {
         "facebook": string,
@@ -49,6 +51,7 @@ type ActionsProfileType =
     | ReturnType<typeof RemovePost>
     | ReturnType<typeof AddLike>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setUserStatus>
 
 
 export const ProfileReducer = (state = initialState, action: ActionsProfileType): InitialProfileStateType => {
@@ -89,6 +92,11 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
                 ...state,
                 profile: action.profile
             }
+            case "SET-USER-STATUS":
+            return {
+                ...state,
+                status: action.status
+            }
 
 
         default:
@@ -99,6 +107,11 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
 export const getProfile = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.authMe(userId)
         .then(response => dispatch(setUserProfile(response)))
+
+}
+export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(response => dispatch(setUserStatus(response)))
 
 }
 
@@ -132,6 +145,13 @@ export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET-USER-PROFILE',
         profile: profile
+
+    } as const
+}
+export const setUserStatus = (status: any) => {
+    return {
+        type: 'SET-USER-STATUS',
+        status: status
 
     } as const
 }

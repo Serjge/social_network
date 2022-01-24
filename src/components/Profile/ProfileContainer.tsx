@@ -1,14 +1,23 @@
-import React, {ComponentType} from 'react'
+import React from 'react'
 import {Profile} from "./Profile";
 import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
-import {AddLike, addPost, ChangeNewText, getProfile, ProfileType, RemovePost} from "../../Redux/ProfileReducer";
-import {InjectedProps, withRouter} from '../../hoc/withRouter/withRouter';
+import {
+    AddLike,
+    addPost,
+    ChangeNewText,
+    getProfile,
+    getStatus,
+    ProfileType,
+    RemovePost
+} from "../../Redux/ProfileReducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect/withAuthRedirect";
+import {InjectedProps, withRouter} from "../../hoc/withRouter/withRouter";
 
 type mapStateToPropsType = {
     profile: ProfileType
+    status: string
 }
 type mapDispatchToPropsType = {
     addPost: () => void
@@ -16,6 +25,7 @@ type mapDispatchToPropsType = {
     RemovePost: (removeId: string) => void
     AddLike: (LikeId: string, isLike: boolean) => void
     getProfile: (userId: string) => void
+    getStatus: (userId: string) => void
 }
 
 export type ProfileAPIContainerPropsType = mapStateToPropsType & mapDispatchToPropsType & InjectedProps
@@ -29,24 +39,26 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
             userId = '21501';
         }
         this.props.getProfile(userId)
-
+        this.props.getStatus(userId)
+        // console.log(this.props)
     }
 
     render() {
         return (
-            <Profile profile={this.props.profile}/>
+            <Profile profile={this.props.profile} status={this.props.status}/>
         )
     }
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
 
     }
 }
 
-export const ProfileContainer = compose<ComponentType>(
+export const ProfileContainer = compose<React.ComponentType>(
     connect(mapStateToProps,
         {
             addPost,
@@ -54,6 +66,7 @@ export const ProfileContainer = compose<ComponentType>(
             RemovePost,
             AddLike,
             getProfile,
+            getStatus,
         }),
     withRouter,
     withAuthRedirect
