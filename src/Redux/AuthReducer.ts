@@ -87,3 +87,11 @@ export const setToggleIsAuth = (isAuth: boolean) => {
         isAuth: isAuth
     } as const
 }
+export const setLogin = (email: string,password: string,rememberMe= false) => {
+    return {
+        type: 'LOGIN-USER',
+        email: email,
+        password: password,
+        rememberMe: rememberMe
+    } as const
+}

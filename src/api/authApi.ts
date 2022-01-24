@@ -10,5 +10,8 @@ export const instance = axios.create({
 export const authApi = {
     authMe() {
       return  instance.get(`auth/me`).then(response => response.data)
+    },
+    loginMe() {
+      return  instance.post(`auth/login`).then(response => response.data)
     }
 }

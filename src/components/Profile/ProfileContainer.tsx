@@ -9,7 +9,8 @@ import {
     getProfile,
     getStatus,
     ProfileType,
-    RemovePost, updateStatus
+    RemovePost,
+    updateStatus
 } from "../../Redux/ProfileReducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect/withAuthRedirect";
