@@ -11,17 +11,24 @@ export const profileAPI = {
     authMe(userId: string) {
         return instance.get(`profile/` + userId)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                return  response.data
             })
 
     },
     getStatus(userId: string) {
         return instance.get(`profile/status/` + userId)
-            // .then(console.log)
             .then(response => {
                 console.log(response.data)
                 return response.data
+            })
+
+    },
+    updateStatusApi(status: string) {
+        return instance.put(`profile/status`, {status :status})
+            .then(response => {
+                console.log(status)
+                return response
             })
 
     },

@@ -1,36 +1,43 @@
 import React from 'react'
-import s from './ProfileInfo.module.scss'
-import {ProfileType} from "../../../Redux/ProfileReducer";
-import avatarDefault from '../../../assets/img/kak-dobavit-uchetnuyu-zapis-v-mozilla-thunderbird.png'
 
 type ProfileInfoPropsType = {
     status: string
+    updateStatus: (userId: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileInfoPropsType> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
+
     }
 
-    activateEditMode() {
+    activateEditMode = () => {
         this.setState({editMode: true})
     }
 
     offActivateEditMode = () => {
         this.setState({editMode: false})
-        this.state.editMode = false
+        this.props.updateStatus(this.state.status)
+    }
+
+    onChangeStatus = (e: { currentTarget: { value: string } }) => {
+        this.setState({status: e.currentTarget.value})
     }
 
     render() {
         return (
             <div>
                 {!this.state.editMode &&
-                    <span onDoubleClick={this.activateEditMode.bind(this)}>
+                    <span onDoubleClick={this.activateEditMode}>
                         status: {this.props.status}
                     </span>
                 }
                 {this.state.editMode &&
-                    <input autoFocus onBlur={this.offActivateEditMode.bind(this)} value={this.props.status}
+                    <input autoFocus
+                           onBlur={this.offActivateEditMode}
+                           value={this.state.status}
+                           onChange={this.onChangeStatus}
                            type="text"/>
                 }
             </div>

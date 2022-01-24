@@ -7,9 +7,10 @@ import {ProfileStatus} from "./ProfileStatus";
 type ProfileInfoPropsType = {
     profile: ProfileType
     status: string
+    updateStatus: (userId: string) => void
 }
 
-export const ProfileInfo = ({profile, status}:ProfileInfoPropsType) => {
+export const ProfileInfo = ({profile, status, updateStatus}:ProfileInfoPropsType) => {
 
     return (
         <div>
@@ -19,7 +20,7 @@ export const ProfileInfo = ({profile, status}:ProfileInfoPropsType) => {
             <div className={s.avatar}><img alt=''
                                            src={profile && profile.photos.large !== null ? profile.photos.large : avatarDefault}/>
                <div style={{ padding: '20px', textAlign:'center'}}> {profile && profile.fullName}</div>
-                <ProfileStatus status={status}/>
+                <ProfileStatus status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )

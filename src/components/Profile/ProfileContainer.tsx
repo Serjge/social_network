@@ -9,7 +9,7 @@ import {
     getProfile,
     getStatus,
     ProfileType,
-    RemovePost
+    RemovePost, updateStatus
 } from "../../Redux/ProfileReducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect/withAuthRedirect";
@@ -26,6 +26,7 @@ type mapDispatchToPropsType = {
     AddLike: (LikeId: string, isLike: boolean) => void
     getProfile: (userId: string) => void
     getStatus: (userId: string) => void
+    updateStatus: (userId: string) => void
 }
 
 export type ProfileAPIContainerPropsType = mapStateToPropsType & mapDispatchToPropsType & InjectedProps
@@ -45,7 +46,7 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
 
     render() {
         return (
-            <Profile profile={this.props.profile} status={this.props.status}/>
+            <Profile profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
         )
     }
 }
@@ -67,6 +68,7 @@ export const ProfileContainer = compose<React.ComponentType>(
             AddLike,
             getProfile,
             getStatus,
+            updateStatus,
         }),
     withRouter,
     withAuthRedirect

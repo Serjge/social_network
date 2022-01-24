@@ -112,7 +112,16 @@ export const getProfile = (userId: string) => (dispatch: Dispatch) => {
 export const getStatus = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => dispatch(setUserStatus(response)))
+}
+export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatusApi(status)
+        .then(response => {
+            console.log(status)
+            if (response.data.resultCode === 0) {
+                dispatch(setUserStatus(status))
+            }
 
+        })
 }
 
 export const addPost = () => {
