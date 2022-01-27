@@ -1,4 +1,4 @@
-import {AddMessageAC, ChangeNewDialogCallBackAC, DialogsPageType} from "../../Redux/DialogsReducer";
+import {AddMessage, DialogsPageType} from "../../Redux/DialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
@@ -10,8 +10,7 @@ type mapStateToPropsType = {
     dialogsPage: DialogsPageType
 }
 type mapDispatchToPropsType = {
-    addMessage: () => void
-    OnChangeHandler: (message: string) => void
+    addMessageHandler: (newText:string) => void
 }
 
 export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -24,17 +23,11 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        addMessage: () => {
-            dispatch(AddMessageAC())
-            dispatch(ChangeNewDialogCallBackAC(''))
+        addMessageHandler: (newText) => {
+            dispatch(AddMessage(newText))
         },
-        OnChangeHandler: (message: string) => {
-            dispatch(ChangeNewDialogCallBackAC(message))
-        }
     }
 }
 
 export const DialogsContainer = compose<React.ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect
-)(Dialogs)
+    connect(mapStateToProps, mapDispatchToProps), withAuthRedirect)(Dialogs)

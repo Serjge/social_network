@@ -5,7 +5,6 @@ import {profileAPI} from "../api/profileApi";
 export type  InitialProfileStateType = typeof initialState
 
 const initialState = {
-    messageForNewPost: '' as string,
     posts: [
         {id: v1(), message: `Hi, how are you?`, likeCount: 10, isLike: false},
         {id: v1(), message: `It's my first post`, likeCount: 15, isLike: false},
@@ -47,7 +46,6 @@ export type PostsType = {
 
 type ActionsProfileType =
     ReturnType<typeof addPost>
-    | ReturnType<typeof ChangeNewText>
     | ReturnType<typeof RemovePost>
     | ReturnType<typeof AddLike>
     | ReturnType<typeof setUserProfile>
@@ -59,19 +57,13 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
         case "ADD-POST":
             const newPost: PostsType = {
                 id: v1(),
-                message: state.messageForNewPost.trim(),
+                message: action.newText.trim(),
                 likeCount: 0,
                 isLike: false
             }
             return {
                 ...state,
-                messageForNewPost: '',
                 posts: [newPost, ...state.posts]
-            }
-        case "UPDATE-NEW-POST-TEXT":
-            return {
-                ...state,
-                messageForNewPost: action.newPostText
             }
         case "REMOVE-POST":
             return {
@@ -92,13 +84,11 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
                 ...state,
                 profile: action.profile
             }
-            case "SET-USER-STATUS":
+        case "SET-USER-STATUS":
             return {
                 ...state,
                 status: action.status
             }
-
-
         default:
             return state
     }
@@ -124,18 +114,19 @@ export const updateStatus = (status: string) => (dispatch: Dispatch) => {
         })
 }
 
-export const addPost = () => {
+export const addPost = (newText: string) => {
     return {
         type: 'ADD-POST',
+        newText
     } as const
 }
 
-export const ChangeNewText = (newPostText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newPostText: newPostText
-    } as const
-}
+// export const ChangeNewText = (newPostText: string) => {
+//     return {
+//         type: 'UPDATE-NEW-POST-TEXT',
+//         newPostText: newPostText
+//     } as const
+// }
 
 export const RemovePost = (removeId: string) => {
     return {

@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {
     AddLike,
     addPost,
-    ChangeNewText,
     getProfile,
     getStatus,
     ProfileType,
@@ -21,8 +20,7 @@ type mapStateToPropsType = {
     status: string
 }
 type mapDispatchToPropsType = {
-    addPost: () => void
-    ChangeNewText: (newPostText: string) => void
+    addPost: (newText: string) => void
     RemovePost: (removeId: string) => void
     AddLike: (LikeId: string, isLike: boolean) => void
     getProfile: (userId: string) => void
@@ -42,7 +40,6 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
         }
         this.props.getProfile(userId)
         this.props.getStatus(userId)
-        // console.log(this.props)
     }
 
     render() {
@@ -64,7 +61,6 @@ export const ProfileContainer = compose<React.ComponentType>(
     connect(mapStateToProps,
         {
             addPost,
-            ChangeNewText,
             RemovePost,
             AddLike,
             getProfile,

@@ -11,7 +11,6 @@ export type DialogType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>,
     messages: Array<MessagesType>
-    messagesNewDialogs: string
 }
 export type  InitialDialogsStateType = typeof initialState
 
@@ -29,43 +28,27 @@ const initialState = {
         {id: v1(), message: 'Glad to see you!'},
         {id: v1(), message: 'How are you?'}
     ] as MessagesType[],
-    messagesNewDialogs: '' as string
 }
 type ActionsDialogsType =
-    ReturnType<typeof AddMessageAC>
-    | ReturnType<typeof ChangeNewDialogCallBackAC>
-
+    ReturnType<typeof AddMessage>
 
 export const DialogsReducer = (state = initialState, action: ActionsDialogsType): InitialDialogsStateType => {
     switch (action.type) {
         case "ADD-MESSAGE":
-            const newMessage: MessagesType = {id: v1(), message: state.messagesNewDialogs}
+            const newMessage: MessagesType = {id: v1(), message: action.newText}
 
             return {
                 ...state,
-                messagesNewDialogs: '',
                 messages: [...state.messages, newMessage]
-            }
-        case "UPDATE-NEW-DIALOG-TEXT":
-            return {
-                ...state,
-                messagesNewDialogs: action.newDialogText
             }
         default:
             return state
     }
 }
 
-export const AddMessageAC = () => {
+export const AddMessage = (newText: string) => {
     return {
         type: 'ADD-MESSAGE',
+        newText
     } as const
 }
-export const ChangeNewDialogCallBackAC = (newDialogText: string) => {
-    return {
-        type: 'UPDATE-NEW-DIALOG-TEXT',
-        newDialogText: newDialogText
-    } as const
-}
-
-
