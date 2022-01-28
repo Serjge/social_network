@@ -5,7 +5,6 @@ import React from "react";
 import {Login} from "./Login";
 
 type mapStateToPropsType = {
-    error: string
     isAuth: boolean
 }
 type mapDispatchToPropsType = {
@@ -24,7 +23,6 @@ export class LoginApiComponent extends React.Component<LoginApiComponentPropsTyp
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        error: state.authPage.error,
         isAuth: state.authPage.isAuth,
     }
 }

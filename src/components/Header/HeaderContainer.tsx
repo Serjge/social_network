@@ -38,7 +38,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         login: state.authPage.data.login,
         email: state.authPage.data.email,
-        usersId: state.authPage.data.usersId,
+        usersId: state.authPage.data.userId,
         isFetching: state.authPage.isFetching,
         auth: state.authPage.isAuth
     }

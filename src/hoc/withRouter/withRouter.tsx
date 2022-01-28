@@ -29,16 +29,3 @@ export function withRouter<T>(WrappedComponent: React.ComponentType<T>) {
         );
     }
 }
-
-export function withRouter2(Component:any) {
-    function ComponentWithRouterProp(props: typeof Component) {
-        const params = useParams<'userId'>();
-        return (
-            <Component
-                {...props}
-                userId={params.userId}
-            />
-        );
-    }
-    return ComponentWithRouterProp;
-}

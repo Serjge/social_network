@@ -1,16 +1,14 @@
 import {Dispatch} from "redux";
 import {authApi} from "../api/authApi";
-import {Navigate} from "react-router-dom";
-import React from "react";
+import {stopSubmit} from "redux-form";
 
 type initialStateType = {
     data: dataType
     isFetching: boolean
     isAuth: boolean
-    error:string
 }
 type dataType = {
-    usersId: string,
+    userId: string,
     email: string,
     login: string
 }
@@ -19,16 +17,12 @@ const initialState = {
     data: {} as dataType,
     isFetching: true,
     isAuth: false,
-    error: 'asdasd',
 }
 
 type ActionsUsersType =
     ReturnType<typeof setUserAuth>
     | ReturnType<typeof setToggleIsFetching>
     | ReturnType<typeof setToggleIsAuth>
-    // | ReturnType<typeof setLogin>
-    | ReturnType<typeof setError>
-
 
 export const AuthReducer = (state: initialStateType = initialState, action: ActionsUsersType): initialStateType => {
     switch (action.type) {
@@ -39,9 +33,8 @@ export const AuthReducer = (state: initialStateType = initialState, action: Acti
                     ...state.data,
                     email: action.data.email,
                     login: action.data.login,
-                    usersId: action.data.usersId
+                    userId: action.data.usersId
                 },
-
             }
         case 'TOGGLE-IS-FETCHING':
             return {
@@ -52,10 +45,6 @@ export const AuthReducer = (state: initialStateType = initialState, action: Acti
             return {
                 ...state,
                 isAuth: action.isAuth
-            }
-        case "TOGGLE-IS-ERROR":
-            return {
-                ...state, error: action.error
             }
         default:
             return state
@@ -68,8 +57,9 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         .then(response => {
             dispatch(setToggleIsFetching(false))
             if (response.resultCode === 0) {
+                console.log(response)
                 dispatch(setUserAuth(
-                    response.data.usersId,
+                    response.data.id,
                     response.data.email,
                     response.data.login
                 ))
@@ -78,15 +68,12 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
             dispatch(setToggleIsFetching(false))
         })
 }
-export const login= (email: string,password: string,rememberMe:boolean) => (dispatch: Dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     authApi.loginMe(email, password, rememberMe)
         .then(response => {
-
-            if(response.resultCode === 0) {
-
+            if (response.resultCode === 0) {
                 authApi.authMe()
                     .then(response => {
-                        dispatch(setToggleIsFetching(false))
                         if (response.resultCode === 0) {
                             dispatch(setUserAuth(
                                 response.data.usersId,
@@ -96,21 +83,16 @@ export const login= (email: string,password: string,rememberMe:boolean) => (disp
                             dispatch(setToggleIsAuth(true))
                         }
                     })
-
-            }else {
-               dispatch(setError(response.messages[0]))
+            } else {
+                dispatch(stopSubmit('login', {_error: response.messages[0]}))
             }
         })
 }
-export const logout= () => (dispatch: Dispatch) => {
+export const logout = () => (dispatch: Dispatch) => {
     authApi.logoutMe()
         .then(response => {
-
-            if(response.resultCode === 0) {
-                console.log('loout')
+            if (response.resultCode === 0) {
                 dispatch(setToggleIsAuth(false))
-            }else {
-                dispatch(setError(response.messages[0]))
             }
         })
 }
@@ -131,19 +113,5 @@ export const setToggleIsAuth = (isAuth: boolean) => {
     return {
         type: 'TOGGLE-IS-AUTH',
         isAuth: isAuth
-    } as const
-}
-// export const setLogin = (email: string,password: string,rememberMe= false) => {
-//     return {
-//         type: 'LOGIN-USER',
-//         email: email,
-//         password: password,
-//         rememberMe: rememberMe
-//     } as const
-// }
-export const setError = (error: string) => {
-    return {
-        type: 'TOGGLE-IS-ERROR',
-        error: error
     } as const
 }

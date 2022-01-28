@@ -18,6 +18,7 @@ import {InjectedProps, withRouter} from "../../hoc/withRouter/withRouter";
 type mapStateToPropsType = {
     profile: ProfileType
     status: string
+    authUserId:string
 }
 type mapDispatchToPropsType = {
     addPost: (newText: string) => void
@@ -35,8 +36,9 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
     componentDidMount() {
 
         let userId: string = this.props.userId
+
         if (!userId) {
-            userId = '21501';
+            userId = this.props.authUserId;
         }
         this.props.getProfile(userId)
         this.props.getStatus(userId)
@@ -52,7 +54,8 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authUserId: state.authPage.data.userId
 
     }
 }
