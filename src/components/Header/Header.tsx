@@ -9,11 +9,13 @@ type HeaderPropsType = {
     isFetching: boolean
     setToggleIsFetching: (isFetching: boolean) => void
     auth: boolean
+    logout: ()=>void
 }
 
 export const Header = ({
                            login,
                            auth,
+    logout,
                        }: HeaderPropsType) => {
 
     return (
@@ -23,7 +25,7 @@ export const Header = ({
                 <div>
                     {auth ? login : 'guest'}
                     {auth
-                        ? <NavLink to={'/logout'}>logout</NavLink>
+                        ? <NavLink onClick={logout} to={'/logout'}>logout</NavLink>
                         : <NavLink to={'/login'}>Login</NavLink>}
 
                 </div>

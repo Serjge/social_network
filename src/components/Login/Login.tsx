@@ -2,17 +2,27 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/forms/FormsControls/TextArea";
 import {maxLengthCreator, requiredField} from "../../utils/validator/validator";
+import {Navigate} from "react-router-dom";
 
-export const Login = () => {
+type LoginPropsType = {
+    login: (email: string,password: string,rememberMe:boolean) => void
+    error:string
+    isAuth :boolean
+}
+export const Login = ({login, error, isAuth}:LoginPropsType) => {
 
     const onSubmit = (formData: FormDataType) => {
+        login(formData.login, formData.password ,formData.rememberMe)
     }
+    if(isAuth) { return <Navigate to={'/profile'}/>}
     return (
         <>
+
             <h1>
                 LOGIN
             </h1>
             <ReduxLoginForm onSubmit={onSubmit}/>
+            {error}
         </>
     );
 };
