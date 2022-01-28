@@ -2,10 +2,13 @@ import React from 'react'
 import {PostMap} from './Post/PostMap';
 import {MyPostsPropsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../../utils/validator/validator";
+import {TextArea} from "../../common/forms/FormsControls/TextArea";
 
 export const MyPosts = ({addPost,onClickRemovePost,onClickLike,profilePage}: MyPostsPropsType) => {
 
     const onAddNewPostHandler = (formData: newMyPostDataType) => {
+        console.log(formData)
         addPost(formData.newMyPost)
     }
 
@@ -25,11 +28,17 @@ type newMyPostDataType = {
     newMyPost: string
 }
 
+const maxLength10 = maxLengthCreator(10)
+
 const NewMyPosts: React.ComponentType<InjectedFormProps<newMyPostDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field type={'text'} component={'textarea'} name={'newMyPost'}/>
+                <Field type={'text'}
+                       component={TextArea}
+                       name={'newMyPost'}
+                       validate={[requiredField, maxLength10]}
+                />
             </div>
             <div>
                 <button>Add post</button>

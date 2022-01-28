@@ -4,17 +4,18 @@ import {DialogsName} from "./DialogsName/DialogsName";
 import {DialogsMessage} from "./DialogsMessage/DialogsMessage";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {TextArea} from "../common/forms/FormsControls/TextArea";
+import {maxLengthCreator, requiredField} from "../../utils/validator/validator";
 
 export function Dialogs({
                             addMessageHandler,
-                            // OnChangeHandler,
                             dialogsPage,
                         }: DialogsPropsType) {
 
     const dialogsElement = dialogsPage.dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
     const dialogsMessage = dialogsPage.messages.map(m => <DialogsMessage key={m.id} message={m.message}/>)
 
-    const onChangeMessage = (formData:DialogTextAreaDataType) => {
+    const onChangeMessage = (formData: DialogTextAreaDataType) => {
         addMessageHandler(formData.newMessage)
     }
 
@@ -34,12 +35,17 @@ export function Dialogs({
 type DialogTextAreaDataType = {
     newMessage: string
 }
+const maxLength50 = maxLengthCreator(50)
 
 const DialogTextArea: React.ComponentType<InjectedFormProps<DialogTextAreaDataType>> = (props) => {
     return (
 
         <form onSubmit={props.handleSubmit}>
-            <Field type={'text'} name={'newMessage'} placeholder={'Add message'} component={'textarea'}/>
+            <Field type={'text'}
+                   name={'newMessage'}
+                   placeholder={'Add message'}
+                   component={TextArea}
+                   validate={[requiredField, maxLength50]}/>
             <button>Add Message</button>
         </form>
 
