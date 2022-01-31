@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {authApi} from "../api/authApi";
-import {stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
+import {BaseThunkType, InferActionsTypes} from "./redux_store";
 
 type initialStateType = {
     data: dataType
@@ -23,6 +24,10 @@ type ActionsUsersType =
     ReturnType<typeof setUserAuth>
     | ReturnType<typeof setToggleIsFetching>
     | ReturnType<typeof setToggleIsAuth>
+
+type ActionsType = InferActionsTypes<ActionsUsersType>
+
+type ThunkType = BaseThunkType<ActionsType | FormAction>
 
 export const AuthReducer = (state: initialStateType = initialState, action: ActionsUsersType): initialStateType => {
     switch (action.type) {
@@ -52,12 +57,12 @@ export const AuthReducer = (state: initialStateType = initialState, action: Acti
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
-    dispatch(setToggleIsFetching(true))
-    authApi.authMe()
+   return authApi.authMe()
         .then(response => {
-            dispatch(setToggleIsFetching(false))
+
+
             if (response.resultCode === 0) {
-                console.log(response)
+                // console.log(response)
                 dispatch(setUserAuth(
                     response.data.id,
                     response.data.email,
@@ -65,8 +70,10 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
                 ))
                 dispatch(setToggleIsAuth(true))
             }
-            dispatch(setToggleIsFetching(false))
+
         })
+
+
 }
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     authApi.loginMe(email, password, rememberMe)
