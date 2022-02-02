@@ -29,7 +29,7 @@ const initialState = {
         {id: v1(), message: 'How are you?'}
     ] as MessagesType[],
 }
-type ActionsDialogsType =
+export type ActionsDialogsType =
     ReturnType<typeof AddMessage>
 
 export const DialogsReducer = (state = initialState, action: ActionsDialogsType): InitialDialogsStateType => {

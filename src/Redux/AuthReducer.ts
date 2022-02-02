@@ -1,7 +1,8 @@
 import {Dispatch} from "redux";
 import {authApi} from "../api/authApi";
-import {FormAction, stopSubmit} from "redux-form";
-import {BaseThunkType, InferActionsTypes} from "./redux_store";
+import {stopSubmit} from "redux-form";
+import {ActionAllType, AppStateType} from "./redux_store";
+import {ThunkAction} from "redux-thunk";
 
 type initialStateType = {
     data: dataType
@@ -20,16 +21,12 @@ const initialState = {
     isAuth: false,
 }
 
-type ActionsUsersType =
+export type ActionsAuthType =
     ReturnType<typeof setUserAuth>
     | ReturnType<typeof setToggleIsFetching>
     | ReturnType<typeof setToggleIsAuth>
 
-type ActionsType = InferActionsTypes<ActionsUsersType>
-
-type ThunkType = BaseThunkType<ActionsType | FormAction>
-
-export const AuthReducer = (state: initialStateType = initialState, action: ActionsUsersType): initialStateType => {
+export const AuthReducer = (state: initialStateType = initialState, action: ActionsAuthType): initialStateType => {
     switch (action.type) {
         case "SET-USERS-DATA":
             return {
@@ -56,13 +53,10 @@ export const AuthReducer = (state: initialStateType = initialState, action: Acti
     }
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
+export const getAuthUserData = () => (dispatch: Dispatch<ActionAllType>) => {
    return authApi.authMe()
         .then(response => {
-
-
             if (response.resultCode === 0) {
-                // console.log(response)
                 dispatch(setUserAuth(
                     response.data.id,
                     response.data.email,
@@ -70,32 +64,21 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
                 ))
                 dispatch(setToggleIsAuth(true))
             }
-
         })
-
-
 }
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+
+export const login = (email: string, password: string, rememberMe: boolean): ThunkAction<void, AppStateType, unknown, ActionAllType> => (dispatch) => {
     authApi.loginMe(email, password, rememberMe)
         .then(response => {
             if (response.resultCode === 0) {
-                authApi.authMe()
-                    .then(response => {
-                        if (response.resultCode === 0) {
-                            dispatch(setUserAuth(
-                                response.data.usersId,
-                                response.data.email,
-                                response.data.login
-                            ))
-                            dispatch(setToggleIsAuth(true))
-                        }
-                    })
+                dispatch(getAuthUserData())
             } else {
                 dispatch(stopSubmit('login', {_error: response.messages[0]}))
             }
         })
 }
-export const logout = () => (dispatch: Dispatch) => {
+
+export const logout = () => (dispatch: Dispatch<ActionAllType>) => {
     authApi.logoutMe()
         .then(response => {
             if (response.resultCode === 0) {

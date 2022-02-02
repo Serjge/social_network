@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/profileApi";
+import {ActionAllType} from "./redux_store";
 
 export type  InitialProfileStateType = typeof initialState
 
@@ -44,7 +45,7 @@ export type PostsType = {
     isLike: boolean
 }
 
-type ActionsProfileType =
+export type ActionsProfileType =
     ReturnType<typeof addPost>
     | ReturnType<typeof RemovePost>
     | ReturnType<typeof AddLike>
@@ -94,23 +95,21 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
     }
 }
 
-export const getProfile = (userId: string) => (dispatch: Dispatch) => {
+export const getProfile = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
     profileAPI.authMe(userId)
         .then(response => dispatch(setUserProfile(response)))
-
 }
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+
+export const getStatus = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
     profileAPI.getStatus(userId)
         .then(response => dispatch(setUserStatus(response)))
 }
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+export const updateStatus = (status: string) => (dispatch: Dispatch<ActionAllType>) => {
     profileAPI.updateStatusApi(status)
         .then(response => {
-            console.log(status)
             if (response.data.resultCode === 0) {
                 dispatch(setUserStatus(status))
             }
-
         })
 }
 
@@ -120,13 +119,6 @@ export const addPost = (newText: string) => {
         newText
     } as const
 }
-
-// export const ChangeNewText = (newPostText: string) => {
-//     return {
-//         type: 'UPDATE-NEW-POST-TEXT',
-//         newPostText: newPostText
-//     } as const
-// }
 
 export const RemovePost = (removeId: string) => {
     return {

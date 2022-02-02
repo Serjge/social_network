@@ -1,5 +1,6 @@
 import {usersAPI} from "../api/userApi";
 import {Dispatch} from "redux";
+import {ActionAllType} from "./redux_store";
 
 export type InitialUsersStateType = typeof initialState
 
@@ -23,7 +24,7 @@ export type UserType = {
     location: { city: string, country: string }
 }
 
-type ActionsUsersType =
+export type ActionsUsersType =
     ReturnType<typeof setFollow>
     | ReturnType<typeof setUnFollow>
     | ReturnType<typeof setUsers>
@@ -88,7 +89,7 @@ export const UsersReducer = (state: InitialUsersStateType = initialState, action
     }
 }
 
-export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch<ActionAllType>) => {
 
     dispatch(setToggleIsFetching(true))
     dispatch(setCurrentPage(currentPage))
@@ -97,10 +98,9 @@ export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Di
         dispatch(setUsers(response.items))
         dispatch(setTotalUserCount(response.totalCount))
     })
-
 }
 
-export const follow = (userId: string) => (dispatch: Dispatch) => {
+export const follow = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
     dispatch(toggleFollowingInProgress(true, +userId))
     usersAPI.follow(userId)
         .then(response => {
@@ -112,7 +112,7 @@ export const follow = (userId: string) => (dispatch: Dispatch) => {
         )
 }
 
-export const unFollow = (userId: string) => (dispatch: Dispatch) => {
+export const unFollow = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
     dispatch(toggleFollowingInProgress(true, +userId))
     usersAPI.unFollow(userId)
         .then(response => {

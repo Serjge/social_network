@@ -1,35 +1,19 @@
-import axios from "axios";
+import {instance} from "./instanceApi";
 
-export const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    headers: {
-        "API-KEY": "6455f709-1e25-404c-a49d-c20b867901e8"
-    }
-});
 export const profileAPI = {
     authMe(userId: string) {
         return instance.get(`profile/` + userId)
-            .then(response => {
-                // console.log(response)
-               return  response.data
-            })
+            .then(response => response.data)
 
     },
     getStatus(userId: string) {
         return instance.get(`profile/status/` + userId)
-            .then(response => {
-                console.log(response.data)
-                return response.data
-            })
+            .then(response => response.data)
 
     },
     updateStatusApi(status: string) {
-        return instance.put(`profile/status`, {status :status})
-            .then(response => {
-                console.log(status)
-                return response
-            })
+        return instance.put(`profile/status`, {status: status})
+            .then(response => response)
 
     },
 
