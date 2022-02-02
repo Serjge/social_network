@@ -8,7 +8,6 @@ import {TextArea} from "../../common/forms/FormsControls/TextArea";
 export const MyPosts = ({addPost,onClickRemovePost,onClickLike,profilePage}: MyPostsPropsType) => {
 
     const onAddNewPostHandler = (formData: newMyPostDataType) => {
-        console.log(formData)
         addPost(formData.newMyPost)
     }
 
