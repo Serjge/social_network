@@ -1,8 +1,7 @@
 import {Dispatch} from "redux";
 import {authApi} from "../api/authApi";
 import {stopSubmit} from "redux-form";
-import {ActionAllType, AppStateType} from "./redux_store";
-import {ThunkAction} from "redux-thunk";
+import {ActionAllType, AppThunkType} from "./redux_store";
 
 type initialStateType = {
     data: dataType
@@ -53,8 +52,10 @@ export const AuthReducer = (state: initialStateType = initialState, action: Acti
     }
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch<ActionAllType>) => {
-   return authApi.authMe()
+//thunk
+
+export const getAuthUserData = (): AppThunkType<Promise<void>> => (dispatch) => {
+    return authApi.authMe()
         .then(response => {
             if (response.resultCode === 0) {
                 dispatch(setUserAuth(
@@ -67,7 +68,7 @@ export const getAuthUserData = () => (dispatch: Dispatch<ActionAllType>) => {
         })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean): ThunkAction<void, AppStateType, unknown, ActionAllType> => (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean): AppThunkType => (dispatch) => {
     authApi.loginMe(email, password, rememberMe)
         .then(response => {
             if (response.resultCode === 0) {
@@ -77,6 +78,8 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
             }
         })
 }
+
+//action
 
 export const logout = () => (dispatch: Dispatch<ActionAllType>) => {
     authApi.logoutMe()
@@ -93,12 +96,14 @@ export const setUserAuth = (usersId: string, email: string, login: string) => {
         data: {usersId, email, login}
     } as const
 }
+
 export const setToggleIsFetching = (isFetching: boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING',
         isFetching: isFetching
     } as const
 }
+
 export const setToggleIsAuth = (isAuth: boolean) => {
     return {
         type: 'TOGGLE-IS-AUTH',

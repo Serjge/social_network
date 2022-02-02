@@ -3,7 +3,7 @@ import {ActionsProfileType, ProfileReducer} from "./ProfileReducer";
 import {ActionsDialogsType, DialogsReducer} from "./DialogsReducer";
 import {ActionsUsersType, UsersReducer} from "./UsersReducer";
 import {ActionsAuthType, AuthReducer} from "./AuthReducer";
-import thunkMiddleware from "redux-thunk"
+import thunkMiddleware, {ThunkAction} from "redux-thunk"
 import {reducer as formReducer} from "redux-form"
 import {ActionsAppType, AppReducer} from "./AppReducer";
 
@@ -25,3 +25,10 @@ export type ActionAllType = ActionsUsersType
     | ActionsAuthType
     | ActionsDialogsType
     | ActionsProfileType
+
+export type AppThunkType<ReturnType = void> = ThunkAction<
+    ReturnType,
+    AppStateType,
+    unknown,
+    ActionAllType
+    >
