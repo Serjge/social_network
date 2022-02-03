@@ -95,12 +95,12 @@ export const ProfileReducer = (state = initialState, action: ActionsProfileType)
     }
 }
 
-export const getProfile = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
+export const requestProfile = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
     profileAPI.authMe(userId)
         .then(response => dispatch(setUserProfile(response)))
 }
 
-export const getStatus = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
+export const requestStatus = (userId: string) => (dispatch: Dispatch<ActionAllType>) => {
     profileAPI.getStatus(userId)
         .then(response => dispatch(setUserStatus(response)))
 }

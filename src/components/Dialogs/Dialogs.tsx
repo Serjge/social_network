@@ -9,11 +9,12 @@ import {maxLengthCreator, requiredField} from "../../utils/validator/validator";
 
 export function Dialogs({
                             addMessageHandler,
-                            dialogsPage,
+                            dialogs,
+                            messages,
                         }: DialogsPropsType) {
 
-    const dialogsElement = dialogsPage.dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
-    const dialogsMessage = dialogsPage.messages.map(m => <DialogsMessage key={m.id} message={m.message}/>)
+    const dialogsElement = dialogs.map(d => <DialogsName id={d.id} name={d.name} key={d.id}/>)
+    const dialogsMessage = messages.map(m => <DialogsMessage key={m.id} message={m.message}/>)
 
     const onChangeMessage = (formData: DialogTextAreaDataType) => {
         addMessageHandler(formData.newMessage)

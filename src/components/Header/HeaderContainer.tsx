@@ -4,6 +4,7 @@ import {AppStateType} from "../../Redux/redux_store";
 import {connect} from "react-redux";
 import {logout, setToggleIsFetching} from "../../Redux/AuthReducer";
 import {Preloader} from "../common/preloader/Preloader";
+import {getAuthIsFetching, getEmail, getIsAuth, getLogin, getUserId} from "../../Redux/authSelectors";
 
 type mapStateToPropsType = {
     login: string
@@ -31,11 +32,11 @@ export class HeaderAPIContainer extends React.Component<HeaderAPIContainerType, 
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        login: state.authPage.data.login,
-        email: state.authPage.data.email,
-        usersId: state.authPage.data.userId,
-        isFetching: state.authPage.isFetching,
-        auth: state.authPage.isAuth
+        login: getLogin(state),
+        email: getEmail(state),
+        usersId: getUserId(state),
+        isFetching: getAuthIsFetching(state),
+        auth: getIsAuth(state)
     }
 }
 

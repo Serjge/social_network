@@ -89,7 +89,7 @@ export const UsersReducer = (state: InitialUsersStateType = initialState, action
     }
 }
 
-export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch<ActionAllType>) => {
+export const requestUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch<ActionAllType>) => {
 
     dispatch(setToggleIsFetching(true))
     dispatch(setCurrentPage(currentPage))

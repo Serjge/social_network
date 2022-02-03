@@ -5,8 +5,8 @@ import {connect} from "react-redux";
 import {
     AddLike,
     addPost,
-    getProfile,
-    getStatus,
+    requestProfile,
+    requestStatus,
     ProfileType,
     RemovePost,
     updateStatus
@@ -14,18 +14,20 @@ import {
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect/withAuthRedirect";
 import {InjectedProps, withRouter} from "../../hoc/withRouter/withRouter";
+import {getUserId} from "../../Redux/authSelectors";
+import {getProfile, getStatus} from '../../Redux/profileSelectors';
 
 type mapStateToPropsType = {
     profile: ProfileType
     status: string
-    authUserId:string
+    authUserId: string
 }
 type mapDispatchToPropsType = {
     addPost: (newText: string) => void
     RemovePost: (removeId: string) => void
     AddLike: (LikeId: string, isLike: boolean) => void
-    getProfile: (userId: string) => void
-    getStatus: (userId: string) => void
+    requestProfile: (userId: string) => void
+    requestStatus: (userId: string) => void
     updateStatus: (userId: string) => void
 }
 
@@ -40,8 +42,8 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
         if (!userId) {
             userId = this.props.authUserId;
         }
-        this.props.getProfile(userId)
-        this.props.getStatus(userId)
+        this.props.requestProfile(userId)
+        this.props.requestStatus(userId)
     }
 
     render() {
@@ -53,9 +55,9 @@ class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> 
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        authUserId: state.authPage.data.userId
+        profile: getProfile(state),
+        status: getStatus(state),
+        authUserId: getUserId(state)
 
     }
 }
@@ -66,8 +68,8 @@ export const ProfileContainer = compose<React.ComponentType>(
             addPost,
             RemovePost,
             AddLike,
-            getProfile,
-            getStatus,
+            requestProfile,
+            requestStatus,
             updateStatus,
         }),
     withRouter,
