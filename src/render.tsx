@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import {App, AppContainer} from "./App";
-import {store} from "./Redux/redux_store";
+import {store} from "store/store";
 import {Provider} from "react-redux";
 
 export const renderTree = () => {

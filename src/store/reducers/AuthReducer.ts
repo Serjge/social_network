@@ -1,7 +1,7 @@
-import {Dispatch} from "redux";
-import {authApi} from "../api/authApi";
+import {authApi} from "api";
+import { Dispatch } from "redux";
 import {stopSubmit} from "redux-form";
-import {ActionAllType, AppThunkType} from "./redux_store";
+import {ActionAllType, AppThunkType} from "store/store";
 
 type initialStateType = {
     data: dataType

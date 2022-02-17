@@ -1,5 +1,5 @@
-import {AppStateType} from "./redux_store";
-import {DialogType, MessagesType} from "./DialogsReducer";
+import {AppStateType} from "store/store";
+import {DialogType, MessagesType} from "store/reducers/DialogsReducer";
 
 export const getDialogs = (state: AppStateType): DialogType[] => {
     return state.dialogsPage.dialogs

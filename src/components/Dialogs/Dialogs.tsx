@@ -1,11 +1,10 @@
-import React from "react";
-import s from './Dialogs.module.scss'
+import style from './Dialogs.module.scss'
 import {DialogsName} from "./DialogsName/DialogsName";
 import {DialogsMessage} from "./DialogsMessage/DialogsMessage";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {TextArea} from "../common/forms/FormsControls/TextArea";
-import {maxLengthCreator, requiredField} from "../../utils/validator/validator";
+import {maxLengthCreator, requiredField} from "utils/validator/validator";
 
 export function Dialogs({
                             addMessageHandler,
@@ -21,11 +20,11 @@ export function Dialogs({
     }
 
     return (
-        <div className={s.dialogs__wrapper}>
-            <div className={s.dialogs__list}>
+        <div className={style.dialogs__wrapper}>
+            <div className={style.dialogs__list}>
                 {dialogsElement}
             </div>
-            <div className={s.dialogs__messages}>
+            <div className={style.dialogs__messages}>
                 {dialogsMessage}
                 <ReduxDialogTextArea onSubmit={onChangeMessage}/>
             </div>

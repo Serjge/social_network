@@ -1,11 +1,11 @@
-import {AddMessage, DialogType, MessagesType} from "../../Redux/DialogsReducer";
+import {AddMessage, DialogType, MessagesType} from "store/reducers/DialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
-import {AppStateType} from "../../Redux/redux_store";
+import {AppStateType} from "store/store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect/withAuthRedirect";
 import React from "react";
-import {getDialogs, getMessages} from "../../Redux/dialogsSelectors";
+import {getDialogs, getMessages} from "store/selectors/dialogsSelectors";
 
 type mapStateToPropsType = {
     dialogs: DialogType[]

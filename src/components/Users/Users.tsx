@@ -1,6 +1,6 @@
 import React from 'react';
-import userPhoto from '../../assets/img/i.webp'
-import {UserType} from "../../Redux/UsersReducer";
+import userPhoto from 'assets/img/defaultUsersAvatar.webp'
+import {UserType} from "store/reducers/UsersReducer";
 import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {

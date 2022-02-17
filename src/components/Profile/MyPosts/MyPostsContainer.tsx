@@ -1,11 +1,17 @@
-import {AddLike, addPost, InitialProfileStateType, RemovePost} from '../../../Redux/ProfileReducer';
+import {
+    AddLike,
+    addPost,
+    InitialProfileStateType,
+    PostsType,
+    RemovePost,
+} from 'store/reducers/ProfileReducer';
 import {MyPosts} from "./MyPosts";
-import {AppStateType} from "../../../Redux/redux_store";
+import {AppStateType} from "store/store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 
 type mapStateToPropsType = {
-    profilePage: InitialProfileStateType
+    posts: PostsType[]
 }
 
 type mapDispatchToPropsType = {
@@ -18,7 +24,7 @@ export type MyPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        profilePage: state.profilePage,
+        posts: state.profilePage.posts,
 
     }
 }

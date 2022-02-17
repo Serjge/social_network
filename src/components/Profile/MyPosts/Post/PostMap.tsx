@@ -1,6 +1,6 @@
 import {Post} from "./Post";
 import React from "react";
-import {PostsType} from "../../../../Redux/ProfileReducer";
+import {PostsType} from "store/reducers/ProfileReducer";
 
 type PostMapPropsType = {
     posts: PostsType[]

@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './ProfileInfo.module.scss'
-import {ProfileType} from "../../../Redux/ProfileReducer";
-import avatarDefault from '../../../assets/img/kak-dobavit-uchetnuyu-zapis-v-mozilla-thunderbird.png'
+import {ProfileType} from "store/reducers/ProfileReducer";
+import avatarDefault from 'assets/img/defaultAvatar.png'
 import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoPropsType = {

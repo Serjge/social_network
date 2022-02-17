@@ -1,10 +1,10 @@
 import React from 'react'
 import {Header} from "./Header";
-import {AppStateType} from "../../Redux/redux_store";
+import {AppStateType} from "store/store";
 import {connect} from "react-redux";
-import {logout, setToggleIsFetching} from "../../Redux/AuthReducer";
+import {logout, setToggleIsFetching} from "store/reducers/AuthReducer";
 import {Preloader} from "../common/preloader/Preloader";
-import {getAuthIsFetching, getEmail, getIsAuth, getLogin, getUserId} from "../../Redux/authSelectors";
+import {getAuthIsFetching, getEmail, getIsAuth, getLogin, getUserId} from "store/selectors/authSelectors";
 
 type mapStateToPropsType = {
     login: string

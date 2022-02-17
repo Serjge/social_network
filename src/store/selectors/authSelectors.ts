@@ -1,4 +1,4 @@
-import {AppStateType} from "./redux_store";
+import {AppStateType} from "store/store";
 
 export const getLogin = (state: AppStateType): string => {
     return state.authPage.data.login

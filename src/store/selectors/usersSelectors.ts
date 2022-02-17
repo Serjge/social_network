@@ -1,5 +1,5 @@
-import {AppStateType} from "./redux_store";
-import {UserType} from "./UsersReducer";
+import {AppStateType} from "store/store";
+import {UserType} from "store/reducers/UsersReducer";
 
 export const getUsers = (state: AppStateType): UserType[] => {
     return state.usersPage.users
