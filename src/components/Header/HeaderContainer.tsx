@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import {Header} from "./Header";
 import {AppStateType} from "store/store";
 import {connect} from "react-redux";
@@ -21,7 +21,7 @@ type mapDispatchToPropsType = {
 
 type HeaderAPIContainerType = mapStateToPropsType & mapDispatchToPropsType
 
-export class HeaderAPIContainer extends React.Component<HeaderAPIContainerType, HeaderAPIContainerType> {
+export class HeaderAPIContainer extends Component<HeaderAPIContainerType, HeaderAPIContainerType> {
 
     render() {
         return <>{this.props.isFetching ? <Preloader/> : null}
