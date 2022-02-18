@@ -18,11 +18,10 @@
 //     )
 // }
 import { PureComponent, ReactElement } from 'react';
-import { ProfileType } from 'type';
 
 import { MyPostsContainer, ProfileInfo } from '.';
 
-
+import { ProfileType } from 'type';
 
 type ProfilePropsType = {
   profile: ProfileType;

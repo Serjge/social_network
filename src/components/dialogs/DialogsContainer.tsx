@@ -1,17 +1,15 @@
-import { withAuthRedirect } from 'hoc';
 import { ComponentType } from 'react';
 
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
 
-
-import { AppStateType } from 'store';
-import { AddMessage} from 'store/reducers/dialogsReducer';
-
-import { getDialogs, getMessages } from 'store/selectors';
-import { DialogType, MessagesType } from 'type';
 import { Dialogs } from './Dialogs';
 
+import { withAuthRedirect } from 'hoc';
+import { AppStateType } from 'store';
+import { AddMessage } from 'store/reducers/dialogsReducer';
+import { getDialogs, getMessages } from 'store/selectors';
+import { DialogType, MessagesType } from 'type';
 
 type mapStateToPropsType = {
   dialogs: DialogType[];
@@ -38,4 +36,3 @@ export const DialogsContainer = compose<ComponentType>(
   connect(mapStateToProps, mapDispatchToProps),
   withAuthRedirect,
 )(Dialogs);
-

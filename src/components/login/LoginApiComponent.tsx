@@ -1,7 +1,6 @@
 import { PureComponent, ReactElement } from 'react';
+
 import { Login } from '.';
-
-
 
 export type mapStateToPropsType = {
   isAuth: boolean;

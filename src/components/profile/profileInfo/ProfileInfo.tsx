@@ -25,14 +25,14 @@
 //     )
 // }
 
-
 import { PureComponent, ReactElement } from 'react';
+
 import style from './ProfileInfo.module.scss';
 
-import avatarDefault from 'assets/img/defaultAvatar.png';
 import { ProfileStatus } from '.';
-import { ProfileType } from 'type';
 
+import avatarDefault from 'assets/img/defaultAvatar.png';
+import { ProfileType } from 'type';
 
 type ProfileInfoPropsType = {
   profile: ProfileType;

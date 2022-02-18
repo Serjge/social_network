@@ -45,20 +45,21 @@
 //     logout,
 // })(HeaderAPIContainer)
 
-
 import { connect } from 'react-redux';
+
+import { HeaderAPIContainer, mapStateToPropsType } from './HeaderAPIContainer';
+
 import { logout, setToggleIsFetching } from 'store/actions';
 import { getAuthIsFetching, getIsAuth, getLogin } from 'store/selectors';
 import { AppStateType } from 'store/store';
-import { HeaderAPIContainer, mapStateToPropsType } from './HeaderAPIContainer';
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
-    login: getLogin(state),
-    isFetching: getAuthIsFetching(state),
-    auth: getIsAuth(state),
+  login: getLogin(state),
+  isFetching: getAuthIsFetching(state),
+  auth: getIsAuth(state),
 });
 
 export const HeaderContainer = connect(mapStateToProps, {
-    setToggleIsFetching,
-    logout,
+  setToggleIsFetching,
+  logout,
 })(HeaderAPIContainer);

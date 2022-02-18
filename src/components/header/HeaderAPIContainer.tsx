@@ -1,8 +1,8 @@
-import { Preloader } from 'components/common';
 import { PureComponent, ReactElement } from 'react';
+
 import { Header } from './Header';
 
-
+import { Preloader } from 'components/common';
 
 export type mapStateToPropsType = {
   login: string;

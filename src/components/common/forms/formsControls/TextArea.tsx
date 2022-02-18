@@ -27,7 +27,6 @@ export class TextArea extends PureComponent<FormPropsType> {
   }
 }
 
-
 // import React from 'react';
 // import style from './TextArea.module.scss'
 // import {WrappedFieldProps} from "redux-form/lib/Field";

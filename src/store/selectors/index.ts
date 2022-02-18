@@ -1,9 +1,13 @@
-export { getInitialized } from './appSelectors'
+export { getInitialized } from './appSelectors';
 export {
-  getAuthIsFetching, getIsAuth, getLogin, getUserId, getEmail,
-} from './authSelectors'
-export { getDialogs, getMessages } from './dialogsSelectors'
-export { getProfile, getStatus } from './profileSelectors'
+  getAuthIsFetching,
+  getIsAuth,
+  getLogin,
+  getUserId,
+  getEmail,
+} from './authSelectors';
+export { getDialogs, getMessages } from './dialogsSelectors';
+export { getProfile, getStatus } from './profileSelectors';
 export {
   getCurrentPage,
   getPageSize,
@@ -11,4 +15,4 @@ export {
   getTotalUserCount,
   getUsers,
   getUsersIsFetching,
-} from './usersSelectors'
+} from './usersSelectors';

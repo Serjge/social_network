@@ -1,2 +1,2 @@
-export { withRouter } from './withRouter'
-export type { locationType, InjectedProps } from './withRouter'
+export { withRouter } from './withRouter';
+export type { locationType, InjectedProps } from './withRouter';

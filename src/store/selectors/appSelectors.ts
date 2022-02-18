@@ -1,5 +1,3 @@
-import {AppStateType} from "store/store";
+import { AppStateType } from 'store/store';
 
-export const getInitialized = (state: AppStateType): boolean => {
-    return state.app.initialized
-}
+export const getInitialized = (state: AppStateType): boolean => state.app.initialized;

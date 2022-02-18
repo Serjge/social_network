@@ -23,22 +23,22 @@ import { NavLink } from 'react-router-dom';
 import style from './DialogsName.module.scss';
 
 type DialogsNamePropsType = {
-    name: string;
-    id: string;
+  name: string;
+  id: string;
 };
 
 export class DialogsName extends PureComponent<DialogsNamePropsType> {
-    render(): ReactElement {
-        const { name, id } = this.props;
-        return (
-          <div className={style.name}>
-              <NavLink
-                to={`/dialogs/${id}`}
-                className={navDate => (navDate.isActive ? style.active : '')}
-              >
-                  {name}
-              </NavLink>
-          </div>
-        );
-    }
+  render(): ReactElement {
+    const { name, id } = this.props;
+    return (
+      <div className={style.name}>
+        <NavLink
+          to={`/dialogs/${id}`}
+          className={navDate => (navDate.isActive ? style.active : '')}
+        >
+          {name}
+        </NavLink>
+      </div>
+    );
+  }
 }

@@ -1,5 +1,4 @@
 // import React from 'react'
-import { path } from 'enum';
 // import s from './Navbar.module.scss'
 // import {ItemMenu} from "./item/ItemMenu";
 //
@@ -17,18 +16,20 @@ import { path } from 'enum';
 //
 // }
 import { PureComponent, ReactElement } from 'react';
-import { ItemMenu } from './item';
 
+import { ItemMenu } from './item';
 import style from './Navbar.module.scss';
+
+import { path } from 'enum';
 
 export class Navbar extends PureComponent {
   render(): ReactElement {
     return (
       <nav className={style.nav}>
-         <ItemMenu to={path.PROFILE} nameMenu="Profile" />
-         <ItemMenu to={path.DIALOGS} nameMenu="Message" />
-         <ItemMenu to={path.USERS} nameMenu="Users" />
-         <ItemMenu to={path.SETTINGS} nameMenu="Settings" />
+        <ItemMenu to={path.PROFILE} nameMenu="Profile" />
+        <ItemMenu to={path.DIALOGS} nameMenu="Message" />
+        <ItemMenu to={path.USERS} nameMenu="Users" />
+        <ItemMenu to={path.SETTINGS} nameMenu="Settings" />
       </nav>
     );
   }

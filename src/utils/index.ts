@@ -1,2 +1,2 @@
-export { requiredField, maxLengthCreator } from './validator'
-export {paginator} from './paginator'
+export { requiredField, maxLengthCreator } from './validator';
+export { paginator } from './paginator';

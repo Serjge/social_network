@@ -125,13 +125,11 @@
 //
 //
 
-import { User } from 'components/users/user';
 import { PureComponent, ReactElement } from 'react';
+
+import { User } from 'components/users/user';
 import { UserType } from 'type';
-
 import { paginator } from 'utils';
-
-
 
 type UsersPropsType = {
   users: UserType[];

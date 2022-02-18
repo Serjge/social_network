@@ -1,27 +1,28 @@
+/* eslint-disable */
 export const paginator = (
   currentPage: number,
   totalCount: number,
   pageSize: number,
 ): number[] => {
-  let pagesCounter = Math.ceil(totalCount / pageSize)
-  let pages = []
+  const pagesCounter = Math.ceil(totalCount / pageSize);
+  const pages = [];
 
   if (currentPage < 7) {
-      for (let i = 1; i <= currentPage + 5; i++) {
-          pages.push(i)
-      }
-      pages.push(pagesCounter)
+    for (let i = 1; i <= currentPage + 5; i++) {
+      pages.push(i);
+    }
+    pages.push(pagesCounter);
   } else if (currentPage + 5 >= pagesCounter) {
-      pages.push(1)
-      for (let i = currentPage - 5; i <= pagesCounter; i++) {
-          pages.push(i)
-      }
+    pages.push(1);
+    for (let i = currentPage - 5; i <= pagesCounter; i++) {
+      pages.push(i);
+    }
   } else {
-      pages.push(1)
-      for (let i = currentPage - 5; i <= currentPage + 5; i++) {
-          pages.push(i)
-      }
-      pages.push(pagesCounter)
+    pages.push(1);
+    for (let i = currentPage - 5; i <= currentPage + 5; i++) {
+      pages.push(i);
+    }
+    pages.push(pagesCounter);
   }
 
   //

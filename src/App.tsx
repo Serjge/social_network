@@ -1,76 +1,72 @@
-import { Navbar } from 'components/navbar/Navbar'
-import 'App.scss'
-import { UsersContainer } from 'components/users/UsersContainer';
-import { Navigate, Route, Routes } from "react-router-dom";
-import { HeaderContainer } from 'components/header/HeaderContainer';
+/* eslint-disable */
+import { Navbar } from 'components/navbar/Navbar';
 
-import { connect } from "react-redux";
-import { AppStateType } from "store/store";
-import { Preloader } from "components/common/preloader/Preloader";
+import 'App.scss';
 
-import { getInitialized } from "store/selectors/appSelectors";
 import { PureComponent } from 'react';
+
+import { connect } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import { Preloader } from 'components/common/preloader/Preloader';
 import { DialogsContainer } from 'components/dialogs/DialogsContainer';
+import { HeaderContainer } from 'components/header/HeaderContainer';
 import { LoginContainer } from 'components/login';
-import { Settings } from 'components/settings';
 import { ProfileContainer } from 'components/profile';
+import { Settings } from 'components/settings';
+import { UsersContainer } from 'components/users/UsersContainer';
+import { getInitialized } from 'store/selectors/appSelectors';
+import { AppStateType } from 'store/store';
 import { initializedApp } from 'store/thunks';
 
 type mapDispatchToPropsType = {
-  initializedApp: () => void
-}
+  initializedApp: () => void;
+};
 type mapStateToPropsType = {
-  initialized: boolean
-}
+  initialized: boolean;
+};
 
-type AppContainerType = mapDispatchToPropsType & mapStateToPropsType
+type AppContainerType = mapDispatchToPropsType & mapStateToPropsType;
 
 export class App extends PureComponent<AppContainerType> {
-
   componentDidMount() {
-    this.props.initializedApp()
+    this.props.initializedApp();
   }
-
 
   render() {
     if (!this.props.initialized) {
-      return <Preloader/>
+      return <Preloader />;
     }
 
     return (
       <div className="App">
-        <HeaderContainer/>
+        <HeaderContainer />
         <div className="app__wrapper">
-          <Navbar/>
+          <Navbar />
           <div className="app__wrapper_contend">
             <Routes>
-              <Route path={ '/' } element={ <Navigate to="/profile"/> }/>
-              <Route path="/profile" element={ <ProfileContainer/> }>
-                <Route path=":userId" element={ <ProfileContainer/> }/>
+              <Route path="/" element={<Navigate to="/profile" />} />
+              <Route path="/profile" element={<ProfileContainer />}>
+                <Route path=":userId" element={<ProfileContainer />} />
               </Route>
-              <Route path='/dialogs' element={ <DialogsContainer/> }>
-                <Route path=':userId' element={ <DialogsContainer/> }/>
+              <Route path="/dialogs" element={<DialogsContainer />}>
+                <Route path=":userId" element={<DialogsContainer />} />
               </Route>
-              <Route path='/users' element={ <UsersContainer/> }/>
-              <Route path='/login' element={ <LoginContainer/> }/>
-              <Route path='/settings' element={ <Settings/> }/>
+              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/login" element={<LoginContainer />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-  return {
-    initialized: getInitialized(state)
-  }
-}
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
+  initialized: getInitialized(state),
+});
 
 export const AppContainer = connect(mapStateToProps, {
-
   initializedApp,
-
-})(App)
-
+})(App);

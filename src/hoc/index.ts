@@ -1,3 +1,3 @@
-export { withRouter } from './withRouter'
-export type { locationType, InjectedProps } from './withRouter'
-export { withAuthRedirect } from './withAuthRedirect'
+export { withRouter } from './withRouter';
+export type { locationType, InjectedProps } from './withRouter';
+export { withAuthRedirect } from './withAuthRedirect';

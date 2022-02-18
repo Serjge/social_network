@@ -1,1 +1,1 @@
-export { requiredField, maxLengthCreator } from './validator'
+export { requiredField, maxLengthCreator } from './validator';

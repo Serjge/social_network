@@ -26,7 +26,6 @@
 //   return connect(mapStateToProps)(RedirectComponent)
 // }
 
-
 import { ComponentType, ReactElement } from 'react';
 
 import {
@@ -58,9 +57,9 @@ export function withAuthRedirect<T>(
     keyof Shared<
       mapStateToPropsType & DispatchProp,
       GetLibraryManagedProps<(props: mapStateToPropsType) => ReactElement>
-      >
     >
-  > {
+  >
+> {
   const RedirectComponent = (props: mapStateToPropsType): ReactElement => {
     const { isAuth, ...restProps } = props;
 

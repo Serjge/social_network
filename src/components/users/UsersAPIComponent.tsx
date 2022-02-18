@@ -1,10 +1,9 @@
-import { Preloader } from 'components/common';
 import { Component, ReactElement } from 'react';
-import { UserType } from 'type';
 
 import { Users } from './Users';
 
-
+import { Preloader } from 'components/common';
+import { UserType } from 'type';
 
 export type mapStateToPropsType = {
   users: UserType[];
@@ -24,11 +23,7 @@ type mapDispatchToPropsType = {
 
 export type UsersAPIComponentPropsType = mapStateToPropsType & mapDispatchToPropsType;
 
-export class UsersAPIComponent extends Component<
-  UsersAPIComponentPropsType
-
-> {
-
+export class UsersAPIComponent extends Component<UsersAPIComponentPropsType> {
   componentDidMount(): void {
     const firstPage = 1;
     const { requestUsers, pageSize } = this.props;

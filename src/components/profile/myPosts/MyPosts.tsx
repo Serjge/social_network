@@ -72,24 +72,23 @@
 // //       this.props.addPost(formData.newMyPost)
 // // }
 
-import { TextArea } from 'components/common';
 import { ComponentType, PureComponent, ReactElement } from 'react';
 
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
 import { MyPostsPropsType } from './MyPostsContainer';
-
-
-import { maxLengthCreator, requiredField } from 'utils';
 import { PostMap } from './post';
+
+import { TextArea } from 'components/common';
+import { maxLengthCreator, requiredField } from 'utils';
 
 const lengthText = 10;
 
 const maxLength10 = maxLengthCreator(lengthText);
 
 const NewMyPosts: ComponentType<InjectedFormProps<newMyPostDataType>> = ({
-                                                                           handleSubmit,
-                                                                         }: InjectedFormProps<newMyPostDataType>) => (
+  handleSubmit,
+}: InjectedFormProps<newMyPostDataType>) => (
   <form onSubmit={handleSubmit}>
     <div>
       <Field
@@ -100,7 +99,8 @@ const NewMyPosts: ComponentType<InjectedFormProps<newMyPostDataType>> = ({
       />
     </div>
     <div>
-      <button >Add post</button>
+      {/* eslint-disable-next-line react/button-has-type */}
+      <button>Add post</button>
     </div>
   </form>
 );

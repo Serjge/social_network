@@ -1,11 +1,9 @@
 import { Component, ReactElement } from 'react';
 
+import { Profile } from '.';
 
 import { InjectedProps } from 'hoc';
-
-import { Profile } from '.';
 import { ProfileType } from 'type';
-
 
 export type mapStateToPropsType = {
   profile: ProfileType;

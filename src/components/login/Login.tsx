@@ -77,9 +77,8 @@ import { PureComponent, ReactElement } from 'react';
 
 import { Navigate } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
+
 import { FormDataType, LoginForm } from './LoginForm';
-
-
 
 type LoginPropsType = {
   login: (email: string, password: string, rememberMe: boolean) => void;
