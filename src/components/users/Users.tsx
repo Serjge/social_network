@@ -127,7 +127,8 @@
 
 import { User } from 'components/users/user';
 import { PureComponent, ReactElement } from 'react';
-import { UserType } from 'store/reducers/UsersReducer';
+import { UserType } from 'type';
+
 import { paginator } from 'utils';
 
 

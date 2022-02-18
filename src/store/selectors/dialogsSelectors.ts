@@ -1,5 +1,5 @@
 import {AppStateType} from "store/store";
-import {DialogType, MessagesType} from "store/reducers/DialogsReducer";
+import { DialogType, MessagesType } from 'type';
 
 export const getDialogs = (state: AppStateType): DialogType[] => {
     return state.dialogsPage.dialogs

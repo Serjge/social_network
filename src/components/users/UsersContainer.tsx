@@ -86,6 +86,7 @@ import { compose } from 'redux';
 
 import { withAuthRedirect } from 'hoc';
 import { AppStateType } from 'store';
+import { toggleFollowingInProgress } from 'store/actions';
 
 import {
     getCurrentPage,
@@ -97,7 +98,8 @@ import {
 } from 'store/selectors';
 
 import { mapStateToPropsType, UsersAPIComponent } from './UsersAPIComponent';
-import { follow, requestUsers, toggleFollowingInProgress, unFollow } from 'store/reducers/UsersReducer';
+import { follow, requestUsers, unFollow } from 'store/thunks';
+
 
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({

@@ -7,13 +7,14 @@ import { HeaderContainer } from 'components/header/HeaderContainer';
 import { connect } from "react-redux";
 import { AppStateType } from "store/store";
 import { Preloader } from "components/common/preloader/Preloader";
-import { initializedApp } from "store/reducers/AppReducer";
+
 import { getInitialized } from "store/selectors/appSelectors";
-import { Component } from "react";
+import { PureComponent } from 'react';
 import { DialogsContainer } from 'components/dialogs/DialogsContainer';
 import { LoginContainer } from 'components/login';
 import { Settings } from 'components/settings';
 import { ProfileContainer } from 'components/profile';
+import { initializedApp } from 'store/thunks';
 
 type mapDispatchToPropsType = {
   initializedApp: () => void
@@ -24,7 +25,7 @@ type mapStateToPropsType = {
 
 type AppContainerType = mapDispatchToPropsType & mapStateToPropsType
 
-export class App extends Component<AppContainerType> {
+export class App extends PureComponent<AppContainerType> {
 
   componentDidMount() {
     this.props.initializedApp()

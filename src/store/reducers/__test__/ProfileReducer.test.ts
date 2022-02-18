@@ -1,4 +1,5 @@
-import { InitialProfileStateType, ProfileReducer } from 'store/reducers/ProfileReducer';
+import {  ProfileReducer } from 'store/reducers';
+import { InitialProfileStateType } from 'store/reducers/profileReducer';
 
 let startState: InitialProfileStateType
 

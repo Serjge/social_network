@@ -1,6 +1,7 @@
 import { Preloader } from 'components/common';
 import { Component, ReactElement } from 'react';
-import { UserType } from 'store/reducers/UsersReducer';
+import { UserType } from 'type';
+
 import { Users } from './Users';
 
 

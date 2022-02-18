@@ -32,7 +32,8 @@
 
 import { connect } from 'react-redux';
 import { AppStateType } from 'store';
-import { login } from 'store/reducers/AuthReducer';
+import { login } from 'store/thunks';
+
 import { LoginApiComponent, mapStateToPropsType } from './LoginApiComponent';
 
 

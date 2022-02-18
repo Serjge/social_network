@@ -2,8 +2,9 @@ import { Component, ReactElement } from 'react';
 
 
 import { InjectedProps } from 'hoc';
-import { ProfileType } from 'store/reducers/ProfileReducer';
+
 import { Profile } from '.';
+import { ProfileType } from 'type';
 
 
 export type mapStateToPropsType = {

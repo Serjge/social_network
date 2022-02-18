@@ -85,6 +85,7 @@ import { ComponentType } from 'react';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { addLike, addPost, removePost } from 'store/actions';
 
 import { mapStateToPropsType, ProfileAPIContainer } from './ProfileAPIContainer';
 
@@ -93,7 +94,8 @@ import { withAuthRedirect, withRouter } from 'hoc';
 import { AppStateType } from 'store';
 
 import { getUserId, getProfile, getStatus } from 'store/selectors';
-import { addLike, addPost, removePost, requestProfile, requestStatus, updateStatus } from 'store/reducers/ProfileReducer';
+import { requestProfile, requestStatus, updateStatus } from 'store/thunks';
+
 
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({

@@ -1,2 +1,2 @@
-export type { AppThunkType, AppStateType, ActionAllType } from './store'
+export type {  AppStateType } from './store'
 export { store, rootReducer } from './store'

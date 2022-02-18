@@ -25,7 +25,8 @@
 // }
 
 import { PureComponent, ReactElement } from 'react';
-import { PostsType } from 'store/reducers/ProfileReducer';
+import { PostsType } from 'type';
+
 import { Post } from '.';
 
 

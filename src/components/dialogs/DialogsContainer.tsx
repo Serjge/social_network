@@ -6,9 +6,10 @@ import { compose, Dispatch } from 'redux';
 
 
 import { AppStateType } from 'store';
-import { AddMessage, DialogType, MessagesType } from 'store/reducers/DialogsReducer';
+import { AddMessage} from 'store/reducers/dialogsReducer';
 
 import { getDialogs, getMessages } from 'store/selectors';
+import { DialogType, MessagesType } from 'type';
 import { Dialogs } from './Dialogs';
 
 

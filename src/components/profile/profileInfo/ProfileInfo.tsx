@@ -27,12 +27,11 @@
 
 
 import { PureComponent, ReactElement } from 'react';
-import { ProfileType } from 'store/reducers/ProfileReducer';
-
 import style from './ProfileInfo.module.scss';
 
 import avatarDefault from 'assets/img/defaultAvatar.png';
 import { ProfileStatus } from '.';
+import { ProfileType } from 'type';
 
 
 type ProfileInfoPropsType = {

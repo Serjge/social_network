@@ -52,7 +52,8 @@ import { Dispatch } from 'redux';
 
 
 import { AppStateType } from 'store';
-import { addLike, addPost, PostsType, removePost } from 'store/reducers/ProfileReducer';
+import { addLike, addPost, removePost } from 'store/actions';
+import { PostsType } from 'type';
 import { MyPosts } from './MyPosts';
 
 

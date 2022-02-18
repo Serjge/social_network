@@ -1,5 +1,6 @@
 import {AppStateType} from "store/store";
-import {ProfileType} from "store/reducers/ProfileReducer";
+import { ProfileType } from 'type';
+
 
 export const getProfile = (state: AppStateType): ProfileType => {
     return state.profilePage.profile

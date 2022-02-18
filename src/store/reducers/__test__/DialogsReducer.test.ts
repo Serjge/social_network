@@ -1,5 +1,5 @@
 import { DialogsReducer } from 'store/reducers';
-import { InitialDialogsStateType } from 'store/reducers/DialogsReducer';
+import { InitialDialogsStateType } from 'store/reducers/dialogsReducer';
 
 let startState: InitialDialogsStateType
 

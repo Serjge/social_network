@@ -1,17 +1,7 @@
+import { ActionsDialogsType } from 'store/actions';
+import { DialogType, MessagesType } from 'type';
 import {v1} from "uuid";
 
-export type MessagesType = {
-    id: string,
-    message: string
-}
-export type DialogType = {
-    id: string,
-    name: string
-}
-export type DialogsPageType = {
-    dialogs: Array<DialogType>,
-    messages: Array<MessagesType>
-}
 export type  InitialDialogsStateType = typeof initialState
 
 const initialState = {
@@ -29,8 +19,6 @@ const initialState = {
         {id: v1(), message: 'How are you?'}
     ] as MessagesType[],
 }
-export type ActionsDialogsType =
-    ReturnType<typeof AddMessage>
 
 export const DialogsReducer = (state = initialState, action: ActionsDialogsType): InitialDialogsStateType => {
     switch (action.type) {

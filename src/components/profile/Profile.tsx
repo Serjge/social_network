@@ -18,7 +18,8 @@
 //     )
 // }
 import { PureComponent, ReactElement } from 'react';
-import { ProfileType } from 'store/reducers/ProfileReducer';
+import { ProfileType } from 'type';
+
 import { MyPostsContainer, ProfileInfo } from '.';
 
 
