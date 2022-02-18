@@ -1,0 +1,1 @@
+export { DialogsMessage } from './DialogsMessage';

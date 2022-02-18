@@ -47,8 +47,8 @@ export type PostsType = {
 
 export type ActionsProfileType =
   ReturnType<typeof addPost>
-  | ReturnType<typeof RemovePost>
-  | ReturnType<typeof AddLike>
+  | ReturnType<typeof removePost>
+  | ReturnType<typeof addLike>
   | ReturnType<typeof setUserProfile>
   | ReturnType<typeof setUserStatus>
 
@@ -120,13 +120,13 @@ export const addPost = (newText: string) => {
   } as const
 }
 
-export const RemovePost = (removeId: string) => {
+export const removePost = (removeId: string) => {
   return {
     type: 'REMOVE-POST',
     removeId: removeId,
   } as const
 }
-export const AddLike = (LikeId: string, isLike: boolean) => {
+export const addLike = (LikeId: string, isLike: boolean) => {
   return {
     type: 'ADD-LIKE',
     LikeId: LikeId,

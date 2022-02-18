@@ -1,18 +1,19 @@
-import { Navbar } from 'components/Navbar/Navbar'
+import { Navbar } from 'components/navbar/Navbar'
 import 'App.scss'
+import { UsersContainer } from 'components/users/UsersContainer';
 import { Navigate, Route, Routes } from "react-router-dom";
-import { DialogsContainer } from "components/Dialogs/DialogsContainer";
-import { UsersContainer } from "components/Users/UsersContainer";
-import { ProfileContainer } from 'components/Profile/ProfileContainer';
-import { HeaderContainer } from 'components/Header/HeaderContainer';
-import { Settings } from "components/Settings/Settings";
-import { LoginContainer } from "components/Login/LoginContainer";
+import { HeaderContainer } from 'components/header/HeaderContainer';
+
 import { connect } from "react-redux";
 import { AppStateType } from "store/store";
 import { Preloader } from "components/common/preloader/Preloader";
 import { initializedApp } from "store/reducers/AppReducer";
 import { getInitialized } from "store/selectors/appSelectors";
 import { Component } from "react";
+import { DialogsContainer } from 'components/dialogs/DialogsContainer';
+import { LoginContainer } from 'components/login';
+import { Settings } from 'components/settings';
+import { ProfileContainer } from 'components/profile';
 
 type mapDispatchToPropsType = {
   initializedApp: () => void

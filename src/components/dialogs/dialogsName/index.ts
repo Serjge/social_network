@@ -1,0 +1,1 @@
+export { DialogsName } from './DialogsName';
