@@ -1,26 +1,10 @@
-// import s from "./DialogsName.module.scss";
-// import {NavLink} from "react-router-dom";
-// import React from "react";
-//
-// type DialogsNameType = {
-//     name: string
-//     id: string
-// }
-//
-// export function DialogsName(props: DialogsNameType) {
-//     return (
-//         <div className={s.name}>
-//             <NavLink to={'/dialogs/' + props.id}
-//                      className={(navDate) => navDate.isActive ? s.active : ''}>{props.name}</NavLink>
-//         </div>
-//     )
-// }
-
 import { PureComponent, ReactElement } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
 import style from './DialogsName.module.scss';
+
+import { path } from 'enum';
 
 type DialogsNamePropsType = {
   name: string;
@@ -33,7 +17,7 @@ export class DialogsName extends PureComponent<DialogsNamePropsType> {
     return (
       <div className={style.name}>
         <NavLink
-          to={`/dialogs/${id}`}
+          to={`${path.dialogs}${id}`}
           className={navDate => (navDate.isActive ? style.active : '')}
         >
           {name}

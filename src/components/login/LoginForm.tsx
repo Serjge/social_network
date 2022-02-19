@@ -35,8 +35,8 @@ export class LoginForm extends PureComponent<InjectedFormProps<FormDataType>> {
           <Field type="checkbox" name="rememberMe" component="input" />
           remember me
         </div>
-        {/* eslint-disable-next-line react/button-has-type */}
-        <button>Login</button>
+
+        <button type="submit">Login</button>
         {error ? <div>{error}</div> : null}
       </form>
     );

@@ -4,9 +4,9 @@ export type { ActionsAppType } from './appActions';
 
 export type { ActionsAuthType } from './authAction';
 
-export { setToggleIsFetching, setToggleIsAuth, setUserAuth, logout } from './authAction';
+export { setToggleIsFetching, setToggleIsAuth, setUserAuth } from './authAction';
 
-export { AddMessage } from './dialogActions';
+export { addMessage } from './dialogActions';
 
 export type { ActionsDialogsType } from './dialogActions';
 
@@ -30,3 +30,5 @@ export {
   setUnFollow,
   toggleFollowingInProgress,
 } from './userActions';
+
+export type { ActionAllType } from './type';

@@ -26,3 +26,11 @@ export const login =
       }
     });
   };
+
+export const logout = (): AppThunkType => dispatch => {
+  authApi.logoutMe().then(response => {
+    if (response.resultCode === resultCode.success) {
+      dispatch(setToggleIsAuth(false));
+    }
+  });
+};

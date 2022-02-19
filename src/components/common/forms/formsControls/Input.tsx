@@ -12,7 +12,9 @@ export class Input extends PureComponent<FormPropsType> {
       type,
       meta: { touched, error, warning },
     } = this.props;
+
     const hasError = touched && error;
+
     return (
       <div className={`${style.formControl} ${hasError ? style.error : ''}`}>
         <div>

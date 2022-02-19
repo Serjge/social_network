@@ -1,29 +1,23 @@
-//обнуляющие классы
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.preloader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-body {
-  background: #1e1e1e;
-  color: #cccccc;
-}
-
-.app__wrapper {
+.wrapper {
   max-width: 1280px;
   margin: 0 auto;
 
   display: grid;
-  grid-template-areas:
-    'nav  content';
+  grid-template-areas:    'nav  content';
   //grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
   padding: 10px;
   border-radius: 5px;
 
-  &_content {
+  & .content {
     grid-area: content;
     background: #2d2d2d;
   }

@@ -24,34 +24,33 @@ export const paginator = (
     }
     pages.push(pagesCounter);
   }
-
-  //
-  // const pagesCounter = Math.ceil(totalCount / pageSize);
-  // const maxPage = 7;
-  // const pages = [];
-  // const numberOfPages = 5;
-  // const onePage = 1;
-  //
-  // if (currentPage < maxPage) {
-  //   for (let i = 1; i <= currentPage + numberOfPages; i + onePage) {
-  //     pages.push(i);
-  //   }
-  //   pages.push(pagesCounter);
-  // } else if (currentPage + numberOfPages >= pagesCounter) {
-  //   pages.push(onePage);
-  //   for (let i = currentPage - numberOfPages; i <= pagesCounter; i + onePage) {
-  //     pages.push(i);
-  //   }
-  // } else {
-  //   pages.push(onePage);
-  //   for (
-  //     let i = currentPage - numberOfPages;
-  //     i <= currentPage + numberOfPages;
-  //     i + onePage
-  //   ) {
-  //     pages.push(i);
-  //   }
-  //   pages.push(pagesCounter);
-  // }
   return pages;
 };
+
+//   const pagesCounter = Math.ceil(totalCount / pageSize);
+//   const pages = [];
+//
+//   const firstPage = 1;
+//   const fivePages = 5;
+//   const oneNumber = 1;
+//   const sevenFirsPages = 7;
+//   const previousPages = currentPage - fivePages;
+//   const nextPages = currentPage + fivePages;
+//
+//   if (currentPage < sevenFirsPages) {
+//     for (let i = 1; i <= nextPages; i + oneNumber) {
+//       pages.push(i);
+//     }
+//     pages.push(pagesCounter);
+//   } else if (nextPages >= pagesCounter) {
+//     pages.push(firstPage);
+//     for (let i = previousPages; i <= pagesCounter; i + oneNumber) {
+//       pages.push(i);
+//     }
+//   } else {
+//     pages.push(firstPage);
+//     for (let i = previousPages; i <= nextPages; i + oneNumber) {
+//       pages.push(i);
+//     }
+//     pages.push(pagesCounter);
+//   }

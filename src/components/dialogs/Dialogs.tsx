@@ -3,12 +3,13 @@ import { ComponentType, PureComponent, ReactElement } from 'react';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
 import style from './Dialogs.module.scss';
-import { DialogsMessage } from './dialogsMessage';
 
-import { TextArea } from 'components/common';
-import { DialogsPropsType } from 'components/dialogs/DialogsContainer';
-import { DialogsName } from 'components/dialogs/dialogsName';
+import { DialogsMessage, DialogsPropsType, TextArea, DialogsName } from 'components';
 import { maxLengthCreator, requiredField } from 'utils';
+
+type DialogTextAreaDataType = {
+  newMessage: string;
+};
 
 const lengthText = 50;
 const maxLength50 = maxLengthCreator(lengthText);
@@ -24,8 +25,7 @@ const DialogTextArea: ComponentType<InjectedFormProps<DialogTextAreaDataType>> =
       component={TextArea}
       validate={[requiredField, maxLength50]}
     />
-    {/* eslint-disable-next-line react/button-has-type */}
-    <button>Add Message</button>
+    <button type="submit">Add Message</button>
   </form>
 );
 
@@ -33,7 +33,6 @@ const ReduxDialogTextArea = reduxForm<DialogTextAreaDataType>({
   form: 'newMessageDialog',
 })(DialogTextArea);
 
-//
 export class Dialogs extends PureComponent<DialogsPropsType> {
   render(): ReactElement {
     const { addMessageHandler, dialogs, messages } = this.props;
@@ -42,8 +41,8 @@ export class Dialogs extends PureComponent<DialogsPropsType> {
       <DialogsName id={id} name={name} key={id} />
     ));
 
-    const dialogsMessage = messages.map(m => (
-      <DialogsMessage key={m.id} message={m.message} />
+    const dialogsMessage = messages.map(({ message, id }) => (
+      <DialogsMessage key={id} message={message} />
     ));
 
     const onChangeMessage = (formData: DialogTextAreaDataType): void => {
@@ -53,9 +52,9 @@ export class Dialogs extends PureComponent<DialogsPropsType> {
     return (
       <>
         <div>Dialog</div>
-        <div className={style.dialogs__wrapper}>
-          <div className={style.dialogs__list}>{dialogsElement}</div>
-          <div className={style.dialogs__messages}>
+        <div className={style.wrapper}>
+          <div className={style.list}>{dialogsElement}</div>
+          <div className={style.messages}>
             {dialogsMessage}
             <ReduxDialogTextArea onSubmit={onChangeMessage} />
           </div>
@@ -64,7 +63,3 @@ export class Dialogs extends PureComponent<DialogsPropsType> {
     );
   }
 }
-
-type DialogTextAreaDataType = {
-  newMessage: string;
-};

@@ -1,72 +1,59 @@
-/* eslint-disable */
-import { Navbar } from 'components/navbar/Navbar';
+import { PureComponent, ReactElement } from 'react';
 
-import 'App.scss';
-
-import { PureComponent } from 'react';
-
-import { connect } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Preloader } from 'components/common/preloader/Preloader';
-import { DialogsContainer } from 'components/dialogs/DialogsContainer';
-import { HeaderContainer } from 'components/header/HeaderContainer';
-import { LoginContainer } from 'components/login';
-import { ProfileContainer } from 'components/profile';
-import { Settings } from 'components/settings';
-import { UsersContainer } from 'components/users/UsersContainer';
-import { getInitialized } from 'store/selectors/appSelectors';
-import { AppStateType } from 'store/store';
-import { initializedApp } from 'store/thunks';
-
-type mapDispatchToPropsType = {
-  initializedApp: () => void;
-};
-type mapStateToPropsType = {
-  initialized: boolean;
-};
-
-type AppContainerType = mapDispatchToPropsType & mapStateToPropsType;
+import style from 'App.module.scss';
+import { AppContainerType } from 'AppContainer';
+import {
+  DialogsContainer,
+  HeaderContainer,
+  LoginContainer,
+  Navbar,
+  Preloader,
+  ProfileContainer,
+  Settings,
+  UsersContainer,
+} from 'components';
+import { path } from 'enum';
 
 export class App extends PureComponent<AppContainerType> {
-  componentDidMount() {
-    this.props.initializedApp();
+  componentDidMount(): void {
+    const { initializedApp } = this.props;
+    initializedApp();
   }
 
-  render() {
-    if (!this.props.initialized) {
-      return <Preloader />;
+  render(): ReactElement {
+    const { initialized } = this.props;
+    if (!initialized) {
+      return (
+        <div className={style.preloader}>
+          <Preloader />
+        </div>
+      );
     }
-
     return (
-      <div className="App">
-        <HeaderContainer />
-        <div className="app__wrapper">
-          <Navbar />
-          <div className="app__wrapper_contend">
-            <Routes>
-              <Route path="/" element={<Navigate to="/profile" />} />
-              <Route path="/profile" element={<ProfileContainer />}>
-                <Route path=":userId" element={<ProfileContainer />} />
-              </Route>
-              <Route path="/dialogs" element={<DialogsContainer />}>
-                <Route path=":userId" element={<DialogsContainer />} />
-              </Route>
-              <Route path="/users" element={<UsersContainer />} />
-              <Route path="/login" element={<LoginContainer />} />
-              <Route path="/settings" element={<Settings />} />
-            </Routes>
+      <>
+        <div>
+          <HeaderContainer />
+          <div className={style.wrapper}>
+            <Navbar />
+            <div className={style.content}>
+              <Routes>
+                <Route path={path.root} element={<Navigate to={path.profile} />} />
+                <Route path={path.profile} element={<ProfileContainer />}>
+                  <Route path={path.userId} element={<ProfileContainer />} />
+                </Route>
+                <Route path={path.dialogs} element={<DialogsContainer />}>
+                  <Route path={path.userId} element={<DialogsContainer />} />
+                </Route>
+                <Route path={path.users} element={<UsersContainer />} />
+                <Route path={path.login} element={<LoginContainer />} />
+                <Route path={path.settings} element={<Settings />} />
+              </Routes>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
-
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
-  initialized: getInitialized(state),
-});
-
-export const AppContainer = connect(mapStateToProps, {
-  initializedApp,
-})(App);

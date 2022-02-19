@@ -33,6 +33,8 @@ export class User extends PureComponent<UserPropsType> {
       followingInProgress,
     } = this.props;
 
+    const { small } = photos;
+
     const disableFollow = (id: string): boolean =>
       followingInProgress.some(idFollow => idFollow === +id);
 
@@ -40,8 +42,8 @@ export class User extends PureComponent<UserPropsType> {
       <div key={idUser} className={style.wrapper}>
         <div>
           <div className={style.avatar}>
-            <NavLink to={`${path.PROFILE}${idUser}`}>
-              <img src={photos.small === null ? userPhoto : photos.small} alt={name} />
+            <NavLink to={`${path.profile}${idUser}`}>
+              <img src={small === null ? userPhoto : small} alt={name} />
             </NavLink>
           </div>
           <div>

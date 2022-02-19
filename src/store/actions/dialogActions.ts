@@ -1,6 +1,6 @@
-export type ActionsDialogsType = ReturnType<typeof AddMessage>;
+export type ActionsDialogsType = ReturnType<typeof addMessage>;
 
-export const AddMessage = (newText: string) =>
+export const addMessage = (newText: string) =>
   ({
     type: 'ADD-MESSAGE',
     newText,

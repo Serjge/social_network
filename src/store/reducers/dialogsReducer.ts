@@ -35,9 +35,3 @@ export const DialogsReducer = (
       return state;
   }
 };
-
-export const AddMessage = (newText: string) =>
-  ({
-    type: 'ADD-MESSAGE',
-    newText,
-  } as const);

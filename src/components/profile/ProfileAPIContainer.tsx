@@ -1,7 +1,6 @@
 import { Component, ReactElement } from 'react';
 
-import { Profile } from '.';
-
+import { Profile } from 'components';
 import { InjectedProps } from 'hoc';
 import { ProfileType } from 'type';
 

@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function requiredField<T>(value: T) {
+export function requiredField<T>(value: T): string | undefined {
   if (value) return undefined;
   return 'Field is Required';
 }

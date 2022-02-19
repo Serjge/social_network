@@ -1,6 +1,9 @@
 export enum path {
-  PROFILE = '/profile/',
-  DIALOGS = '/dialogs/',
-  USERS = '/users',
-  SETTINGS = '/settings',
+  root = '/',
+  profile = '/profile/',
+  dialogs = '/dialogs/',
+  users = '/users',
+  settings = '/settings',
+  login = '/login',
+  userId = ':userId',
 }

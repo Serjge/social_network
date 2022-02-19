@@ -1,4 +1,4 @@
-import { setToggleIsFetching } from 'store/actions/authAction';
+import { setToggleIsFetching } from 'store/actions';
 import { UserType } from 'type';
 
 export type ActionsUsersType =

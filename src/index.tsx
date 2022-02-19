@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
 
-import { AppContainer } from 'App';
+import { AppContainer } from 'AppContainer';
 import { store } from 'store';
 
 ReactDOM.render(

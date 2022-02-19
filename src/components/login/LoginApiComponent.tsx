@@ -10,10 +10,7 @@ type mapDispatchToPropsType = {
 };
 export type LoginApiComponentPropsType = mapStateToPropsType & mapDispatchToPropsType;
 
-export class LoginApiComponent extends PureComponent<
-  LoginApiComponentPropsType,
-  LoginApiComponentPropsType
-> {
+export class LoginApiComponent extends PureComponent<LoginApiComponentPropsType> {
   render(): ReactElement {
     const { login, isAuth } = this.props;
     return <Login login={login} isAuth={isAuth} />;

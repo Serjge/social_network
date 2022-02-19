@@ -7,7 +7,7 @@ import { Dialogs } from './Dialogs';
 
 import { withAuthRedirect } from 'hoc';
 import { AppStateType } from 'store';
-import { AddMessage } from 'store/reducers/dialogsReducer';
+import { addMessage } from 'store/actions';
 import { getDialogs, getMessages } from 'store/selectors';
 import { DialogType, MessagesType } from 'type';
 
@@ -15,6 +15,7 @@ type mapStateToPropsType = {
   dialogs: DialogType[];
   messages: MessagesType[];
 };
+
 type mapDispatchToPropsType = {
   addMessageHandler: (newText: string) => void;
 };
@@ -28,7 +29,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => ({
   addMessageHandler: newText => {
-    dispatch(AddMessage(newText));
+    dispatch(addMessage(newText));
   },
 });
 

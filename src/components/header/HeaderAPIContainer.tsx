@@ -2,8 +2,6 @@ import { PureComponent, ReactElement } from 'react';
 
 import { Header } from './Header';
 
-import { Preloader } from 'components/common';
-
 export type mapStateToPropsType = {
   login: string;
   isFetching: boolean;
@@ -17,17 +15,9 @@ type mapDispatchToPropsType = {
 
 type HeaderAPIContainerType = mapStateToPropsType & mapDispatchToPropsType;
 
-export class HeaderAPIContainer extends PureComponent<
-  HeaderAPIContainerType,
-  HeaderAPIContainerType
-> {
+export class HeaderAPIContainer extends PureComponent<HeaderAPIContainerType> {
   render(): ReactElement {
-    const { isFetching, auth, login, logout } = this.props;
-    return (
-      <>
-        {isFetching ? <Preloader /> : null}
-        <Header login={login} auth={auth} logout={logout} />
-      </>
-    );
+    const { auth, login, logout } = this.props;
+    return <Header login={login} auth={auth} logout={logout} />;
   }
 }

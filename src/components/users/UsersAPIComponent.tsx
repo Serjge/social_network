@@ -2,7 +2,7 @@ import { Component, ReactElement } from 'react';
 
 import { Users } from './Users';
 
-import { Preloader } from 'components/common';
+import { Preloader } from 'components';
 import { UserType } from 'type';
 
 export type mapStateToPropsType = {
