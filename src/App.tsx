@@ -1,20 +1,17 @@
-import { PureComponent, ReactElement } from 'react';
+import { lazy, PureComponent, ReactElement, Suspense } from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import style from 'App.module.scss';
 import { AppContainerType } from 'AppContainer';
-import {
-  DialogsContainer,
-  HeaderContainer,
-  LoginContainer,
-  Navbar,
-  Preloader,
-  ProfileContainer,
-  Settings,
-  UsersContainer,
-} from 'components';
+import { HeaderContainer, Navbar, Preloader } from 'components';
 import { path } from 'enum';
+
+const DialogsContainer = lazy(() => import('components/dialogs/DialogsContainer'));
+const ProfileContainer = lazy(() => import('components/profile/ProfileContainer'));
+const UsersContainer = lazy(() => import('components/users/UsersContainer'));
+const Settings = lazy(() => import('components/settings/Settings'));
+const LoginContainer = lazy(() => import('components/login/LoginContainer'));
 
 export class App extends PureComponent<AppContainerType> {
   componentDidMount(): void {
@@ -32,12 +29,12 @@ export class App extends PureComponent<AppContainerType> {
       );
     }
     return (
-      <>
-        <div>
-          <HeaderContainer />
-          <div className={style.wrapper}>
-            <Navbar />
-            <div className={style.content}>
+      <div>
+        <HeaderContainer />
+        <div className={style.wrapper}>
+          <Navbar />
+          <div className={style.content}>
+            <Suspense fallback={<div>Loading</div>}>
               <Routes>
                 <Route path={path.root} element={<Navigate to={path.profile} />} />
                 <Route path={path.profile} element={<ProfileContainer />}>
@@ -50,10 +47,10 @@ export class App extends PureComponent<AppContainerType> {
                 <Route path={path.login} element={<LoginContainer />} />
                 <Route path={path.settings} element={<Settings />} />
               </Routes>
-            </div>
+            </Suspense>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

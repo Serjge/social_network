@@ -3,8 +3,10 @@ import { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { mapStateToPropsType, ProfileAPIContainer } from './ProfileAPIContainer';
-
+import {
+  mapStateToPropsType,
+  ProfileAPIContainer,
+} from 'components/profile/ProfileAPIContainer';
 import { withAuthRedirect, withRouter } from 'hoc';
 import { AppStateType } from 'store';
 import { addLike, addPost, removePost } from 'store/actions';
@@ -17,7 +19,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
   authUserId: getUserId(state),
 });
 
-export const ProfileContainer = compose<ComponentType>(
+const ProfileContainer = compose<ComponentType>(
   connect(mapStateToProps, {
     addPost,
     removePost,
@@ -29,3 +31,5 @@ export const ProfileContainer = compose<ComponentType>(
   withRouter,
   withAuthRedirect,
 )(ProfileAPIContainer);
+
+export default ProfileContainer;

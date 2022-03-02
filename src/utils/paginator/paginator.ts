@@ -24,10 +24,7 @@ export const paginator = (
     }
     pages.push(pagesCounter);
   }
-  return pages;
-};
-
-//   const pagesCounter = Math.ceil(totalCount / pageSize);
+// const pagesCounter = Math.ceil(totalCount / pageSize);
 //   const pages = [];
 //
 //   const firstPage = 1;
@@ -54,3 +51,9 @@ export const paginator = (
 //     }
 //     pages.push(pagesCounter);
 //   }
+
+
+  return pages;
+};
+
+

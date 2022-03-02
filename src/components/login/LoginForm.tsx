@@ -5,6 +5,12 @@ import { Field, InjectedFormProps } from 'redux-form';
 import { Input } from 'components/common';
 import { maxLengthCreator, requiredField } from 'utils';
 
+export type FormDataType = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+};
+
 const lengthText = 30;
 const maxLength30 = maxLengthCreator(lengthText);
 
@@ -35,16 +41,9 @@ export class LoginForm extends PureComponent<InjectedFormProps<FormDataType>> {
           <Field type="checkbox" name="rememberMe" component="input" />
           remember me
         </div>
-
         <button type="submit">Login</button>
         {error ? <div>{error}</div> : null}
       </form>
     );
   }
 }
-
-export type FormDataType = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-};

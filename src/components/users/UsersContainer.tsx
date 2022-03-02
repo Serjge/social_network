@@ -27,7 +27,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
   followingInProgress: getFollowingInProgress(state),
 });
 
-export const UsersContainer = compose<ComponentType>(
+const UsersContainer = compose<ComponentType>(
   connect(mapStateToProps, {
     toggleFollowingInProgress,
     requestUsers,
@@ -37,4 +37,4 @@ export const UsersContainer = compose<ComponentType>(
   withAuthRedirect,
 )(UsersAPIComponent);
 
-//
+export default UsersContainer;

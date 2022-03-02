@@ -26,19 +26,17 @@ export class ProfileStatus extends React.Component<
   componentDidUpdate(prevProps: Readonly<ProfileInfoPropsType>): void {
     const { status: statusProps } = this.props;
     if (prevProps.status !== statusProps) {
-      const changeStatus = (): void => {
-        this.setState({ statusState: statusProps });
-      };
-      changeStatus();
+      this.changeStatus();
     }
   }
 
-  onChangeStatus = (e: { currentTarget: { value: string } }): void => {
-    this.setState({ statusState: e.currentTarget.value });
+  changeStatus = (): void => {
+    const { status: statusProps } = this.props;
+    this.setState({ statusState: statusProps });
   };
 
-  activateEditMode = (): void => {
-    this.setState({ editMode: true });
+  changeOnClickStatus = (e: { currentTarget: { value: string } }): void => {
+    this.setState({ statusState: e.currentTarget.value });
   };
 
   offActivateEditMode = (): void => {
@@ -46,6 +44,10 @@ export class ProfileStatus extends React.Component<
     const { statusState } = this.state;
     this.setState({ editMode: false });
     updateStatus(statusState);
+  };
+
+  activateEditMode = (): void => {
+    this.setState({ editMode: true });
   };
 
   render(): ReactElement {
@@ -60,7 +62,7 @@ export class ProfileStatus extends React.Component<
           <input
             onBlur={this.offActivateEditMode}
             value={statusState}
-            onChange={this.onChangeStatus}
+            onChange={this.changeOnClickStatus}
             type="text"
           />
         )}

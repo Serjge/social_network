@@ -9,4 +9,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
   isAuth: state.authPage.isAuth,
 });
 
-export const LoginContainer = connect(mapStateToProps, { login })(LoginApiComponent);
+const LoginContainer = connect(mapStateToProps, { login })(LoginApiComponent);
+
+export default LoginContainer;

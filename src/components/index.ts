@@ -1,8 +1,8 @@
 export { TextArea, Input, Preloader, IconS } from './common';
-export { DialogsMessage, DialogsName, Dialogs, DialogsContainer } from './dialogs';
+export { DialogsMessage, DialogsName, Dialogs } from './dialogs';
 export type { DialogsPropsType } from './dialogs';
 export { HeaderAPIContainer, Header, HeaderContainer } from './header';
-export { Login, LoginForm, LoginApiComponent, LoginContainer } from './login';
+export { Login, LoginForm, LoginApiComponent } from './login';
 export { ItemMenu, Navbar } from './navbar';
 export {
   Profile,
@@ -13,7 +13,5 @@ export {
   MyPosts,
   PostMap,
   ProfileAPIContainer,
-  ProfileContainer,
 } from './profile';
-export { Settings } from 'components/settings';
-export { UsersAPIComponent, Users, UsersContainer, User } from './users';
+export { UsersAPIComponent, Users, User } from './users';
