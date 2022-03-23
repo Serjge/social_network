@@ -14,15 +14,17 @@ export type ProfileType = {
   lookingForAJobDescription: string;
   fullName: string;
   userId: number;
-  photos: {
-    small: string;
-    large: string;
-  };
-} | null;
+  photos: Photos;
+};
 
 export type PostsType = {
   id: string;
   message: string;
   likeCount: number;
   isLike: boolean;
+};
+
+export type Photos = {
+  small: string | null;
+  large: string | null;
 };

@@ -12,6 +12,7 @@ import { AppStateType } from 'store';
 import { addLike, addPost, removePost } from 'store/actions';
 import { getUserId, getProfile, getStatus } from 'store/selectors';
 import { requestProfile, requestStatus, updateStatus } from 'store/thunks';
+import { savePhoto } from 'store/thunks/profileThunks';
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
   profile: getProfile(state),
@@ -27,6 +28,7 @@ const ProfileContainer = compose<ComponentType>(
     requestProfile,
     requestStatus,
     updateStatus,
+    savePhoto,
   }),
   withRouter,
   withAuthRedirect,

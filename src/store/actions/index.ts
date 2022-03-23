@@ -16,6 +16,7 @@ export {
   removePost,
   setUserStatus,
   addPost,
+  savePhotoSuccess,
 } from './profileActions';
 
 export type { ActionsProfileType } from './profileActions';

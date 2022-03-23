@@ -5,7 +5,8 @@ export type ActionsProfileType =
   | ReturnType<typeof removePost>
   | ReturnType<typeof addLike>
   | ReturnType<typeof setUserProfile>
-  | ReturnType<typeof setUserStatus>;
+  | ReturnType<typeof setUserStatus>
+  | ReturnType<typeof savePhotoSuccess>;
 
 export const addPost = (newText: string) =>
   ({
@@ -36,4 +37,10 @@ export const setUserStatus = (status: any) =>
   ({
     type: 'SET-USER-STATUS',
     status,
+  } as const);
+
+export const savePhotoSuccess = (photo: any) =>
+  ({
+    type: 'SAVE-PHOTO-SUCCESS',
+    photo,
   } as const);

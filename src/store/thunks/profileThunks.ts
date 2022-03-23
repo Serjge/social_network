@@ -1,6 +1,6 @@
 import { profileAPI } from 'api';
 import { resultCode } from 'enum';
-import { setUserProfile, setUserStatus } from 'store/actions';
+import { savePhotoSuccess, setUserProfile, setUserStatus } from 'store/actions';
 import { AppThunkType } from 'store/thunks';
 
 export const requestProfile =
@@ -21,6 +21,16 @@ export const updateStatus =
     profileAPI.updateStatusApi(status).then(response => {
       if (response.data.resultCode === resultCode.success) {
         dispatch(setUserStatus(status));
+      }
+    });
+  };
+
+export const savePhoto =
+  (file: string | Blob): AppThunkType =>
+  dispatch => {
+    profileAPI.savePhoto(file).then(response => {
+      if (response.data.resultCode === resultCode.success) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
       }
     });
   };

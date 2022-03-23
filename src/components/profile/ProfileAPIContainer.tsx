@@ -16,6 +16,7 @@ type mapDispatchToPropsType = {
   requestProfile: (userId: string) => void;
   requestStatus: (userId: string) => void;
   updateStatus: (userId: string) => void;
+  savePhoto: (file: string | Blob) => void;
 };
 
 export type ProfileAPIContainerPropsType = mapStateToPropsType &
@@ -24,6 +25,19 @@ export type ProfileAPIContainerPropsType = mapStateToPropsType &
 
 export class ProfileAPIContainer extends Component<ProfileAPIContainerPropsType> {
   componentDidMount(): void {
+    this.refreshProfile();
+  }
+
+  componentDidUpdate(prevProps: Readonly<ProfileAPIContainerPropsType>): void {
+    const { userId } = this.props;
+    const { userId: prevUserId } = prevProps;
+
+    if (userId !== prevUserId) {
+      this.refreshProfile();
+    }
+  }
+
+  refreshProfile = (): void => {
     const { authUserId, requestProfile, requestStatus } = this.props;
     let { userId } = this.props;
 
@@ -32,10 +46,19 @@ export class ProfileAPIContainer extends Component<ProfileAPIContainerPropsType>
     }
     requestProfile(userId);
     requestStatus(userId);
-  }
+  };
 
   render(): ReactElement {
-    const { profile, status, updateStatus } = this.props;
-    return <Profile profile={profile} status={status} updateStatus={updateStatus} />;
+    const { profile, status, updateStatus, userId, savePhoto } = this.props;
+
+    return (
+      <Profile
+        isOwner={!userId}
+        profile={profile}
+        status={status}
+        updateStatus={updateStatus}
+        savePhoto={savePhoto}
+      />
+    );
   }
 }

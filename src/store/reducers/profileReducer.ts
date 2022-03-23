@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { v1 } from 'uuid';
 
 import { ActionsProfileType } from 'store/actions';
@@ -12,9 +11,16 @@ const initialState = {
     { id: v1(), message: `It's my first post`, likeCount: 15, isLike: false },
     { id: v1(), message: `React, it's cool!`, likeCount: 50, isLike: false },
   ] as PostsType[],
-  profile: null as ProfileType,
+  profile: {
+    photos: {
+      small: '',
+      large: '',
+    },
+  } as ProfileType,
   status: '' as string,
 };
+
+const PLUS_ONE = 1;
 
 export const ProfileReducer = (
   state = initialState,
@@ -22,15 +28,17 @@ export const ProfileReducer = (
 ): InitialProfileStateType => {
   switch (action.type) {
     case 'ADD-POST':
-      const newPost: PostsType = {
-        id: v1(),
-        message: action.newText.trim(),
-        likeCount: 0,
-        isLike: false,
-      };
       return {
         ...state,
-        posts: [newPost, ...state.posts],
+        posts: [
+          {
+            id: v1(),
+            message: action.newText.trim(),
+            likeCount: 0,
+            isLike: false,
+          },
+          ...state.posts,
+        ],
       };
     case 'REMOVE-POST':
       return {
@@ -41,10 +49,11 @@ export const ProfileReducer = (
       return {
         ...state,
         posts: state.posts.map(p =>
+          // eslint-disable-next-line no-nested-ternary
           p.id === action.LikeId
             ? !p.isLike
-              ? { ...p, isLike: action.isLike, likeCount: p.likeCount + 1 }
-              : { ...p, isLike: action.isLike, likeCount: p.likeCount - 1 }
+              ? { ...p, isLike: action.isLike, likeCount: p.likeCount + PLUS_ONE }
+              : { ...p, isLike: action.isLike, likeCount: p.likeCount - PLUS_ONE }
             : p,
         ),
       };
@@ -58,6 +67,8 @@ export const ProfileReducer = (
         ...state,
         status: action.status,
       };
+    case 'SAVE-PHOTO-SUCCESS':
+      return { ...state, profile: { ...state.profile, photos: action.photo } };
     default:
       return state;
   }

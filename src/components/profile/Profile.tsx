@@ -8,14 +8,23 @@ type ProfilePropsType = {
   profile: ProfileType;
   status: string;
   updateStatus: (userId: string) => void;
+  isOwner: boolean;
+  savePhoto: (file: string | Blob) => void;
 };
 
 export class Profile extends PureComponent<ProfilePropsType> {
   render(): ReactElement {
-    const { profile, status, updateStatus } = this.props;
+    const { profile, status, updateStatus, isOwner, savePhoto } = this.props;
+
     return (
       <div>
-        <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} />
+        <ProfileInfo
+          isOwner={isOwner}
+          profile={profile}
+          status={status}
+          updateStatus={updateStatus}
+          savePhoto={savePhoto}
+        />
         <MyPostsContainer />
       </div>
     );

@@ -1,4 +1,4 @@
-import { PureComponent, ReactElement } from 'react';
+import { ChangeEvent, PureComponent, ReactElement } from 'react';
 
 import style from './ProfileInfo.module.scss';
 
@@ -11,11 +11,24 @@ type ProfileInfoPropsType = {
   profile: ProfileType;
   status: string;
   updateStatus: (userId: string) => void;
+  isOwner: boolean;
+  savePhoto: (file: string | Blob) => void;
 };
+
+const ZERO_FILE = 0;
 
 export class ProfileInfo extends PureComponent<ProfileInfoPropsType> {
   render(): ReactElement {
-    const { profile, status, updateStatus } = this.props;
+    const { profile, status, updateStatus, isOwner, savePhoto } = this.props;
+    const {
+      photos: { large },
+      fullName,
+    } = profile;
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>): void => {
+      if (e.target.files!.length) {
+        savePhoto(e.target.files![ZERO_FILE]);
+      }
+    };
 
     return (
       <div>
@@ -23,17 +36,10 @@ export class ProfileInfo extends PureComponent<ProfileInfoPropsType> {
           <img alt="" src={background} />
         </div>
         <div className={style.avatar}>
-          <img
-            alt=""
-            src={
-              profile && profile.photos.large !== null
-                ? profile.photos.large
-                : avatarDefault
-            }
-          />
+          <img alt="" src={profile && large !== null ? large : avatarDefault} />
+          {isOwner && <input onChange={onMainPhotoSelected} type="file" />}
           <div style={{ padding: '20px', textAlign: 'center' }}>
-            {' '}
-            {profile && profile.fullName}
+            {profile && fullName}
           </div>
           <ProfileStatus status={status} updateStatus={updateStatus} />
         </div>
