@@ -78,7 +78,7 @@ export class ProfileInfo extends PureComponent<ProfileInfoPropsType> {
               <Contact key={key} contactTitle={key} contactValue={contacts[key]} />
             ))}
           </div>
-          <ProfileStatus status={status} updateStatus={updateStatus} />
+          <ProfileStatus isOwner={isOwner} status={status} updateStatus={updateStatus} />
         </div>
       </div>
     );

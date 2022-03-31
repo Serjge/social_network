@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import React, { ReactElement } from 'react';
 
 type ProfileInfoPropsType = {
   status: string;
   updateStatus: (userId: string) => void;
+  isOwner: boolean;
 };
 
 type ProfileInfoStateType = {
@@ -51,16 +53,19 @@ export class ProfileStatus extends React.Component<
   };
 
   render(): ReactElement {
-    const { status: statusProps } = this.props;
+    const { status: statusProps, isOwner } = this.props;
     const { editMode, statusState } = this.state;
 
     return (
       <div>
         {!editMode && (
-          <span onDoubleClick={this.activateEditMode}>status: {statusProps}</span>
+          <span onDoubleClick={isOwner ? this.activateEditMode : undefined}>
+            status: {statusProps}
+          </span>
         )}
-        {editMode && (
+        {isOwner && editMode && (
           <input
+            autoFocus
             onBlur={this.offActivateEditMode}
             value={statusState}
             onChange={this.changeOnClickStatus}
