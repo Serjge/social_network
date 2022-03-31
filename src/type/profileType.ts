@@ -1,20 +1,11 @@
 export type ProfileType = {
   aboutMe: string;
-  contacts: {
-    facebook: string;
-    website: string;
-    vk: string;
-    twitter: string;
-    instagram: string;
-    youtube: string;
-    github: string;
-    mainLink: string;
-  };
+  contacts: ContactsType;
   lookingForAJob: string;
   lookingForAJobDescription: string;
   fullName: string;
   userId: number;
-  photos: Photos;
+  photos: PhotosType;
 };
 
 export type PostsType = {
@@ -24,7 +15,18 @@ export type PostsType = {
   isLike: boolean;
 };
 
-export type Photos = {
+export type PhotosType = {
   small: string | null;
   large: string | null;
+};
+
+export type ContactsType = {
+  facebook: string;
+  website: string;
+  vk: string;
+  twitter: string;
+  instagram: string;
+  youtube: string;
+  github: string;
+  mainLink: string;
 };

@@ -46,7 +46,7 @@ export class MyPosts extends PureComponent<MyPostsPropsType> {
     };
 
     return (
-      <div style={{ display: 'block', marginTop: '120px' }}>
+      <div style={{ display: 'block', marginTop: '20px' }}>
         <ReduxNewMyPosts onSubmit={onAddNewPostHandler} />
         <div>
           <PostMap

@@ -1,6 +1,6 @@
 import { instance } from './instanceApi';
 
-import { CommonResponseType, Photos, ProfileType } from 'type';
+import { CommonResponseType, PhotosType, ProfileType } from 'type';
 
 export const profileAPI = {
   authMe(userId: string) {
@@ -17,7 +17,7 @@ export const profileAPI = {
   savePhoto(file: string | Blob) {
     const formData = new FormData();
     formData.append('image', file);
-    return instance.put<CommonResponseType<{ photos: Photos }>>(
+    return instance.put<CommonResponseType<{ photos: PhotosType }>>(
       `profile/photo`,
       formData,
       {
