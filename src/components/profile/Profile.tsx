@@ -17,7 +17,7 @@ export class Profile extends PureComponent<ProfilePropsType> {
     const { profile, status, updateStatus, isOwner, savePhoto } = this.props;
 
     return (
-      <div>
+      <div style={{ padding: '20px' }}>
         <ProfileInfo
           isOwner={isOwner}
           profile={profile}
