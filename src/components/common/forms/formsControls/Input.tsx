@@ -18,8 +18,12 @@ export class Input extends PureComponent<FormPropsType> {
     return (
       <div className={`${style.formControl} ${hasError ? style.error : ''}`}>
         <div>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <input {...input} placeholder={placeholder} type={type} />
+          <input
+            className={style.input}
+            {...input}
+            placeholder={placeholder}
+            type={type}
+          />
         </div>
         <div>
           {touched &&

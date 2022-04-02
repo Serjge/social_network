@@ -15,3 +15,25 @@
   }
 
 }
+.input {
+
+  display: block;
+  width:  300px;
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid #fefefe;
+  background: none;
+  margin: 10px;
+  padding: 10px 15px;
+  outline: none;
+  color: #fefefe;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #282c34
+    inset !important;
+    -webkit-text-fill-color: #fefefe !important;
+  }
+}

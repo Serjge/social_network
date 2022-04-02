@@ -3,6 +3,7 @@ import { PureComponent, ReactElement } from 'react';
 import { Navigate } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 
+import style from './login.module.scss';
 import { FormDataType, LoginForm } from './LoginForm';
 
 import { path } from 'enum';
@@ -29,10 +30,10 @@ export class Login extends PureComponent<LoginPropsType> {
     }
 
     return (
-      <>
-        <h1> LOGIN </h1>
+      <div className={style.wrapper}>
+        <h1 className={style.title}> LOGIN </h1>
         <ReduxLoginForm onSubmit={onSubmit} />
-      </>
+      </div>
     );
   }
 }

@@ -61,6 +61,7 @@
       }
     ],
     "prettier/prettier": "error",
+    "react/jsx-props-no-spreading": "off",
     "react/prop-types": 0,
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",

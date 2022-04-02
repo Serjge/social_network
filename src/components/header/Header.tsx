@@ -21,13 +21,19 @@ export class Header extends PureComponent<HeaderPropsType> {
         <div className={style.wrap}>
           <IconS />
           <div>
-            {auth ? `${login}` : 'guest'}
             {auth ? (
-              <NavLink onClick={logout} to={path.login}>
+              <span className={style.name}>{login}</span>
+            ) : (
+              <span className={style.name}>guest</span>
+            )}
+            {auth ? (
+              <NavLink className={style.button} onClick={logout} to={path.login}>
                 Logout
               </NavLink>
             ) : (
-              <NavLink to={path.login}>Login</NavLink>
+              <NavLink className={style.button} to={path.login}>
+                Login
+              </NavLink>
             )}
           </div>
         </div>

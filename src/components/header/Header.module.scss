@@ -20,5 +20,52 @@
       max-width: 50px;
     }
   }
+  & .name {
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    appearance: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+  & .button {
+    margin: 15px 0;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    appearance: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 2px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #4676d7;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border-bottom: 3px solid #4676d7;
+
+    &:hover {
+      color: #fefefe;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #fefefe;
+    }
+  }
 
 }
