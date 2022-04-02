@@ -2,7 +2,7 @@
   "name": "social_network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://serjge.github.io/social_network ",
+  "homepage": "https://serjge.github.io/social_network/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.0",
     "@testing-library/dom": "^8.11.0",
