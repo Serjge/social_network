@@ -32,6 +32,20 @@ export class Login extends PureComponent<LoginPropsType> {
     return (
       <div className={style.wrapper}>
         <h1 className={style.title}> LOGIN </h1>
+        <p>
+          To log in get registered:{' '}
+          <a
+            className={style.link}
+            href="https://social-network.samuraijs.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            here
+          </a>
+        </p>
+        <p>or use common test account credentials:</p>
+        <p>Email: free@samuraijs.com</p>
+        <p>Password: free</p>
         <ReduxLoginForm onSubmit={onSubmit} />
       </div>
     );

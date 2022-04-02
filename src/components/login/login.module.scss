@@ -2,10 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 25px;
+  appearance: none;
+  padding: 15px 30px;
+  font-size: 18px;
 }
 
 .title {
   margin-top: 100px;
+  margin-bottom: 30px;
 }
 
 .wrapper__field {
@@ -13,10 +20,11 @@
 }
 
 .button {
-padding: 5px 20px;
+  padding: 5px 20px;
   margin-bottom: 50px;
 }
 
-.input {
-
+.link {
+  text-decoration: none;
+  color: #fefefe;
 }
