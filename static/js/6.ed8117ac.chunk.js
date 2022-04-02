@@ -1,0 +1,2 @@
+(this.webpackJsonpsocial_network=this.webpackJsonpsocial_network||[]).push([[6],{308:function(t,s,i){"use strict";i.r(s);var n=i(22),a=i(103),e=i(60),o=Object(n.b)((function(t){return{isAuth:t.authPage.isAuth}}),{login:e.d})(a.a);s.default=o}}]);
+//# sourceMappingURL=6.ed8117ac.chunk.js.map
